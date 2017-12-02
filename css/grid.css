@@ -1,11 +1,11 @@
 body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: minmax(50px, 100px)  minmax(50px, 100px) 1fr;
+    grid-template-rows: minmax(10px, 100px) minmax(10px, 100px) 1fr;
     margin:0;
     background-color: #F3EDD6;
 }
-/* repeat(12, minmax(100px, 1fr)) */
+
 #top {
     background-color: #F5E8BC;
     grid-column: 1 / -1;
@@ -23,28 +23,20 @@ body {
     grid-row: 1;
     grid-column: 1;
 }
-#contra {
-    background-color: #7F0000;
-    grid-row-start: 2;
-/*    grid-row-end: span 2; */
-    grid-column-start: 2;
-/*    grid-column-end: span 2; */
-}
-
 #lambda {
     grid-row: -2;
     grid-column: 2;
     align-self: end;
 }
+
 #content {
-  /*  border: 1px solid rgb(0,95,107); */
-    grid-row: 3 / -1;
-    grid-column: 3 / -1;
+    grid-row: 2 / -1;
+    grid-column: 2 / -1;
 }
 
 .square {
-	width: 50px;
-	height: 50px;
+	width: 10px;
+	height: 10px;
 }
 #square1 {
 	background: #BF0000;
@@ -60,6 +52,15 @@ body {
 }
 
 @media (min-width: 600px) {
+    #contra {
+    background-color: #7F0000;
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+    #content {
+    grid-row: 3 / -1;
+    grid-column: 3 / -1;
+    }
     .square {
 	width: 100px;
 	height: 100px;

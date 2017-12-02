@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-11-27 Mon 12:12 -->
+<!-- 2017-12-02 Sat 20:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The pleasantness of Om</title>
@@ -233,7 +233,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="org-div-home-and-up">
- <a accesskey="h" href="website-sitemap.html"> UP </a>
+ <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="website-sitemap.html"> HOME </a>
 </div><div id="content">
@@ -255,10 +255,10 @@ The testimonials are stored in a vector of maps, where a single map might look l
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">{</span><span style="color: #008b8b;">:shop_name</span> <span style="color: #8b2252;">"MomentsOfArt"</span>
- <span style="color: #008b8b;">:shop_owner</span> <span style="color: #8b2252;">"Loribeth"</span>
- <span style="color: #008b8b;">:avatar</span> <span style="color: #8b2252;">"http://img0.etsystatic.com/011/0/30011619/iusa_75x75.22273684_cjcb.jpg"</span>
- <span style="color: #008b8b;">:quote</span> <span style="color: #8b2252;">"I think you are providing a wonderful app to Etsy shop owners."</span><span style="color: #707183;">}</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">{</span><span style="color: #d08770;">:shop_name</span> <span style="color: #a3be8c;">"MomentsOfArt"</span>
+ <span style="color: #d08770;">:shop_owner</span> <span style="color: #a3be8c;">"Loribeth"</span>
+ <span style="color: #d08770;">:avatar</span> <span style="color: #a3be8c;">"http://img0.etsystatic.com/011/0/30011619/iusa_75x75.22273684_cjcb.jpg"</span>
+ <span style="color: #d08770;">:quote</span> <span style="color: #a3be8c;">"I think you are providing a wonderful app to Etsy shop owners."</span><span style="color: #8c8c8c;">}</span>
 </pre>
 </div>
 
@@ -267,45 +267,45 @@ The ticker doesn’t just pick a random item out of the collection. Instead, all
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">app-state</span> <span style="color: #7388d6;">(</span>atom <span style="color: #909183;">{</span><span style="color: #008b8b;">:testimonials</span> <span style="color: #709870;">(</span>shuffle testimonials<span style="color: #709870;">)</span><span style="color: #909183;">}</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span><span style="color: #b48ead;">def</span> <span style="color: #bf616a;">app-state</span> <span style="color: #93a8c6;">(</span>atom <span style="color: #b0b1a3;">{</span><span style="color: #d08770;">:testimonials</span> <span style="color: #97b098;">(</span>shuffle testimonials<span style="color: #97b098;">)</span><span style="color: #b0b1a3;">}</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">transition</span> <span style="color: #7388d6;">[</span>state<span style="color: #7388d6;">]</span>
-  <span style="color: #7388d6;">(</span><span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span>transact! state <span style="color: #008b8b;">:testimonials</span> #<span style="color: #909183;">(</span><span style="color: #a020f0;">if</span> <span style="color: #709870;">(</span>seq <span style="color: #907373;">(</span>pop <span style="color: #a0522d;">%</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span> <span style="color: #709870;">(</span>pop <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span> <span style="color: #709870;">(</span>shuffle testimonials<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #8c8c8c;">(</span><span style="color: #b48ead;">defn</span> <span style="color: #8fa1b3;">transition</span> <span style="color: #93a8c6;">[</span>state<span style="color: #93a8c6;">]</span>
+  <span style="color: #93a8c6;">(</span><span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span>transact! state <span style="color: #d08770;">:testimonials</span> #<span style="color: #b0b1a3;">(</span><span style="color: #b48ead;">if</span> <span style="color: #97b098;">(</span>seq <span style="color: #aebed8;">(</span>pop <span style="color: #bf616a;">%</span><span style="color: #aebed8;">)</span><span style="color: #97b098;">)</span> <span style="color: #97b098;">(</span>pop <span style="color: #bf616a;">%</span><span style="color: #97b098;">)</span> <span style="color: #97b098;">(</span>shuffle testimonials<span style="color: #97b098;">)</span><span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">testimonial</span> <span style="color: #7388d6;">[</span>state<span style="color: #7388d6;">]</span>
-  <span style="color: #7388d6;">(</span>peek <span style="color: #909183;">(</span><span style="color: #008b8b;">:testimonials</span> state<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #8c8c8c;">(</span><span style="color: #b48ead;">defn</span> <span style="color: #8fa1b3;">testimonial</span> <span style="color: #93a8c6;">[</span>state<span style="color: #93a8c6;">]</span>
+  <span style="color: #93a8c6;">(</span>peek <span style="color: #b0b1a3;">(</span><span style="color: #d08770;">:testimonials</span> state<span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">widget</span> <span style="color: #7388d6;">[</span>data owner<span style="color: #7388d6;">]</span>
-  <span style="color: #7388d6;">(</span>reify
-    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IRender</span>
-    <span style="color: #909183;">(</span>render <span style="color: #709870;">[</span>this<span style="color: #709870;">]</span>
-      <span style="color: #709870;">(</span>html <span style="color: #907373;">[</span><span style="color: #008b8b;">:div</span> <span style="color: #6276ba;">{</span><span style="color: #008b8b;">:class</span> <span style="color: #8b2252;">"media"</span><span style="color: #6276ba;">}</span>
-             <span style="color: #6276ba;">[</span><span style="color: #008b8b;">:a</span> <span style="color: #858580;">{</span><span style="color: #008b8b;">:class</span> <span style="color: #8b2252;">"pull-left"</span> <span style="color: #008b8b;">:href</span> <span style="color: #8b2252;">"#"</span><span style="color: #858580;">}</span>
-              <span style="color: #858580;">[</span><span style="color: #008b8b;">:img</span> <span style="color: #80a880;">{</span><span style="color: #008b8b;">:class</span> <span style="color: #8b2252;">"media-object avatar"</span> 
-                     <span style="color: #008b8b;">:alt</span> <span style="color: #8b2252;">"Avatar"</span> 
-                     <span style="color: #008b8b;">:style</span> #js <span style="color: #887070;">{</span><span style="color: #008b8b;">:width</span> <span style="color: #8b2252;">"75px"</span> <span style="color: #008b8b;">:height</span> <span style="color: #8b2252;">"75px"</span><span style="color: #887070;">}</span>
-                     <span style="color: #008b8b;">:src</span> <span style="color: #887070;">(</span><span style="color: #008b8b;">:avatar</span> <span style="color: #707183;">(</span>testimonial data<span style="color: #707183;">)</span><span style="color: #887070;">)</span><span style="color: #80a880;">}</span><span style="color: #858580;">]</span><span style="color: #6276ba;">]</span>
-             <span style="color: #6276ba;">[</span><span style="color: #008b8b;">:div</span> <span style="color: #858580;">{</span><span style="color: #008b8b;">:class</span> <span style="color: #8b2252;">"media-body"</span><span style="color: #858580;">}</span>
-              <span style="color: #858580;">[</span><span style="color: #008b8b;">:h4</span> <span style="color: #80a880;">{</span><span style="color: #008b8b;">:class</span> <span style="color: #8b2252;">"media-heading"</span><span style="color: #80a880;">}</span>
-               <span style="color: #80a880;">[</span><span style="color: #008b8b;">:a</span> <span style="color: #887070;">{</span><span style="color: #008b8b;">:href</span> <span style="color: #707183;">(</span>str <span style="color: #8b2252;">"http://www.etsy.com/shop/"</span> <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:shop_name</span> <span style="color: #909183;">(</span>testimonial data<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> 
-                    <span style="color: #008b8b;">:class</span> <span style="color: #8b2252;">"shop"</span> 
-                    <span style="color: #008b8b;">:target</span> <span style="color: #8b2252;">"_blank"</span><span style="color: #887070;">}</span> 
-                <span style="color: #887070;">(</span><span style="color: #008b8b;">:shop_name</span> <span style="color: #707183;">(</span>testimonial data<span style="color: #707183;">)</span><span style="color: #887070;">)</span><span style="color: #80a880;">]</span><span style="color: #858580;">]</span>
-              <span style="color: #858580;">[</span><span style="color: #008b8b;">:blockquote</span> 
-               <span style="color: #80a880;">[</span><span style="color: #008b8b;">:p</span> <span style="color: #887070;">{</span><span style="color: #008b8b;">:class</span> <span style="color: #8b2252;">"text-info quote"</span><span style="color: #887070;">}</span> 
-                <span style="color: #887070;">(</span><span style="color: #008b8b;">:quote</span> <span style="color: #707183;">(</span>testimonial data<span style="color: #707183;">)</span><span style="color: #887070;">)</span><span style="color: #80a880;">]</span>
-               <span style="color: #80a880;">[</span><span style="color: #008b8b;">:small</span> 
-                <span style="color: #887070;">[</span><span style="color: #008b8b;">:cite</span> <span style="color: #707183;">{</span><span style="color: #008b8b;">:title</span> <span style="color: #8b2252;">"Source title"</span> 
-                        <span style="color: #008b8b;">:class</span> <span style="color: #8b2252;">"shop_owner"</span><span style="color: #707183;">}</span> 
-                 <span style="color: #707183;">(</span><span style="color: #008b8b;">:shop_owner</span> <span style="color: #7388d6;">(</span>testimonial data<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span><span style="color: #887070;">]</span><span style="color: #80a880;">]</span><span style="color: #858580;">]</span><span style="color: #6276ba;">]</span><span style="color: #907373;">]</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span>
-    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IDidMount</span>
-    <span style="color: #909183;">(</span>did-mount <span style="color: #709870;">[</span>this node<span style="color: #709870;">]</span>
-      <span style="color: #709870;">(</span><span style="color: #228b22;">js</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #483d8b;">setInterval</span> transition 5000 data<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #8c8c8c;">(</span><span style="color: #b48ead;">defn</span> <span style="color: #8fa1b3;">widget</span> <span style="color: #93a8c6;">[</span>data owner<span style="color: #93a8c6;">]</span>
+  <span style="color: #93a8c6;">(</span>reify
+    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IRender</span>
+    <span style="color: #b0b1a3;">(</span>render <span style="color: #97b098;">[</span>this<span style="color: #97b098;">]</span>
+      <span style="color: #97b098;">(</span>html <span style="color: #aebed8;">[</span><span style="color: #d08770;">:div</span> <span style="color: #b0b0b3;">{</span><span style="color: #d08770;">:class</span> <span style="color: #a3be8c;">"media"</span><span style="color: #b0b0b3;">}</span>
+             <span style="color: #b0b0b3;">[</span><span style="color: #d08770;">:a</span> <span style="color: #90a890;">{</span><span style="color: #d08770;">:class</span> <span style="color: #a3be8c;">"pull-left"</span> <span style="color: #d08770;">:href</span> <span style="color: #a3be8c;">"#"</span><span style="color: #90a890;">}</span>
+              <span style="color: #90a890;">[</span><span style="color: #d08770;">:img</span> <span style="color: #a2b6da;">{</span><span style="color: #d08770;">:class</span> <span style="color: #a3be8c;">"media-object avatar"</span> 
+                     <span style="color: #d08770;">:alt</span> <span style="color: #a3be8c;">"Avatar"</span> 
+                     <span style="color: #d08770;">:style</span> #js <span style="color: #9cb6ad;">{</span><span style="color: #d08770;">:width</span> <span style="color: #a3be8c;">"75px"</span> <span style="color: #d08770;">:height</span> <span style="color: #a3be8c;">"75px"</span><span style="color: #9cb6ad;">}</span>
+                     <span style="color: #d08770;">:src</span> <span style="color: #9cb6ad;">(</span><span style="color: #d08770;">:avatar</span> <span style="color: #8c8c8c;">(</span>testimonial data<span style="color: #8c8c8c;">)</span><span style="color: #9cb6ad;">)</span><span style="color: #a2b6da;">}</span><span style="color: #90a890;">]</span><span style="color: #b0b0b3;">]</span>
+             <span style="color: #b0b0b3;">[</span><span style="color: #d08770;">:div</span> <span style="color: #90a890;">{</span><span style="color: #d08770;">:class</span> <span style="color: #a3be8c;">"media-body"</span><span style="color: #90a890;">}</span>
+              <span style="color: #90a890;">[</span><span style="color: #d08770;">:h4</span> <span style="color: #a2b6da;">{</span><span style="color: #d08770;">:class</span> <span style="color: #a3be8c;">"media-heading"</span><span style="color: #a2b6da;">}</span>
+               <span style="color: #a2b6da;">[</span><span style="color: #d08770;">:a</span> <span style="color: #9cb6ad;">{</span><span style="color: #d08770;">:href</span> <span style="color: #8c8c8c;">(</span>str <span style="color: #a3be8c;">"http://www.etsy.com/shop/"</span> <span style="color: #93a8c6;">(</span><span style="color: #d08770;">:shop_name</span> <span style="color: #b0b1a3;">(</span>testimonial data<span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span> 
+                    <span style="color: #d08770;">:class</span> <span style="color: #a3be8c;">"shop"</span> 
+                    <span style="color: #d08770;">:target</span> <span style="color: #a3be8c;">"_blank"</span><span style="color: #9cb6ad;">}</span> 
+                <span style="color: #9cb6ad;">(</span><span style="color: #d08770;">:shop_name</span> <span style="color: #8c8c8c;">(</span>testimonial data<span style="color: #8c8c8c;">)</span><span style="color: #9cb6ad;">)</span><span style="color: #a2b6da;">]</span><span style="color: #90a890;">]</span>
+              <span style="color: #90a890;">[</span><span style="color: #d08770;">:blockquote</span> 
+               <span style="color: #a2b6da;">[</span><span style="color: #d08770;">:p</span> <span style="color: #9cb6ad;">{</span><span style="color: #d08770;">:class</span> <span style="color: #a3be8c;">"text-info quote"</span><span style="color: #9cb6ad;">}</span> 
+                <span style="color: #9cb6ad;">(</span><span style="color: #d08770;">:quote</span> <span style="color: #8c8c8c;">(</span>testimonial data<span style="color: #8c8c8c;">)</span><span style="color: #9cb6ad;">)</span><span style="color: #a2b6da;">]</span>
+               <span style="color: #a2b6da;">[</span><span style="color: #d08770;">:small</span> 
+                <span style="color: #9cb6ad;">[</span><span style="color: #d08770;">:cite</span> <span style="color: #8c8c8c;">{</span><span style="color: #d08770;">:title</span> <span style="color: #a3be8c;">"Source title"</span> 
+                        <span style="color: #d08770;">:class</span> <span style="color: #a3be8c;">"shop_owner"</span><span style="color: #8c8c8c;">}</span> 
+                 <span style="color: #8c8c8c;">(</span><span style="color: #d08770;">:shop_owner</span> <span style="color: #93a8c6;">(</span>testimonial data<span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span><span style="color: #9cb6ad;">]</span><span style="color: #a2b6da;">]</span><span style="color: #90a890;">]</span><span style="color: #b0b0b3;">]</span><span style="color: #aebed8;">]</span><span style="color: #97b098;">)</span><span style="color: #b0b1a3;">)</span>
+    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IDidMount</span>
+    <span style="color: #b0b1a3;">(</span>did-mount <span style="color: #97b098;">[</span>this node<span style="color: #97b098;">]</span>
+      <span style="color: #97b098;">(</span><span style="color: #c0c5ce;">js</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #d08770;">setInterval</span> transition 5000 data<span style="color: #97b098;">)</span><span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span>root 
+<span style="color: #8c8c8c;">(</span><span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span>root 
  widget
  app-state
- <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:target</span> <span style="color: #909183;">(</span>sel1 <span style="color: #008b8b;">:#content</span><span style="color: #909183;">)</span><span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+ <span style="color: #93a8c6;">{</span><span style="color: #d08770;">:target</span> <span style="color: #b0b1a3;">(</span>sel1 <span style="color: #d08770;">:#content</span><span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">}</span><span style="color: #8c8c8c;">)</span>
 
 </pre>
 </div>
@@ -315,10 +315,10 @@ Compare this to the imperative code in the original JavaScript version. Now test
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">{shop_name: <span style="color: #8b2252;">"MomentsOfArt"</span>,
- shop_owner: <span style="color: #8b2252;">"Loribeth"</span>,
- avatar: <span style="color: #8b2252;">"http://img0.etsystatic.com/011/0/30011619/iusa_75x75.22273684_cjcb.jpg"</span>,
- quote: <span style="color: #8b2252;">"I think you are providing a wonderful app to Etsy shop owners."</span>}
+<pre class="src src-js">{shop_name: <span style="color: #a3be8c;">"MomentsOfArt"</span>,
+ shop_owner: <span style="color: #a3be8c;">"Loribeth"</span>,
+ avatar: <span style="color: #a3be8c;">"http://img0.etsystatic.com/011/0/30011619/iusa_75x75.22273684_cjcb.jpg"</span>,
+ quote: <span style="color: #a3be8c;">"I think you are providing a wonderful app to Etsy shop owners."</span>}
 </pre>
 </div>
 
@@ -327,69 +327,69 @@ We’re starting by defining some global helper functions, followed by the logic
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">(<span style="color: #a020f0;">function</span>() {
-  (<span style="color: #a020f0;">function</span>() {
-    <span style="color: #a020f0;">var</span> <span style="color: #a0522d;">_base</span>;
-    <span style="color: #a020f0;">return</span> (_base = Array.<span style="color: #008b8b;">prototype</span>).shuffle != <span style="color: #008b8b;">null</span> ? (_base = Array.<span style="color: #008b8b;">prototype</span>).shuffle : _base.shuffle = <span style="color: #a020f0;">function</span>() {
-      <span style="color: #a020f0;">var</span> <span style="color: #a0522d;">i</span>, <span style="color: #a0522d;">j</span>, <span style="color: #a0522d;">_i</span>, <span style="color: #a0522d;">_ref</span>, <span style="color: #a0522d;">_ref1</span>;
-      <span style="color: #a020f0;">for</span> (i = _i = _ref = <span style="color: #008b8b;">this</span>.length - 1; _ref &lt;= 1 ? _i &lt;= 1 : _i &gt;= 1; i = _ref &lt;= 1 ? ++_i : --_i) {
+<pre class="src src-js">(<span style="color: #b48ead;">function</span>() {
+  (<span style="color: #b48ead;">function</span>() {
+    <span style="color: #b48ead;">var</span> <span style="color: #bf616a;">_base</span>;
+    <span style="color: #b48ead;">return</span> (_base = Array.<span style="color: #d08770;">prototype</span>).shuffle != <span style="color: #d08770;">null</span> ? (_base = Array.<span style="color: #d08770;">prototype</span>).shuffle : _base.shuffle = <span style="color: #b48ead;">function</span>() {
+      <span style="color: #b48ead;">var</span> <span style="color: #bf616a;">i</span>, <span style="color: #bf616a;">j</span>, <span style="color: #bf616a;">_i</span>, <span style="color: #bf616a;">_ref</span>, <span style="color: #bf616a;">_ref1</span>;
+      <span style="color: #b48ead;">for</span> (i = _i = _ref = <span style="color: #d08770;">this</span>.length - 1; _ref &lt;= 1 ? _i &lt;= 1 : _i &gt;= 1; i = _ref &lt;= 1 ? ++_i : --_i) {
         j = Math.floor(Math.random() * (i + 1));
-        _ref1 = [<span style="color: #008b8b;">this</span>[j], <span style="color: #008b8b;">this</span>[i]], <span style="color: #008b8b;">this</span>[i] = _ref1[0], <span style="color: #008b8b;">this</span>[j] = _ref1[1];
+        _ref1 = [<span style="color: #d08770;">this</span>[j], <span style="color: #d08770;">this</span>[i]], <span style="color: #d08770;">this</span>[i] = _ref1[0], <span style="color: #d08770;">this</span>[j] = _ref1[1];
       }
-      <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">this</span>;
+      <span style="color: #b48ead;">return</span> <span style="color: #d08770;">this</span>;
     };
   })();
 
-  window.delay = <span style="color: #a020f0;">function</span>(<span style="color: #a0522d;">s</span>, <span style="color: #a0522d;">func</span>) {
-    <span style="color: #a020f0;">return</span> setInterval(func, s * 1000);
+  window.delay = <span style="color: #b48ead;">function</span>(<span style="color: #bf616a;">s</span>, <span style="color: #bf616a;">func</span>) {
+    <span style="color: #b48ead;">return</span> setInterval(func, s * 1000);
   };
 
-  window.randomInt = <span style="color: #a020f0;">function</span>(<span style="color: #a0522d;">lower</span>, <span style="color: #a0522d;">upper</span>) {
-    <span style="color: #a020f0;">var</span> <span style="color: #a0522d;">start</span>, <span style="color: #a0522d;">_ref</span>, <span style="color: #a0522d;">_ref1</span>;
-    <span style="color: #a020f0;">if</span> (upper == <span style="color: #008b8b;">null</span>) {
+  window.randomInt = <span style="color: #b48ead;">function</span>(<span style="color: #bf616a;">lower</span>, <span style="color: #bf616a;">upper</span>) {
+    <span style="color: #b48ead;">var</span> <span style="color: #bf616a;">start</span>, <span style="color: #bf616a;">_ref</span>, <span style="color: #bf616a;">_ref1</span>;
+    <span style="color: #b48ead;">if</span> (upper == <span style="color: #d08770;">null</span>) {
       upper = 0;
     }
     start = Math.random();
-    <span style="color: #a020f0;">if</span> (lower == <span style="color: #008b8b;">null</span>) {
+    <span style="color: #b48ead;">if</span> (lower == <span style="color: #d08770;">null</span>) {
       _ref = [0, lower], lower = _ref[0], upper = _ref[1];
     }
-    <span style="color: #a020f0;">if</span> (lower &gt; upper) {
+    <span style="color: #b48ead;">if</span> (lower &gt; upper) {
       _ref1 = [upper, lower], lower = _ref1[0], upper = _ref1[1];
     }
-    <span style="color: #a020f0;">return</span> Math.floor(start * (upper - lower + 1) + lower);
+    <span style="color: #b48ead;">return</span> Math.floor(start * (upper - lower + 1) + lower);
   };
 
-  $(document).ready(<span style="color: #a020f0;">function</span>() {
-    <span style="color: #a020f0;">var</span> <span style="color: #a0522d;">rotate</span>, <span style="color: #a0522d;">testimonials</span>, <span style="color: #a0522d;">update</span>;    
-    rotate = (<span style="color: #a020f0;">function</span>() {
-      <span style="color: #a020f0;">var</span> <span style="color: #a0522d;">counter</span>, <span style="color: #a0522d;">increment</span>;
+  $(document).ready(<span style="color: #b48ead;">function</span>() {
+    <span style="color: #b48ead;">var</span> <span style="color: #bf616a;">rotate</span>, <span style="color: #bf616a;">testimonials</span>, <span style="color: #bf616a;">update</span>;    
+    rotate = (<span style="color: #b48ead;">function</span>() {
+      <span style="color: #b48ead;">var</span> <span style="color: #bf616a;">counter</span>, <span style="color: #bf616a;">increment</span>;
       counter = 0;
-      increment = <span style="color: #a020f0;">function</span>() {
+      increment = <span style="color: #b48ead;">function</span>() {
         ++counter;
-        <span style="color: #a020f0;">if</span> (counter === testimonials.length) {
+        <span style="color: #b48ead;">if</span> (counter === testimonials.length) {
           testimonials.shuffle();
-          <span style="color: #a020f0;">return</span> counter = 0;
+          <span style="color: #b48ead;">return</span> counter = 0;
         }
       };
-      <span style="color: #a020f0;">return</span> {
-        <span style="color: #0000ff;">value</span>: <span style="color: #a020f0;">function</span>() {
+      <span style="color: #b48ead;">return</span> {
+        <span style="color: #8fa1b3;">value</span>: <span style="color: #b48ead;">function</span>() {
           increment();
-          <span style="color: #a020f0;">return</span> update(testimonials[counter]);
+          <span style="color: #b48ead;">return</span> update(testimonials[counter]);
         }
       };
     })();
-    update = <span style="color: #a020f0;">function</span>(<span style="color: #a0522d;">testimonial</span>) {
-      <span style="color: #a020f0;">return</span> $(<span style="color: #8b2252;">"#testimonials .media"</span>).fadeOut(<span style="color: #a020f0;">function</span>() {
-        $(<span style="color: #8b2252;">".shop"</span>, $(<span style="color: #008b8b;">this</span>)).text(testimonial.shop_name);
-        $(<span style="color: #8b2252;">".shop"</span>, $(<span style="color: #008b8b;">this</span>)).attr(<span style="color: #8b2252;">"href"</span>, <span style="color: #8b2252;">"http://www.etsy.com/shop/"</span> + testimonial.shop_name);
-        $(<span style="color: #8b2252;">".quote"</span>, $(<span style="color: #008b8b;">this</span>)).text(testimonial.quote);
-        $(<span style="color: #8b2252;">".shop_owner"</span>, $(<span style="color: #008b8b;">this</span>)).text(testimonial.shop_owner);
-        <span style="color: #a020f0;">return</span> $(<span style="color: #8b2252;">".avatar"</span>, $(<span style="color: #008b8b;">this</span>)).attr(<span style="color: #8b2252;">"src"</span>, testimonial.avatar);
+    update = <span style="color: #b48ead;">function</span>(<span style="color: #bf616a;">testimonial</span>) {
+      <span style="color: #b48ead;">return</span> $(<span style="color: #a3be8c;">"#testimonials .media"</span>).fadeOut(<span style="color: #b48ead;">function</span>() {
+        $(<span style="color: #a3be8c;">".shop"</span>, $(<span style="color: #d08770;">this</span>)).text(testimonial.shop_name);
+        $(<span style="color: #a3be8c;">".shop"</span>, $(<span style="color: #d08770;">this</span>)).attr(<span style="color: #a3be8c;">"href"</span>, <span style="color: #a3be8c;">"http://www.etsy.com/shop/"</span> + testimonial.shop_name);
+        $(<span style="color: #a3be8c;">".quote"</span>, $(<span style="color: #d08770;">this</span>)).text(testimonial.quote);
+        $(<span style="color: #a3be8c;">".shop_owner"</span>, $(<span style="color: #d08770;">this</span>)).text(testimonial.shop_owner);
+        <span style="color: #b48ead;">return</span> $(<span style="color: #a3be8c;">".avatar"</span>, $(<span style="color: #d08770;">this</span>)).attr(<span style="color: #a3be8c;">"src"</span>, testimonial.avatar);
       }).fadeIn();
     };
     testimonials.shuffle();
     rotate.value();
-    <span style="color: #a020f0;">return</span> delay(5, rotate.value);
+    <span style="color: #b48ead;">return</span> delay(5, rotate.value);
   });
 </pre>
 </div>

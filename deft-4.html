@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-11-27 Mon 12:12 -->
+<!-- 2017-12-02 Sat 20:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How is printing to the console a side effect</title>
@@ -255,7 +255,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="org-div-home-and-up">
- <a accesskey="h" href="website-sitemap.html"> UP </a>
+ <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="website-sitemap.html"> HOME </a>
 </div><div id="content">
@@ -305,18 +305,18 @@ printed, or -1 when the printing was unsuccesful.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<pre class="src src-c"><span style="color: #d08770;">#include</span> <span style="color: #a3be8c;">&lt;stdio.h&gt;</span>
 
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+<span style="color: #c0c5ce;">int</span> <span style="color: #8fa1b3;">main</span>()
 {
-  <span style="color: #228b22;">int</span> <span style="color: #a0522d;">rc</span>;
-  rc = printf(<span style="color: #8b2252;">"test\n"</span>);             <span style="color: #b22222;">/* </span><span style="color: #b22222;">printing test string </span><span style="color: #b22222;">*/</span>
-  fprintf(stderr, <span style="color: #8b2252;">"rc: %d\n"</span>, rc);   <span style="color: #b22222;">/* </span><span style="color: #b22222;">return code of succesful printf call </span>
-<span style="color: #b22222;">                                        5 in this case </span><span style="color: #b22222;">*/</span>
-  fclose(stdout);                    <span style="color: #b22222;">/* </span><span style="color: #b22222;">closing standard output </span><span style="color: #b22222;">*/</span>
-  rc = printf(<span style="color: #8b2252;">"test\n"</span>);             <span style="color: #b22222;">/* </span><span style="color: #b22222;">printing test string (don't hold your breath) </span><span style="color: #b22222;">*/</span>
-  fprintf(stderr, <span style="color: #8b2252;">"rc: %d\n"</span>, rc);   <span style="color: #b22222;">/* </span><span style="color: #b22222;">return code of unsuccesful prinf call </span>
-<span style="color: #b22222;">                                        returns -1  </span><span style="color: #b22222;">*/</span>
+  <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">rc</span>;
+  rc = printf(<span style="color: #a3be8c;">"test\n"</span>);             <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">printing test string </span><span style="color: #c0c5ce;">*/</span>
+  fprintf(stderr, <span style="color: #a3be8c;">"rc: %d\n"</span>, rc);   <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">return code of succesful printf call </span>
+<span style="color: #65737e;">                                        5 in this case </span><span style="color: #c0c5ce;">*/</span>
+  fclose(stdout);                    <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">closing standard output </span><span style="color: #c0c5ce;">*/</span>
+  rc = printf(<span style="color: #a3be8c;">"test\n"</span>);             <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">printing test string (don't hold your breath) </span><span style="color: #c0c5ce;">*/</span>
+  fprintf(stderr, <span style="color: #a3be8c;">"rc: %d\n"</span>, rc);   <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">return code of unsuccesful prinf call </span>
+<span style="color: #65737e;">                                        returns -1  </span><span style="color: #c0c5ce;">*/</span>
 }
 
 </pre>

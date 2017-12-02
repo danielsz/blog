@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-11-27 Mon 12:12 -->
+<!-- 2017-12-02 Sat 20:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mu4e account switching</title>
@@ -233,7 +233,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="org-div-home-and-up">
- <a accesskey="h" href="website-sitemap.html"> UP </a>
+ <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="website-sitemap.html"> HOME </a>
 </div><div id="content">
@@ -244,21 +244,21 @@ The following code snippet, meant to demonstrate <code>mu4e-compose-pre-hook</co
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">1) messages to me@foo.com should be replied with From:me@foo.com</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">2) messages to me@bar.com should be replied with From:me@bar.com</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">3) all other mail should use From:me@cuux.com</span>
+<pre class="src src-emacs-lisp"><span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">1) messages to me@foo.com should be replied with From:me@foo.com</span>
+<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">2) messages to me@bar.com should be replied with From:me@bar.com</span>
+<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">3) all other mail should use From:me@cuux.com</span>
 (add-hook 'mu4e-compose-pre-hook
-  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-set-from-address</span> ()
-    <span style="color: #8b2252;">"Set the From address based on the To address of the original."</span>
-    (<span style="color: #a020f0;">let</span> ((msg mu4e-compose-parent-message)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">msg is shorter...</span>
-      (<span style="color: #a020f0;">when</span> msg
-        (<span style="color: #a020f0;">setq</span> user-mail-address
-          (<span style="color: #a020f0;">cond</span>
-            ((mu4e-message-contact-field-matches msg <span style="color: #483d8b;">:to</span> <span style="color: #8b2252;">"me@foo.com"</span>)
-              <span style="color: #8b2252;">"me@foo.com"</span>)
-            ((mu4e-message-contact-field-matches msg <span style="color: #483d8b;">:to</span> <span style="color: #8b2252;">"me@bar.com"</span>)
-              <span style="color: #8b2252;">"me@bar.com"</span>)
-            (t <span style="color: #8b2252;">"me@cuux.com"</span>)))))))
+  (<span style="color: #b48ead;">defun</span> <span style="color: #8fa1b3;">my-set-from-address</span> ()
+    <span style="color: #a3be8c;">"Set the From address based on the To address of the original."</span>
+    (<span style="color: #b48ead;">let</span> ((msg mu4e-compose-parent-message)) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">msg is shorter...</span>
+      (<span style="color: #b48ead;">when</span> msg
+        (<span style="color: #b48ead;">setq</span> user-mail-address
+          (<span style="color: #b48ead;">cond</span>
+            ((mu4e-message-contact-field-matches msg <span style="color: #d08770;">:to</span> <span style="color: #a3be8c;">"me@foo.com"</span>)
+              <span style="color: #a3be8c;">"me@foo.com"</span>)
+            ((mu4e-message-contact-field-matches msg <span style="color: #d08770;">:to</span> <span style="color: #a3be8c;">"me@bar.com"</span>)
+              <span style="color: #a3be8c;">"me@bar.com"</span>)
+            (t <span style="color: #a3be8c;">"me@cuux.com"</span>)))))))
 </pre>
 </div>
 
@@ -271,29 +271,29 @@ I have come up with a solution that works well for me and that I am offering bel
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">cl-defstruct</span> <span style="color: #228b22;">account</span> full-name address signature)
-(<span style="color: #a020f0;">setq</span> my-accounts (list
-                   (make-account <span style="color: #483d8b;">:full-name</span> <span style="color: #8b2252;">"Stannis Baratheon"</span>
-                                 <span style="color: #483d8b;">:address</span> <span style="color: #8b2252;">"stannis.baratheon@seven-kingdoms.com"</span>
-                                 <span style="color: #483d8b;">:signature</span> <span style="color: #8b2252;">"Best dad ever\nAlso Protector of the Realm"</span>)
-                   (make-account <span style="color: #483d8b;">:full-name</span> <span style="color: #8b2252;">"Daenerys Targaryen"</span>
-                                 <span style="color: #483d8b;">:address</span> <span style="color: #8b2252;">"daenerys.targaryen@meereen.com"</span>
-                                 <span style="color: #483d8b;">:signature</span> <span style="color: #8b2252;">"Dragon pup for sale"</span>)
-                   (make-account <span style="color: #483d8b;">:full-name</span> <span style="color: #8b2252;">"Melisandre"</span>
-                                 <span style="color: #483d8b;">:address</span> <span style="color: #8b2252;">"melisandre@lordoflight.com"</span>
-                                 <span style="color: #483d8b;">:signature</span> <span style="color: #8b2252;">"I love science"</span>)))
+<pre class="src src-emacs-lisp">(<span style="color: #b48ead;">cl-defstruct</span> <span style="color: #c0c5ce;">account</span> full-name address signature)
+(<span style="color: #b48ead;">setq</span> my-accounts (list
+                   (make-account <span style="color: #d08770;">:full-name</span> <span style="color: #a3be8c;">"Stannis Baratheon"</span>
+                                 <span style="color: #d08770;">:address</span> <span style="color: #a3be8c;">"stannis.baratheon@seven-kingdoms.com"</span>
+                                 <span style="color: #d08770;">:signature</span> <span style="color: #a3be8c;">"Best dad ever\nAlso Protector of the Realm"</span>)
+                   (make-account <span style="color: #d08770;">:full-name</span> <span style="color: #a3be8c;">"Daenerys Targaryen"</span>
+                                 <span style="color: #d08770;">:address</span> <span style="color: #a3be8c;">"daenerys.targaryen@meereen.com"</span>
+                                 <span style="color: #d08770;">:signature</span> <span style="color: #a3be8c;">"Dragon pup for sale"</span>)
+                   (make-account <span style="color: #d08770;">:full-name</span> <span style="color: #a3be8c;">"Melisandre"</span>
+                                 <span style="color: #d08770;">:address</span> <span style="color: #a3be8c;">"melisandre@lordoflight.com"</span>
+                                 <span style="color: #d08770;">:signature</span> <span style="color: #a3be8c;">"I love science"</span>)))
 
 (add-hook 'mu4e-compose-pre-hook
-          (<span style="color: #a020f0;">lambda</span> ()
-            <span style="color: #8b2252;">"Set the From address based on the To address of the original."</span>
-            (<span style="color: #a020f0;">let*</span> ((msg mu4e-compose-parent-message)
+          (<span style="color: #b48ead;">lambda</span> ()
+            <span style="color: #a3be8c;">"Set the From address based on the To address of the original."</span>
+            (<span style="color: #b48ead;">let*</span> ((msg mu4e-compose-parent-message)
                    (default-account (car my-accounts))
-                   (current-account (<span style="color: #a020f0;">if</span> msg
-                                        (<span style="color: #a020f0;">loop</span> for account in my-accounts
-                                              when (mu4e-message-contact-field-matches msg <span style="color: #483d8b;">:to</span> (account-address account))
+                   (current-account (<span style="color: #b48ead;">if</span> msg
+                                        (<span style="color: #b48ead;">loop</span> for account in my-accounts
+                                              when (mu4e-message-contact-field-matches msg <span style="color: #d08770;">:to</span> (account-address account))
                                               return account)
                                       default-account)))
-              (<span style="color: #a020f0;">setq</span> user-mail-address (account-address current-account)
+              (<span style="color: #b48ead;">setq</span> user-mail-address (account-address current-account)
                     user-full-name (account-full-name current-account)
                     mu4e-compose-signature (account-signature current-account)))))
 </pre>

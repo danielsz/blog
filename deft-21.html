@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-11-27 Mon 12:12 -->
+<!-- 2017-12-02 Sat 20:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Live coding with Clojure and Emacs</title>
@@ -233,7 +233,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="org-div-home-and-up">
- <a accesskey="h" href="website-sitemap.html"> UP </a>
+ <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="website-sitemap.html"> HOME </a>
 </div><div id="content">
@@ -297,16 +297,16 @@ $ emacs src/fioritto/sketch.clj
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">s</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">s</span>)
 
-(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">imp-clj-html</span> (buffer)
-  (<span style="color: #a020f0;">with-current-buffer</span> (get-buffer buffer)
+(<span style="color: #b48ead;">defun</span> <span style="color: #8fa1b3;">imp-clj-html</span> (buffer)
+  (<span style="color: #b48ead;">with-current-buffer</span> (get-buffer buffer)
     (cider-eval-defun-at-point))
-  (<span style="color: #a020f0;">let*</span> ((content (<span style="color: #a020f0;">with-temp-buffer</span> 
-                    (cider-interactive-eval-print <span style="color: #8b2252;">"(fioritto.sketch/page)"</span>)
+  (<span style="color: #b48ead;">let*</span> ((content (<span style="color: #b48ead;">with-temp-buffer</span> 
+                    (cider-interactive-eval-print <span style="color: #a3be8c;">"(fioritto.sketch/page)"</span>)
                     (sleep-for 0.1)
                     (buffer-string)))
-         (sanitized-content (s-replace-all '((<span style="color: #8b2252;">"\\n"</span> . <span style="color: #8b2252;">""</span>) (<span style="color: #8b2252;">"\\\""</span> . <span style="color: #8b2252;">"'"</span>)) content)))
+         (sanitized-content (s-replace-all '((<span style="color: #a3be8c;">"\\n"</span> . <span style="color: #a3be8c;">""</span>) (<span style="color: #a3be8c;">"\\\""</span> . <span style="color: #a3be8c;">"'"</span>)) content)))
     (princ sanitized-content (current-buffer))
     )
   (delete-region (point-min) (+ (point-min) 1))

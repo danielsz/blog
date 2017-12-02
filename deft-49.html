@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-11-27 Mon 12:12 -->
+<!-- 2017-12-02 Sat 20:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ghosts in the machine</title>
@@ -233,7 +233,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="org-div-home-and-up">
- <a accesskey="h" href="website-sitemap.html"> UP </a>
+ <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="website-sitemap.html"> HOME </a>
 </div><div id="content">
@@ -266,7 +266,7 @@ Back to the beginning (or the end). <i>Use with caution</i>. The side note, reme
 <div class="org-src-container">
 <pre class="src src-shell">clojure.core/remove-ns
  [sym]
-Added<span style="color: #a020f0;"> in</span> 1.0
+Added<span style="color: #b48ead;"> in</span> 1.0
   Removes the namespace named by the symbol. Use with caution.
   Cannot be used to remove the clojure namespace.
 </pre>
@@ -301,12 +301,12 @@ First, let’s create a namespace and intern an entry. (Type the code in a REPL 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PTThVNRbaHk" frameborder="0" allowfullscreen></iframe>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>create-ns 'choice<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>create-ns 'choice<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"red"</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>intern 'choice 'pill <span style="color: #a3be8c;">"red"</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -316,13 +316,13 @@ First, let’s create a namespace and intern an entry. (Type the code in a REPL 
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"red"</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>intern 'choice 'pill <span style="color: #a3be8c;">"red"</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>+ 3 3<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>+ 3 3<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -344,7 +344,7 @@ When we define a named function, we are interning a symbol in a namespace bound 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>ns-publics 'choice<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>ns-publics 'choice<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -368,13 +368,13 @@ Note: We are restricting the present discussion to static Vars. Dynamic Vars hav
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">ns</span> <span style="color: #228b22;">matrix</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">Neo</span> <span style="color: #7388d6;">(</span>agent <span style="color: #909183;">[</span>#'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span><span style="color: #b48ead;">ns</span> <span style="color: #c0c5ce;">matrix</span><span style="color: #8c8c8c;">)</span>
+<span style="color: #8c8c8c;">(</span><span style="color: #b48ead;">def</span> <span style="color: #bf616a;">Neo</span> <span style="color: #93a8c6;">(</span>agent <span style="color: #b0b1a3;">[</span>#'<span style="color: #c0c5ce;">choice</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span>pill<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>send <span style="color: #c0c5ce;">Neo</span> #<span style="color: #93a8c6;">(</span>conj <span style="color: #bf616a;">%</span> <span style="color: #b0b1a3;">(</span>var-get <span style="color: #97b098;">(</span>first <span style="color: #bf616a;">%</span><span style="color: #97b098;">)</span><span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -387,16 +387,16 @@ If we redefine our Var, our agent will pick up the new value.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"blue"</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>intern 'choice 'pill <span style="color: #a3be8c;">"blue"</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>send <span style="color: #c0c5ce;">Neo</span> #<span style="color: #93a8c6;">(</span>conj <span style="color: #bf616a;">%</span> <span style="color: #b0b1a3;">(</span>var-get <span style="color: #97b098;">(</span>first <span style="color: #bf616a;">%</span><span style="color: #97b098;">)</span><span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>= <span style="color: #7388d6;">(</span>first @<span style="color: #228b22;">Neo</span><span style="color: #7388d6;">)</span> #'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>= <span style="color: #93a8c6;">(</span>first @<span style="color: #c0c5ce;">Neo</span><span style="color: #93a8c6;">)</span> #'<span style="color: #c0c5ce;">choice</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span>pill<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -418,7 +418,7 @@ Incidentally, we now have set up the stage to discuss the caution found in <code
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>remove-ns 'choice<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>remove-ns 'choice<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -427,12 +427,12 @@ Now let’s try to retrieve the color of the pill.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>var-get #'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>var-get #'<span style="color: #c0c5ce;">choice</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span>pill<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-shell">Unable to resolve var: choice/pill<span style="color: #a020f0;"> in</span> this context...
+<pre class="src src-shell">Unable to resolve var: choice/pill<span style="color: #b48ead;"> in</span> this context...
 </pre>
 </div>
 
@@ -441,7 +441,7 @@ Of course. But what if we ask Neo?
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>send <span style="color: #c0c5ce;">Neo</span> #<span style="color: #93a8c6;">(</span>conj <span style="color: #bf616a;">%</span> <span style="color: #b0b1a3;">(</span>var-get <span style="color: #97b098;">(</span>first <span style="color: #bf616a;">%</span><span style="color: #97b098;">)</span><span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -455,8 +455,8 @@ Let’s go further down the rabbit hole, and recreate a red pill.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>create-ns 'choice<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"red"</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>create-ns 'choice<span style="color: #8c8c8c;">)</span>
+<span style="color: #8c8c8c;">(</span>intern 'choice 'pill <span style="color: #a3be8c;">"red"</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -469,7 +469,7 @@ If this seems like a contrived exercise, please note that this is exactly what h
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>send <span style="color: #c0c5ce;">Neo</span> #<span style="color: #93a8c6;">(</span>conj <span style="color: #bf616a;">%</span> <span style="color: #b0b1a3;">(</span>var-get <span style="color: #97b098;">(</span>first <span style="color: #bf616a;">%</span><span style="color: #97b098;">)</span><span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 <p>
@@ -477,7 +477,7 @@ Blue? Really? Isn’t our pill red?
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>var-get #'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>var-get #'<span style="color: #c0c5ce;">choice</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span>pill<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -486,7 +486,7 @@ Yes it is, but it seems that we are looking through the Looking-Glass, and thing
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>= <span style="color: #7388d6;">(</span>first @<span style="color: #228b22;">Neo</span><span style="color: #7388d6;">)</span> #'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>= <span style="color: #93a8c6;">(</span>first @<span style="color: #c0c5ce;">Neo</span><span style="color: #93a8c6;">)</span> #'<span style="color: #c0c5ce;">choice</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span>pill<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -545,7 +545,7 @@ If you have ever developed a Ring application, you might know that there is a tr
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>run-jetty <span style="color: #7388d6;">(</span><span style="color: #a020f0;">var</span> handler<span style="color: #7388d6;">)</span> <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:port</span> 8080 <span style="color: #008b8b;">:join?</span> <span style="color: #008b8b;">false</span><span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>run-jetty <span style="color: #93a8c6;">(</span><span style="color: #b48ead;">var</span> handler<span style="color: #93a8c6;">)</span> <span style="color: #93a8c6;">{</span><span style="color: #d08770;">:port</span> 8080 <span style="color: #d08770;">:join?</span> <span style="color: #d08770;">false</span><span style="color: #93a8c6;">}</span><span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 
@@ -590,7 +590,7 @@ Here every <code>refresh</code> results in the duplication of <code>foo</code>. 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>= <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:handler</span> <span style="color: #909183;">(</span><span style="color: #008b8b;">:web</span> <span style="color: #228b22;">system.repl</span><span style="color: #000000; background-color: #ffffff;">/</span>system<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span> #'app<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span>= <span style="color: #93a8c6;">(</span><span style="color: #d08770;">:handler</span> <span style="color: #b0b1a3;">(</span><span style="color: #d08770;">:web</span> <span style="color: #c0c5ce;">system.repl</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span>system<span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span> #'app<span style="color: #8c8c8c;">)</span>
 </pre>
 </div>
 

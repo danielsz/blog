@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2017-11-27 Mon 12:12 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ghosts in the machine</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Daniel Szmulewicz">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/grid.css">
+<link rel="stylesheet" type="text/css" href="css/post.css">
+<link rel="stylesheet" type="text/css" href="assets/fonts/charter/webfonts/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="css/typography.css">
+<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Roboto+Condensed|Source+Serif+Pro|Inconsolata" rel="stylesheet">
+<script src="js/grid.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="website-sitemap.html"> UP </a>
+ |
+ <a accesskey="H" href="website-sitemap.html"> HOME </a>
+</div><div id="content">
+<header>
+<h1 class="title">Ghosts in the machine</h1>
+</header><blockquote>
+<p>
+There is a crack in everything. That's how the light gets in. – Leonard Cohen
+</p>
+</blockquote>
+
+
+<figure>
+<img src="images/lain-animated2.gif" alt="lain-animated2.gif">
+
+</figure>
+
+<p>
+Some stories start with a side note. This is one of them. Then again, the side note might be the end of the story. I’m not sure anymore. But the journey we are going to embark on will quickly transcend it, leading us to explore programming semantics and revisit some timeless philosophical allegories. 
+</p>
+
+<p>
+<b>tl;dr</b> In which we submit reproducible research about the Clojure runtime, particularly concerning code reloading. 
+</p>
+
+<p>
+Back to the beginning (or the end). <i>Use with caution</i>. The side note, remember?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">clojure.core/remove-ns
+ [sym]
+Added<span style="color: #a020f0;"> in</span> 1.0
+  Removes the namespace named by the symbol. Use with caution.
+  Cannot be used to remove the clojure namespace.
+</pre>
+</div>
+
+<p>
+OK, fine. But wait a second, why? What are we guarding ourselves against? What dangers are lurking when invoking above function? A caution works insofar as it is understood. How can one be cautious if one doesn’t know the first thing about the danger or the risk incurred? 
+</p>
+
+<p>
+<code>remove-ns</code> is not typically found in application codebases, but it is found at the heart of a widely used foundation library: <code>org.clojure/tools.namespace</code>. It is the primary mechanism–along with <code>ns-unmap</code> – to unload active definitions. 
+</p>
+
+
+<figure>
+<img src="images/delete.gif" alt="delete.gif">
+
+</figure>
+
+<p>
+So what is there to be so cautious about? 
+</p>
+
+<p>
+There is no way to go around this, we will have to go down the rabbit hole to establish that. The main method is formal and involves a demonstration at the REPL through code. But we will also discuss an idiomatic use of a Clojure pattern familiar to web application developers. Finally, we will look at the output of a memory profiler through several reloading cycles.
+</p>
+
+<p>
+First, let’s create a namespace and intern an entry. (Type the code in a REPL to follow along or watch the live demo).
+</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PTThVNRbaHk" frameborder="0" allowfullscreen></iframe>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>create-ns 'choice<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"red"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"red"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>+ 3 3<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">
+</pre>
+</div>
+
+<p>
+This is the equivalent of <code>(def pill "red")</code> where <code>*ns*</code> (the current namespace) is known as “choice”. The explicit form allows us to appreciate some lesser used operations that stand behind the machinery of creating Vars. 
+</p>
+
+<p>
+Clojure has a host of features—java interop, runtime polymorphism, concurrency primitives, a unified sequence abstraction and what not— but underlying it all is a scoping and binding mechanism embodied by namespaces and Vars. These are the foundation. 
+</p>
+
+<p>
+When we define a named function, we are interning a symbol in a namespace bound to a value (a function in this case). In above snippet, we have defined a Var named “pill” bound to the value “red”. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>ns-publics 'choice<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+
+<p>
+So namespaces are mappings from symbols to Vars, and Vars are for naming and looking up values. 
+</p>
+
+<blockquote>
+<p>
+Identities are mental tools we use to superimpose continuity on a world which is constantly, functionally, creating new values of itself.
+</p>
+</blockquote>
+
+<p>
+The key thing here is that a Var is a <b>stable</b> logical entity. Vars have a root binding that is observable from all threads. Let’s prove this:
+</p>
+
+<p>
+Note: We are restricting the present discussion to static Vars. Dynamic Vars have per-thread bindings, but this is orthogonal to our concerns. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">ns</span> <span style="color: #228b22;">matrix</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">Neo</span> <span style="color: #7388d6;">(</span>agent <span style="color: #909183;">[</span>#'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Actions dispatched to an agent occur in a thread, so when we send <code>var-get</code> to the agent, we are getting the root binding of <code>#'pill</code> as seen from a different thread.
+</p>
+
+<p>
+If we redefine our Var, our agent will pick up the new value. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"blue"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>= <span style="color: #7388d6;">(</span>first @<span style="color: #228b22;">Neo</span><span style="color: #7388d6;">)</span> #'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+The official documentation <a href="http://clojure.org/reference/vars#Interning">mentions</a> this: 
+</p>
+<blockquote>
+<p>
+This means that, unless they have been unmap-ed, Var objects are stable references&#x2026;
+</p>
+</blockquote>
+
+<p>
+Note the caveat. <i>Unless unmap-ed</i>. 
+</p>
+
+<p>
+Incidentally, we now have set up the stage to discuss the caution found in <code>remove-ns</code> docstring .
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>remove-ns 'choice<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Now let’s try to retrieve the color of the pill.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>var-get #'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">Unable to resolve var: choice/pill<span style="color: #a020f0;"> in</span> this context...
+</pre>
+</div>
+
+<p>
+Of course. But what if we ask Neo?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+
+<p>
+Oh, in the agent thread, Neo still holds on to the blue pill. Isn’t the Var gone with the namespace? This is a perfectly reasonable expectation, but false in the current state of affairs. 
+</p>
+
+<p>
+Let’s go further down the rabbit hole, and recreate a red pill. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>create-ns 'choice<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"red"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Now let’s ask Neo again what pill he has chosen.
+</p>
+
+<p>
+If this seems like a contrived exercise, please note that this is exactly what happens when reloading code in the runtime via a library like <code>tools.namespace</code>: it calls <code>remove-ns</code> before reloading definitions with <code>(require ns-sym :reload)</code>. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+<p>
+Blue? Really? Isn’t our pill red?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>var-get #'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Yes it is, but it seems that we are looking through the Looking-Glass, and things aren’t what they seem. Lewis Carol would have enjoyed the sight. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>= <span style="color: #7388d6;">(</span>first @<span style="color: #228b22;">Neo</span><span style="color: #7388d6;">)</span> #'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+At this point, we are not looking at the same Var objects anymore. What does it mean for something to not be equal with itself? Having lost its reflexive property, what good is a Var now? 
+</p>
+
+<p>
+Let’s savour this moment, because this is when the sirens start blasting, all lights go red in the control room, and agents are dispatched in swarm formation to repair the breach in the matrix, removing evidence and making sure no witness remains alive. 
+</p>
+
+
+<figure>
+<img src="images/sirens.gif" alt="sirens.gif">
+
+</figure>
+
+<p>
+Except that we’ve been warned. 
+</p>
+
+<p>
+Remember the cryptic message from the man himself: <i>Use with caution</i>.
+</p>
+
+<blockquote>
+<p>
+So, only namespaces that are not referenced by anything else can be safely removed - it's a very special-purpose operation. — Rich Hickey
+</p>
+</blockquote>
+
+<p>
+The danger that lurks behind <code>remove-ns</code> is abstraction leakage (or breakage). From stable references, Vars become unstable references–merely ghosts of themselves. 
+</p>
+
+<p>
+The <i>ghost in the machine</i> came up in the context of a philosophical discussion around the body and mind. It tries to demolish the notion that body and mind are separate entities working in parallel, which was the classical, cartesian view. Gilbert Ryle argued that treating the mind as a substance, like the body, no matter how different, was a logical fallacy. It was, to be accurate, a category mistake.
+</p>
+
+<blockquote>
+<p>
+A foreigner visiting Oxford or Cambridge for the first time is shown a number of colleges, libraries, playing fields, museums, scientific departments and administrative offices. He then asks 'But' where is the University? &#x2026; It has then to be explained to him that the University is not another collateral institution, some ulterior counterpart to the colleges, laboratories and offices which he has seen. The University is just the way in which all that he has already seen is organized. 
+</p>
+</blockquote>
+
+<p>
+Vars don’t exist as such in bytecode. Vars are an abstraction in the same way as a University. Taken in isolation, an abstraction is like a Platonic ideal: principled, self-contained, true in all instances. This is not our kind of world. Every single process involved in engineering a piece of software is real, not an abstraction. 
+</p>
+
+<p>
+The equivalent of the body and mind dualism in computer engineering is the duality of the runtime and the specification. The runtime implements an execution model that may or may not coincide with the specification of a client programming language. We often think of programming semantics as anterior or prevalent to the runtime, but they belong to different categories altogether.
+</p>
+
+<p>
+If you have ever developed a Ring application, you might know that there is a trick to make your handler pick up changes on the fly. Instead of passing it directly to the HTTP adapter, you pass it a Var. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>run-jetty <span style="color: #7388d6;">(</span><span style="color: #a020f0;">var</span> handler<span style="color: #7388d6;">)</span> <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:port</span> 8080 <span style="color: #008b8b;">:join?</span> <span style="color: #008b8b;">false</span><span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Because Vars implement the <code>IFn</code> interface, we can invoke them as if they were functions— <code>(#'+ 1 1 )</code> is equivalent to <code>(+ 1 1)</code>. 
+</p>
+
+<p>
+Instead of directly passing whatever <code>handler</code> evaluates to, we pass the Var, <code>#'handler</code>. This way, any change in your handler will be reflected immediately, without the need to restart the web server. Merely reloading the namespace via <code>require</code> does the trick.  You can do this manually, or via a Leiningen plugin. This is how <code>lein-ring</code> works: it re-requires your namespace when it detects a file change. However, if you use <code>refresh</code> from <code>tools.namespace</code>, this stops working. But now we know why. After <code>remove-ns</code>, the Var object passed to the server thread is orphaned. 
+</p>
+
+<p>
+We can see that this is true when profiling the memory with a Java introspection tool. 
+</p>
+
+<p>
+This is what happens to <code>foo</code> when reloading a namespace with <code>require ns-sym :reload</code>.
+</p>
+
+
+<figure>
+<img src="images/liveness-foo2.png" alt="liveness-foo2.png" width="600px">
+
+</figure>
+
+<p>
+Only one live object is present at any time because the same Var object gets overwritten over and over. (You can force garbage collection in VisualVM if you don’t see the results immediately.)
+</p>
+
+<p>
+And this is what happens to a Var named foo when reloading a namespace with <code>remove-ns ns-sym</code> + <code>require ns-sym :reload</code>.
+</p>
+
+
+<figure>
+<img src="images/liveness-foo1.png" alt="liveness-foo1.png" width="600px">
+
+</figure>
+
+<p>
+Here every <code>refresh</code> results in the duplication of <code>foo</code>. Those Var objects are inaccessible from the Clojure program but are still considered live by the Java runtime, and so they won’t be garbage collected. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>= <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:handler</span> <span style="color: #909183;">(</span><span style="color: #008b8b;">:web</span> <span style="color: #228b22;">system.repl</span><span style="color: #000000; background-color: #ffffff;">/</span>system<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span> #'app<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Will return true before the first call to <code>remove-ns</code>, false afterwards.
+</p>
+
+<p>
+<code>remove-ns</code> breaks the Var machinery. It jeopardizes Var’s standing as a stable reference type. 
+</p>
+
+<p>
+If you use the reloaded workflow and you restart all parts of your system, the Jetty component (insert your HTTP server component of choice) gets passed the current Var upon restarting, so everything works like expected and you don’t notice that the runtime is tainted with <b>unstable</b> Vars, unreachable objects with stale values. 
+</p>
+
+<p>
+How big is this a problem? Well, proliferation of objects that won’t be deallocated fall in the class of memory leaks. The heap will grow at a rate proportional to the number of times <code>refresh</code> is called. This only happens during development time, so I personally wouldn’t worry about it. Especially considering the <a href="https://github.com/clojure/tools.namespace#reloading-code-motivation">benefits</a> of using <code>tools.namespace</code>. Additionally, starting with <code>system 0.3.0</code>, you are given the option to skip the <code>remove-ns</code> on a per namespace basis, giving you finegrained control over what <code>refresh</code> should do. 
+</p>
+
+<p>
+Further study: 
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=LaNrqaT4Hq0">Video of presentation</a> at Scheme workshop, ICFP 2106.</li>
+<li><a href="https://github.com/danielsz/system#code-reload-vs-system-restart">Code reload vs system restart</a></li>
+<li><a href="https://github.com/guv/txload">Transparent transactional loading of Clojure namespaces.</a></li>
+<li><a href="https://github.com/jstepien/bubble">Atomic hot code reloading with fallback (Erlang-style).</a></li>
+<li><a href="https://github.com/mikera/kiss/wiki/Rationale#why-we-want-immutable-namespaces--environments">Immutable namespaces</a> are being considered for <a href="http://dev.clojure.org/display/design/Release.zFuture">future releases</a>.</li>
+</ul>
+</div>
+</body>
+</html>

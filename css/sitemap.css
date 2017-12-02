@@ -1,0 +1,53 @@
+#content {
+    display: grid;
+    grid-template-areas:
+    "hd"
+    "toc";
+}
+
+#content header {
+    grid-area: hd;
+    padding: 1rem;
+}
+
+#content ul {
+    grid-area: toc;
+}
+
+#content > ul.org-ul {
+    list-style-type: none;
+}
+
+header .author{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1.5em;
+    letter-spacing: 0.1em;
+    text-transform: capitalize;
+}
+header .title {
+    font-family: 'EB Garamond', serif;
+    font-size: 3em;
+    text-shadow: 4px 4px 4px #aaa;
+    text-transform: capitalize;
+}
+
+header .subtitle { 
+    font-family: 'Inconsolota', sans-serif;
+    text-align: right;
+        /* margin-top: 5rem; */
+    font-size: 1em;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+@media (min-width: 600px) {
+    #content ul {
+	column-count: 2;
+	column-gap: 3rem;
+	column-rule: 1px solid #C79C87;
+    }
+    #content {
+	justify-items: center;
+    }
+}

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2017-11-27 Mon 12:12 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In the mood for Lisp</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Daniel Szmulewicz">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/grid.css">
+<link rel="stylesheet" type="text/css" href="css/post.css">
+<link rel="stylesheet" type="text/css" href="assets/fonts/charter/webfonts/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="css/typography.css">
+<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Roboto+Condensed|Source+Serif+Pro|Inconsolata" rel="stylesheet">
+<script src="js/grid.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="website-sitemap.html"> UP </a>
+ |
+ <a accesskey="H" href="website-sitemap.html"> HOME </a>
+</div><div id="content">
+<header>
+<h1 class="title">In the mood for Lisp</h1>
+</header><p>
+Just like in the Hong-Kong movie "<a href="http://en.wikipedia.org/wiki/In_the_Mood_for_Love">In the mood for love"</a>, where love is hinted at in every scene but consummated in none, I have dreamt of a <a href="http://en.wikipedia.org/wiki/Lisp_machine">Lisp Machine</a> without ever having seen one, <a href="http://frostpoetry.blogspot.co.il/2010/12/neither-out-far-nor-in-deep-by-robert.html">neither out far nor in deep</a>.
+</p>
+
+<p>
+So when I put my hands on a 35$ credit-card sized computer, the curiously named Raspberry Pi, I felt the urge to pay tribute to the act of longing for elusive Lisp Machines, be it through pretense and travesty. 
+</p>
+
+<p>
+The cunning scheme unfolds in three acts. Two of those have been documented better than I ever could, so references will suffice. I'll dwell a bit longer on the third step.
+</p>
+
+<p>
+<b>TL;DR:</b> Cookbook-style recipe to lispify your Raspberry Pi. 
+</p>
+
+<div id="outline-container-org9d9a278" class="outline-2">
+<h2 id="org9d9a278">Build Emacs from source</h2>
+<div class="outline-text-2" id="text-org9d9a278">
+<p>
+Why? Because the packaged Emacs on Debian "Wheezy" is behind by a major version, and because building Emacs from source is straightforward.
+</p>
+
+<p>
+<a href="https://coderwall.com/p/uztyfw">https://coderwall.com/p/uztyfw</a>
+</p>
+
+<p>
+<i>Note:</i> Unlike the author, I did not have to symlink gcc. 
+</p>
+
+<p>
+Building Emacs on Raspbian is actually no different that what is called for on generic Debian, so <a href="http://www.plusastra.com/2012/11/installing-emacs-24-on-debian-wheezy.html">instructions</a> should be interchangeable. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfe37406" class="outline-2">
+<h2 id="orgfe37406">Install Clozure Common Lisp</h2>
+<div class="outline-text-2" id="text-orgfe37406">
+<p>
+On Raspbian, I could not find a packaged Steel Bank Common Lisp (SBCL), and while GNU CLISP was available with apt-get and running fine, I could not get it to play nicely with Stumpwm's dependencies. Fear not, because Clozure CL is a Lisp of noble descent that can be optimized for the ARM processor. Follow the excellent instructions courtesy of renowned Lisp hacker Rainer Joswig. 
+</p>
+
+<p>
+<a href="http://lispm.dyndns.org/ccl">http://lispm.dyndns.org/ccl</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfc9464a" class="outline-2">
+<h2 id="orgfc9464a">Install Stumpwm</h2>
+<div class="outline-text-2" id="text-orgfc9464a">
+<p>
+Raspbian comes by default with LXDE, but we're after a lean, keyboard-only, Lisp-based, prefix driven à la Emacs, tiling window manager. Getting this right was actually the trickiest part, because none of the official instructions led to a working setup. I will spare you the failing strategies and the burnt hours, jumping straight to the winning combo, enabled by the heroic feats of Zach Beane and his Quicklisp project, a dependency management system Common Lispers had been waiting for since the dawn of the paren.
+</p>
+
+<p>
+Download quicklisp.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">$ curl -O http://beta.quicklisp.org/quicklisp.lisp
+</pre>
+</div>
+
+<p>
+Install quicklisp.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(load <span style="color: #8b2252;">"/path/to/quicklisp.lisp"</span>)
+(quicklisp-quickstart:install)
+</pre>
+</div>
+
+<p>
+Proceed to installing Stumpwm.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(ql:quickload <span style="color: #8b2252;">"stumpwm"</span>)
+</pre>
+</div>
+
+<p>
+In your CCL init file, make sure you defined a function to load quicklisp on demand, as Rainer Joswig recommends.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">load-quicklisp</span> ()
+  (<span style="color: #a020f0;">let</span> ((quicklisp-init (merge-pathnames <span style="color: #8b2252;">"quicklisp/setup.lisp"</span>
+                                         (user-homedir-pathname))))
+    (<span style="color: #a020f0;">when</span> (probe-file quicklisp-init)
+      (load quicklisp-init))))
+</pre>
+</div>
+
+<p>
+Now we can load Stumpwm in X. Put the following in your .Xinitrc the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #a020f0;">exec</span> ccl -e <span style="color: #8b2252;">"(load-quicklisp)"</span> -e <span style="color: #8b2252;">"(ql:quickload \"stumpwm\")"</span> -e <span style="color: #8b2252;">"(stumpwm:stumpwm)"</span>
+</pre>
+</div>
+
+<p>
+That's it. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcf5faff" class="outline-2">
+<h2 id="orgcf5faff">In conclusion</h2>
+<div class="outline-text-2" id="text-orgcf5faff">
+<p>
+The Raspberry Pi has spawned renewed interest in non-mainstream OSes like RISC OS and Plan 9, but one can experiment delightfully as well while staying on the stock Raspbian. With a little bit of effort and a lot of imagination, you can even pretend you're driving a Lisp machine.
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

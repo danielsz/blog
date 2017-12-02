@@ -1,7 +1,7 @@
 body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: minmax(0, 20px) minmax(0, 20px) 1fr;
+    grid-template-rows: 20px 20px 1fr;
     margin:0;
     background-color: #F3EDD6;
 }
@@ -19,7 +19,7 @@ body {
 }
 #lambda {
     grid-row: -2;
-    grid-column: 2;
+    grid-column: 1;
     align-self: end;
 }
 
@@ -47,7 +47,7 @@ body {
 
 @media (min-width: 600px) {
     body{
-	grid-template-rows: minmax(0, 100px) minmax(0, 100px) 1fr;
+	grid-template-rows: 100px 100px 1fr;
     }
     #contra {
 	background-color: #7F0000;
@@ -67,6 +67,7 @@ body {
 	height: 100px;
     }
     #lambda {
+	grid-column: 2;
 	padding: 2rem;
     }
 }

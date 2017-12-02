@@ -1,7 +1,7 @@
 body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: minmax(0, 100px) minmax(0, 100px) 1fr;
+    grid-template-rows: minmax(0, 20px) minmax(0, 20px) 1fr;
     margin:0;
     background-color: #F3EDD6;
 }
@@ -24,13 +24,13 @@ body {
 }
 
 #content {
-    grid-row: 2 / -1;
+    grid-row: 3 / -1;
     grid-column: 1 / -1;
 }
 
 .square {
-	width: 10px;
-	height: 10px;
+	width: 20px;
+	height: 20px;
 }
 #square1 {
 	background: #BF0000;
@@ -46,19 +46,21 @@ body {
 }
 
 @media (min-width: 600px) {
+    body{
+	grid-template-rows: minmax(0, 100px) minmax(0, 100px) 1fr;
+    }
     #contra {
-    background-color: #7F0000;
-    grid-row-start: 2;
-    grid-column-start: 2;
-}
+	background-color: #7F0000;
+	grid-row-start: 2;
+	grid-column-start: 2;
+    }
     #left {
-    background-color: #F5E8BC;
-    grid-row: 1 / -1;
-    grid-column: 1;
-}
+	background-color: #F5E8BC;
+	grid-row: 1 / -1;
+	grid-column: 1;
+    }
     #content {
-    grid-row: 3 / -1;
-    grid-column: 3 / -1;
+	grid-column: 3 / -1;
     }
     .square {
 	width: 100px;

@@ -21,13 +21,13 @@
 header .author{
     font-family: 'EB Garamond', serif;
     font-style: italic;
-    font-size: 1.5em;
+    font-size: 1.3em;
     letter-spacing: 0.1em;
     text-transform: capitalize;
 }
 header .title {
     font-family: 'EB Garamond', serif;
-    font-size: 3em;
+    font-size: 2em;
     text-shadow: 4px 4px 4px #aaa;
     text-transform: capitalize;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-02 Sat 21:00 -->
+<!-- 2017-12-03 Sun 13:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>In the mood for Lisp</title>
@@ -233,7 +233,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
+ <a accesskey="h" href="index.html"> UP </a>
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
@@ -255,9 +255,9 @@ The cunning scheme unfolds in three acts. Two of those have been documented bett
 <b>TL;DR:</b> Cookbook-style recipe to lispify your Raspberry Pi. 
 </p>
 
-<div id="outline-container-org9d9a278" class="outline-2">
-<h2 id="org9d9a278">Build Emacs from source</h2>
-<div class="outline-text-2" id="text-org9d9a278">
+<div id="outline-container-org2af565b" class="outline-2">
+<h2 id="org2af565b">Build Emacs from source</h2>
+<div class="outline-text-2" id="text-org2af565b">
 <p>
 Why? Because the packaged Emacs on Debian "Wheezy" is behind by a major version, and because building Emacs from source is straightforward.
 </p>
@@ -276,9 +276,9 @@ Building Emacs on Raspbian is actually no different that what is called for on g
 </div>
 </div>
 
-<div id="outline-container-orgfe37406" class="outline-2">
-<h2 id="orgfe37406">Install Clozure Common Lisp</h2>
-<div class="outline-text-2" id="text-orgfe37406">
+<div id="outline-container-org1fa513f" class="outline-2">
+<h2 id="org1fa513f">Install Clozure Common Lisp</h2>
+<div class="outline-text-2" id="text-org1fa513f">
 <p>
 On Raspbian, I could not find a packaged Steel Bank Common Lisp (SBCL), and while GNU CLISP was available with apt-get and running fine, I could not get it to play nicely with Stumpwm's dependencies. Fear not, because Clozure CL is a Lisp of noble descent that can be optimized for the ARM processor. Follow the excellent instructions courtesy of renowned Lisp hacker Rainer Joswig. 
 </p>
@@ -289,9 +289,9 @@ On Raspbian, I could not find a packaged Steel Bank Common Lisp (SBCL), and whil
 </div>
 </div>
 
-<div id="outline-container-orgfc9464a" class="outline-2">
-<h2 id="orgfc9464a">Install Stumpwm</h2>
-<div class="outline-text-2" id="text-orgfc9464a">
+<div id="outline-container-org6069491" class="outline-2">
+<h2 id="org6069491">Install Stumpwm</h2>
+<div class="outline-text-2" id="text-org6069491">
 <p>
 Raspbian comes by default with LXDE, but we're after a lean, keyboard-only, Lisp-based, prefix driven à la Emacs, tiling window manager. Getting this right was actually the trickiest part, because none of the official instructions led to a working setup. I will spare you the failing strategies and the burnt hours, jumping straight to the winning combo, enabled by the heroic feats of Zach Beane and his Quicklisp project, a dependency management system Common Lispers had been waiting for since the dawn of the paren.
 </p>
@@ -310,7 +310,7 @@ Install quicklisp.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(load <span style="color: #a3be8c;">"/path/to/quicklisp.lisp"</span>)
+<pre class="src src-lisp">(load <span style="color: #8b2252;">"/path/to/quicklisp.lisp"</span>)
 (quicklisp-quickstart:install)
 </pre>
 </div>
@@ -320,7 +320,7 @@ Proceed to installing Stumpwm.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(ql:quickload <span style="color: #a3be8c;">"stumpwm"</span>)
+<pre class="src src-lisp">(ql:quickload <span style="color: #8b2252;">"stumpwm"</span>)
 </pre>
 </div>
 
@@ -329,10 +329,10 @@ In your CCL init file, make sure you defined a function to load quicklisp on dem
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="color: #b48ead;">defun</span> <span style="color: #8fa1b3;">load-quicklisp</span> ()
-  (<span style="color: #b48ead;">let</span> ((quicklisp-init (merge-pathnames <span style="color: #a3be8c;">"quicklisp/setup.lisp"</span>
+<pre class="src src-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">load-quicklisp</span> ()
+  (<span style="color: #a020f0;">let</span> ((quicklisp-init (merge-pathnames <span style="color: #8b2252;">"quicklisp/setup.lisp"</span>
                                          (user-homedir-pathname))))
-    (<span style="color: #b48ead;">when</span> (probe-file quicklisp-init)
+    (<span style="color: #a020f0;">when</span> (probe-file quicklisp-init)
       (load quicklisp-init))))
 </pre>
 </div>
@@ -342,7 +342,7 @@ Now we can load Stumpwm in X. Put the following in your .Xinitrc the following:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #b48ead;">exec</span> ccl -e <span style="color: #a3be8c;">"(load-quicklisp)"</span> -e <span style="color: #a3be8c;">"(ql:quickload \"stumpwm\")"</span> -e <span style="color: #a3be8c;">"(stumpwm:stumpwm)"</span>
+<pre class="src src-shell"><span style="color: #a020f0;">exec</span> ccl -e <span style="color: #8b2252;">"(load-quicklisp)"</span> -e <span style="color: #8b2252;">"(ql:quickload \"stumpwm\")"</span> -e <span style="color: #8b2252;">"(stumpwm:stumpwm)"</span>
 </pre>
 </div>
 
@@ -352,9 +352,9 @@ That's it.
 </div>
 </div>
 
-<div id="outline-container-orgcf5faff" class="outline-2">
-<h2 id="orgcf5faff">In conclusion</h2>
-<div class="outline-text-2" id="text-orgcf5faff">
+<div id="outline-container-org2fb7544" class="outline-2">
+<h2 id="org2fb7544">In conclusion</h2>
+<div class="outline-text-2" id="text-org2fb7544">
 <p>
 The Raspberry Pi has spawned renewed interest in non-mainstream OSes like RISC OS and Plan 9, but one can experiment delightfully as well while staying on the stock Raspbian. With a little bit of effort and a lot of imagination, you can even pretend you're driving a Lisp machine.
 </p>

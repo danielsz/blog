@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-02 Sat 21:00 -->
+<!-- 2017-12-03 Sun 13:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Live coding with Clojure and Emacs</title>
+<title>Live coding, take 5</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Daniel Szmulewicz">
 <style type="text/css">
@@ -233,12 +233,12 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
+ <a accesskey="h" href="index.html"> UP </a>
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
 <header>
-<h1 class="title">Live coding with Clojure and Emacs</h1>
+<h1 class="title">Live coding, take 5</h1>
 </header><p>
 Live coding is a methodology and a mindset that lends itself to all kinds of scenarios. When composing music, designing an algorithm or sketching with CSS, instant feedback informs the creator of his ideas while he's nurturing them. The workflow influences the thought process as it's happening. It’s a bottom-up approach, well-known among Lispers, but also by artists of all kinds. Live coding is to programmers what jazz is to musicians, a culture of improvisation, a set of techniques that fluidify the pursuit of a higher goal. 
 </p>
@@ -297,16 +297,16 @@ $ emacs src/fioritto/sketch.clj
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">s</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">s</span>)
 
-(<span style="color: #b48ead;">defun</span> <span style="color: #8fa1b3;">imp-clj-html</span> (buffer)
-  (<span style="color: #b48ead;">with-current-buffer</span> (get-buffer buffer)
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">imp-clj-html</span> (buffer)
+  (<span style="color: #a020f0;">with-current-buffer</span> (get-buffer buffer)
     (cider-eval-defun-at-point))
-  (<span style="color: #b48ead;">let*</span> ((content (<span style="color: #b48ead;">with-temp-buffer</span> 
-                    (cider-interactive-eval-print <span style="color: #a3be8c;">"(fioritto.sketch/page)"</span>)
+  (<span style="color: #a020f0;">let*</span> ((content (<span style="color: #a020f0;">with-temp-buffer</span> 
+                    (cider-interactive-eval-print <span style="color: #8b2252;">"(fioritto.sketch/page)"</span>)
                     (sleep-for 0.1)
                     (buffer-string)))
-         (sanitized-content (s-replace-all '((<span style="color: #a3be8c;">"\\n"</span> . <span style="color: #a3be8c;">""</span>) (<span style="color: #a3be8c;">"\\\""</span> . <span style="color: #a3be8c;">"'"</span>)) content)))
+         (sanitized-content (s-replace-all '((<span style="color: #8b2252;">"\\n"</span> . <span style="color: #8b2252;">""</span>) (<span style="color: #8b2252;">"\\\""</span> . <span style="color: #8b2252;">"'"</span>)) content)))
     (princ sanitized-content (current-buffer))
     )
   (delete-region (point-min) (+ (point-min) 1))

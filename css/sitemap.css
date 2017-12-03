@@ -41,7 +41,7 @@ header .subtitle {
     text-transform: uppercase;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 800px) {
     #content ul {
 	column-count: 2;
 	column-gap: 3rem;

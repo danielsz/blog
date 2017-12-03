@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-02 Sat 21:00 -->
+<!-- 2017-12-03 Sun 13:09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Om mode</title>
@@ -233,7 +233,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
+ <a accesskey="h" href="index.html"> UP </a>
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
@@ -254,39 +254,39 @@ Here is the template <b>om-mode</b> expands into.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #8c8c8c;">(</span><span style="color: #b48ead;">defn</span> <span style="color: #8fa1b3;">example</span>
-  <span style="color: #a3be8c;">"Om component for new example"</span>
-  <span style="color: #93a8c6;">[</span>data owner<span style="color: #93a8c6;">]</span>
-  <span style="color: #93a8c6;">(</span>reify
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IInitState</span>
-    <span style="color: #b0b1a3;">(</span>init-state <span style="color: #97b098;">[</span>_<span style="color: #97b098;">]</span> <span style="color: #97b098;">{</span> <span style="color: #97b098;">}</span>
-      <span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IWillMount</span>
-    <span style="color: #b0b1a3;">(</span>will-mount <span style="color: #97b098;">[</span>_<span style="color: #97b098;">]</span>
-      <span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IDidMount</span>
-    <span style="color: #b0b1a3;">(</span>did-mount <span style="color: #97b098;">[</span>_<span style="color: #97b098;">]</span>
-      <span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IWillUnmount</span>
-    <span style="color: #b0b1a3;">(</span>will-unmount <span style="color: #97b098;">[</span>_<span style="color: #97b098;">]</span>
-      <span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IShouldUpdate</span>
-    <span style="color: #b0b1a3;">(</span>should-update <span style="color: #97b098;">[</span>_ next-props next-state<span style="color: #97b098;">]</span>
-      <span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IWillReceiveProps</span>
-    <span style="color: #b0b1a3;">(</span>will-receive-props <span style="color: #97b098;">[</span>_ next-props<span style="color: #97b098;">]</span>
-      <span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IWillUpdate</span>
-    <span style="color: #b0b1a3;">(</span>will-update <span style="color: #97b098;">[</span>_ next-props next-state<span style="color: #97b098;">]</span>
-      <span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IDidUpdate</span>
-    <span style="color: #b0b1a3;">(</span>did-update <span style="color: #97b098;">[</span>_ prev-props prev-state<span style="color: #97b098;">]</span>
-      <span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IDisplayName</span>
-    <span style="color: #b0b1a3;">(</span>display-name <span style="color: #97b098;">[</span>this<span style="color: #97b098;">]</span>
-      <span style="color: #a3be8c;">"example"</span><span style="color: #b0b1a3;">)</span>
-    <span style="color: #c0c5ce;">om</span><span style="color: #c0c5ce; background-color: #2b303b;">/</span><span style="color: #c0c5ce;">IRenderState</span>
-    <span style="color: #b0b1a3;">(</span>render-state <span style="color: #97b098;">[</span>_ state<span style="color: #97b098;">]</span><span style="color: #b0b1a3;">)</span><span style="color: #93a8c6;">)</span><span style="color: #8c8c8c;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">example</span>
+  <span style="color: #8b2252;">"Om component for new example"</span>
+  <span style="color: #7388d6;">[</span>data owner<span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span>reify
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IInitState</span>
+    <span style="color: #909183;">(</span>init-state <span style="color: #709870;">[</span>_<span style="color: #709870;">]</span> <span style="color: #709870;">{</span> <span style="color: #709870;">}</span>
+      <span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IWillMount</span>
+    <span style="color: #909183;">(</span>will-mount <span style="color: #709870;">[</span>_<span style="color: #709870;">]</span>
+      <span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IDidMount</span>
+    <span style="color: #909183;">(</span>did-mount <span style="color: #709870;">[</span>_<span style="color: #709870;">]</span>
+      <span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IWillUnmount</span>
+    <span style="color: #909183;">(</span>will-unmount <span style="color: #709870;">[</span>_<span style="color: #709870;">]</span>
+      <span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IShouldUpdate</span>
+    <span style="color: #909183;">(</span>should-update <span style="color: #709870;">[</span>_ next-props next-state<span style="color: #709870;">]</span>
+      <span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IWillReceiveProps</span>
+    <span style="color: #909183;">(</span>will-receive-props <span style="color: #709870;">[</span>_ next-props<span style="color: #709870;">]</span>
+      <span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IWillUpdate</span>
+    <span style="color: #909183;">(</span>will-update <span style="color: #709870;">[</span>_ next-props next-state<span style="color: #709870;">]</span>
+      <span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IDidUpdate</span>
+    <span style="color: #909183;">(</span>did-update <span style="color: #709870;">[</span>_ prev-props prev-state<span style="color: #709870;">]</span>
+      <span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IDisplayName</span>
+    <span style="color: #909183;">(</span>display-name <span style="color: #709870;">[</span>this<span style="color: #709870;">]</span>
+      <span style="color: #8b2252;">"example"</span><span style="color: #909183;">)</span>
+    <span style="color: #228b22;">om</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">IRenderState</span>
+    <span style="color: #909183;">(</span>render-state <span style="color: #709870;">[</span>_ state<span style="color: #709870;">]</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>

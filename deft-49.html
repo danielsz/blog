@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-03 Sun 22:53 -->
+<!-- 2017-12-03 Sun 23:27 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ghosts in the machine</title>
@@ -386,7 +386,7 @@ Note: We are restricting the present discussion to static Vars. Dynamic Vars hav
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red"]} 0x232101e3]
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red"]} 0x101f5cd4]
 </pre>
 </div>
 
@@ -414,7 +414,7 @@ If we redefine our Var, our agent will pick up the new value.
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue"]} 0x232101e3]
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue"]} 0x101f5cd4]
 </pre>
 </div>
 
@@ -476,7 +476,7 @@ Of course. But what if we ask Neo?
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue" "blue"]} 0x232101e3]
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue" "blue"]} 0x101f5cd4]
 </pre>
 </div>
 
@@ -521,7 +521,7 @@ If this seems like a contrived exercise, please note that this is exactly what h
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue" "blue" "blue"]} 0x232101e3]
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue" "blue" "blue"]} 0x101f5cd4]
 </pre>
 </div>
 

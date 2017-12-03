@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-03 Sun 13:14 -->
+<!-- 2017-12-03 Sun 22:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>testing org-babel</title>
@@ -240,62 +240,53 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">testing org-babel</h1>
 </header><div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>+ 1 <span style="color: #707183;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-org">1
-</pre>
-</div>
-
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>+ 33 3<span style="color: #707183;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>+ 36 4<span style="color: #707183;">)</span>
-</pre>
-</div>
-
-40
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>= <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:handler</span> <span style="color: #909183;">(</span><span style="color: #008b8b;">:web</span> <span style="color: #228b22;">system.repl</span><span style="color: #000000; background-color: #ffffff;">/</span>system<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span> #'app<span style="color: #707183;">)</span>
-</pre>
-</div>
-
-
-<div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #707183;">(</span>create-ns 'choice<span style="color: #707183;">)</span>
 </pre>
 </div>
 
-#namespace[choice]
-
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>create-ns 'choice<span style="color: #707183;">)</span>
+<pre class="src src-org">#namespace[choice]
 </pre>
 </div>
 
-#namespace[choice]
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>intern 'choice 'pill <span style="color: #8b2252;">"red"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">#'choice/pill
+</pre>
+</div>
 
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #707183;">(</span>ns-publics 'choice<span style="color: #707183;">)</span>
 </pre>
 </div>
 
-{}
-
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(+ 2 8)
+<pre class="src src-org">{pill #'choice/pill}
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>+ 2 8<span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>create-ns 'matrix<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>intern 'matrix '<span style="color: #228b22;">Neo</span> <span style="color: #7388d6;">(</span>agent <span style="color: #909183;">[</span>#'<span style="color: #228b22;">choice</span><span style="color: #000000; background-color: #ffffff;">/</span>pill<span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span>send <span style="color: #228b22;">matrix</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #228b22;">Neo</span> #<span style="color: #7388d6;">(</span>conj <span style="color: #a0522d;">%</span> <span style="color: #909183;">(</span>var-get <span style="color: #709870;">(</span>first <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red"]} 0x7097ca10]
 </pre>
 </div>
 </div>

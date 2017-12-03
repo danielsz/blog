@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-03 Sun 13:14 -->
+<!-- 2017-12-03 Sun 22:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>In the mood for Lisp</title>
@@ -243,21 +243,28 @@ for the JavaScript code in this tag.
 Just like in the Hong-Kong movie "<a href="http://en.wikipedia.org/wiki/In_the_Mood_for_Love">In the mood for love"</a>, where love is hinted at in every scene but consummated in none, I have dreamt of a <a href="http://en.wikipedia.org/wiki/Lisp_machine">Lisp Machine</a> without ever having seen one, <a href="http://frostpoetry.blogspot.co.il/2010/12/neither-out-far-nor-in-deep-by-robert.html">neither out far nor in deep</a>.
 </p>
 
-<p>
-So when I put my hands on a 35$ credit-card sized computer, the curiously named Raspberry Pi, I felt the urge to pay tribute to the act of longing for elusive Lisp Machines, be it through pretense and travesty. 
-</p>
+
+<figure>
+<img src="images/costume-institute01.jpg" alt="costume-institute01.jpg">
+
+</figure>
 
 <p>
-The cunning scheme unfolds in three acts. Two of those have been documented better than I ever could, so references will suffice. I'll dwell a bit longer on the third step.
+So when I put my hands on a 35$ credit-card sized computer, the curiously named Raspberry Pi, I felt the urge to pay tribute to the act of longing for elusive Lisp Machines, be it through pretense or travesty. 
 </p>
 
 <p>
 <b>TL;DR:</b> Cookbook-style recipe to lispify your Raspberry Pi. 
 </p>
 
-<div id="outline-container-org2af565b" class="outline-2">
-<h2 id="org2af565b">Build Emacs from source</h2>
-<div class="outline-text-2" id="text-org2af565b">
+<p>
+The cunning scheme unfolds in three acts. Two of those have been documented better than I ever could, so references will suffice. I'll dwell a bit longer on the third step.
+</p>
+
+<dl class="org-dl">
+<dt>Act I</dt><dd>Build Emacs from source</dd>
+</dl>
+
 <p>
 Why? Because the packaged Emacs on Debian "Wheezy" is behind by a major version, and because building Emacs from source is straightforward.
 </p>
@@ -273,12 +280,11 @@ Why? Because the packaged Emacs on Debian "Wheezy" is behind by a major version,
 <p>
 Building Emacs on Raspbian is actually no different that what is called for on generic Debian, so <a href="http://www.plusastra.com/2012/11/installing-emacs-24-on-debian-wheezy.html">instructions</a> should be interchangeable. 
 </p>
-</div>
-</div>
 
-<div id="outline-container-org1fa513f" class="outline-2">
-<h2 id="org1fa513f">Install Clozure Common Lisp</h2>
-<div class="outline-text-2" id="text-org1fa513f">
+<dl class="org-dl">
+<dt>Act II</dt><dd>Install Clozure Common Lisp</dd>
+</dl>
+
 <p>
 On Raspbian, I could not find a packaged Steel Bank Common Lisp (SBCL), and while GNU CLISP was available with apt-get and running fine, I could not get it to play nicely with Stumpwm's dependencies. Fear not, because Clozure CL is a Lisp of noble descent that can be optimized for the ARM processor. Follow the excellent instructions courtesy of renowned Lisp hacker Rainer Joswig. 
 </p>
@@ -286,12 +292,11 @@ On Raspbian, I could not find a packaged Steel Bank Common Lisp (SBCL), and whil
 <p>
 <a href="http://lispm.dyndns.org/ccl">http://lispm.dyndns.org/ccl</a>
 </p>
-</div>
-</div>
 
-<div id="outline-container-org6069491" class="outline-2">
-<h2 id="org6069491">Install Stumpwm</h2>
-<div class="outline-text-2" id="text-org6069491">
+<dl class="org-dl">
+<dt>Act III</dt><dd>Install Stumpwm</dd>
+</dl>
+
 <p>
 Raspbian comes by default with LXDE, but we're after a lean, keyboard-only, Lisp-based, prefix driven à la Emacs, tiling window manager. Getting this right was actually the trickiest part, because none of the official instructions led to a working setup. I will spare you the failing strategies and the burnt hours, jumping straight to the winning combo, enabled by the heroic feats of Zach Beane and his Quicklisp project, a dependency management system Common Lispers had been waiting for since the dawn of the paren.
 </p>
@@ -347,19 +352,12 @@ Now we can load Stumpwm in X. Put the following in your .Xinitrc the following:
 </div>
 
 <p>
-That's it. 
+<b>In conclusion</b>
 </p>
-</div>
-</div>
 
-<div id="outline-container-org2fb7544" class="outline-2">
-<h2 id="org2fb7544">In conclusion</h2>
-<div class="outline-text-2" id="text-org2fb7544">
 <p>
 The Raspberry Pi has spawned renewed interest in non-mainstream OSes like RISC OS and Plan 9, but one can experiment delightfully as well while staying on the stock Raspbian. With a little bit of effort and a lot of imagination, you can even pretend you're driving a Lisp machine.
 </p>
-</div>
-</div>
 </div>
 </body>
 </html>

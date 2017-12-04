@@ -4,7 +4,7 @@
 <!-- 2017-12-04 Mon 11:49 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Perfumed nightmare</title>
+<title>Finding files</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Daniel Szmulewicz">
 <style type="text/css">
@@ -179,12 +179,11 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/grid.css">
+<link rel="stylesheet" type="text/css" href="css/post.css">
 <link rel="stylesheet" type="text/css" href="assets/fonts/charter/webfonts/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="css/typography.css">
-<link rel="stylesheet" type="text/css" href="css/sitemap.css">
 <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Roboto+Condensed|Source+Serif+Pro|Inconsolata" rel="stylesheet">
 <script src="js/grid.js"></script>
-<script src="js/sitemap.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -233,20 +232,95 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
 <header>
-<h1 class="title">Perfumed nightmare</h1>
-<p class="subtitle">A blog for somnambulisps</p>
-</header><ul class="org-ul">
-<li><a href="2017-12-04T11_17.html">Finding files</a></li>
-<li><a href="deft-49.html">Ghosts in the machine</a></li>
-<li><a href="deft-4.html">How is printing to the console a side effect</a></li>
-<li><a href="blog_on_lisp.html">In the mood for Lisp</a></li>
-<li><a href="deft-20.html">Lisp's nested syntax</a></li>
-<li><a href="deft-21.html">Live coding, take 5</a></li>
-<li><a href="deft-37.html">Om, no DOM</a></li>
-<li><a href="2017-07-31T16_31.html">Timed Idempotency</a></li>
-</ul>
+<h1 class="title">Finding files</h1>
+</header><p>
+Here's a one-line story: a client told me he had just installed a program, but couldn't find its configuration files.
+</p>
+
+<p>
+POSIX-compliant systems come with two utilities that at first sight do the same thing, <i>find</i> and <i>locate</i>. Their semantical similitude will trip over most new shell users at one point or another. When their difference is not well understood, the tendency is to pick one on a whim, and then be startled at the results. 
+</p>
+
+<p>
+What tool was my client using to locate his files? Right, <i>locate</i>. Why couldn't <i>locate</i> find them? Well, <i>locate</i> is a utility that queries a lookup table that gets updated periodically. On a Mac, the interval is set to once a week. No wonder it can't find recent files! If you insist, you can force locate to update its database (on a Mac you would run <code>/usr/libexec/locate.updatedb</code>). But guess what? <i>locate</i> still won't find my client's files. The reason for this is that locate only indexes world-readable files, and it just so happens that my client's configuration files were installed in a user-only readable directory, as they should be. 
+</p>
+
+<p>
+Why can <i>locate</i> access only a restricted set of files? Because <i>locate</i> runs under the unprivileged account of special user <i>nobody</i>, to which only files with permissions set to user <i>nobody</i>, group <i>nobody</i>, or <i>world</i> is visible. Is <i>locate</i> useful at all then? Sure, it is fast, as in super fast—an optimized table lookup. What about the restrictions related to file permissions? Well, remember that on most POSIX systems files are world-readable by default (yes, your home directory too, and if you're on a multi-user system, you might want to change that right now with <code>chmod -R 750 $HOME</code>). So if it's true that <i>locate</i> won't find all of your files on your system, it will find most of them.
+</p>
+
+<p>
+Now, contrast <i>locate</i> to <i>find</i>, a utility that recursively descends a directory tree with powerful pattern matching capabilities. Its operation is expensive and will take some time to complete, but your file will be found no matter what. To find a file by name that can be anywhere on the filesystem, you would type <code>find / -name 'filename'</code>. 
+</p>
+
+<p>
+With this understanding, you know now how to proceed when looking for files. Start off with a lightning speed <i>locate</i>, and if it fails, don't panic, just switch to a <i>find</i> command. And if you're on a Mac and you find yourself doing this often, you might want to update your precomputed database more than once a week, say every day. 
+</p>
+
+<p>
+In the terminal, type:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">open /System/Library/LaunchDaemons/com.apple.locate.plist
+</pre>
+</div>
+
+<p>
+Find the <i>StartCalendarInterval</i> section and delete the <i>Weekday</i> key:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nxml">&lt;<span style="color: #0000ff;">key</span>&gt;StartCalendarInterval&lt;/<span style="color: #0000ff;">key</span>&gt;
+     &lt;<span style="color: #0000ff;">dict</span>&gt;
+          &lt;<span style="color: #0000ff;">key</span>&gt;Hour&lt;/<span style="color: #0000ff;">key</span>&gt;
+          &lt;<span style="color: #0000ff;">integer</span>&gt;3&lt;/<span style="color: #0000ff;">integer</span>&gt;
+          &lt;<span style="color: #0000ff;">key</span>&gt;Minute&lt;/<span style="color: #0000ff;">key</span>&gt;
+          &lt;<span style="color: #0000ff;">integer</span>&gt;15&lt;/<span style="color: #0000ff;">integer</span>&gt;
+     &lt;/<span style="color: #0000ff;">dict</span>&gt;
+</pre>
+</div>
+
+<p>
+Afraid of breaking something? Fear not: validate your changes with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">plutil /System/Library/LaunchDaemons/com.apple.locate.plist
+</pre>
+</div>
+
+<p>
+The output confirms your plist is valid:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">/System/Library/LaunchDaemons/com.apple.locate.plist: OK
+</pre>
+</div>
+
+<p>
+Now let’s embark on a short UNIX archeological journey replete with geeky miscellanea. The first thing to note is that <i>find</i> is actually what <i>locate</i> uses internally when building its database on schedule. If you suspect some promiscuity between the two, you'd be right on spot: <i>locate</i> was born out of <i>find</i>. It was initially called <i>fastfind</i>, and it was a refinement that James A. Woods introduced in the standard <i>find</i> shipping with Berkeley UNIX (BSD). His ideas are laid out in a paper called Finding Files Fast. Interestingly, he thought there was no need to introduce a new tool (and a new man page), arguing it would be wiser to leverage the existing <i>find</i>, supercharging it with a fast mode. If you ran <i>find</i> with two arguments, it would run as before, traversing the filesystem, but if you gave it only one argument (the search string), it would query a precomputed database, dramatically speeding up the operation. Note also that in his mind, the database would get updated on a daily basis. For the hardcore UNIX archeologists among you, the source code can be perused online, with the <i>fastfind</i> section starting on line 797. 
+</p>
+
+<p>
+The result of this change was that the signature of the <i>find</i> command became ambiguous and broke POSIX requirements. Suddenly, <code>find foo</code> was not equivalent anymore to <code>find foo -print</code>. In the first form, it would query the database, in the second form, it would not. So in a later version of Berkeley UNIX (BSD), the findfast part of find was extracted and made into a separate utility: <i>locate</i>. The GNU distribution did likewise in the package that encloses <i>find</i>, <i>xargs</i>, and <i>locate</i> (<code>findutils</code>). 
+</p>
+
+<p>
+The <a href="https://simson.net/ref/ugh.pdf">UNIX-HATERS handbook</a> correctly points out that <i>find</i> wasn’t designed to work with humans, but as a companion utility to <i>cpio/—a Unix backup utility program. Both utilities were written by Dick Haight while working in AT&amp;T's Unix Support Group, appearing in 1977 in PWB/UNIX 1.0, the “Programmer's Work Bench” system for use within AT&amp;T. It was first released outside of AT&amp;T as part of System III Unix in 1981. In the early days, its peculiarities aggravated some UNIX users, <a href="https://simson.net/ref/ugh.pdf">complaining</a> about the seemingly useless /-print</i> option, or lamenting the fact that it didn't support symlinks (for a certain period), etc. Today, most issues with <i>find</i> have been addressed, but reading its man page is still a panacea for none but die-hard UNIX hackers. For the rest of us, a <a href="http://find.unixpin.com/find/index.html">web interface</a> can come handy in those instances when we want to leverage find's full power. Most of the time though, all that is needed to remember is:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">find &lt;directory&gt; -name &lt;filename&gt;
+</pre>
+</div>
 </div>
 </body>
 </html>

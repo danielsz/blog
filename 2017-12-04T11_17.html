@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-04 Mon 11:49 -->
+<!-- 2017-12-04 Mon 11:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Finding files</title>
@@ -310,11 +310,11 @@ Now let’s embark on a short UNIX archeological journey replete with geeky misc
 </p>
 
 <p>
-The result of this change was that the signature of the <i>find</i> command became ambiguous and broke POSIX requirements. Suddenly, <code>find foo</code> was not equivalent anymore to <code>find foo -print</code>. In the first form, it would query the database, in the second form, it would not. So in a later version of Berkeley UNIX (BSD), the findfast part of find was extracted and made into a separate utility: <i>locate</i>. The GNU distribution did likewise in the package that encloses <i>find</i>, <i>xargs</i>, and <i>locate</i> (<code>findutils</code>). 
+The result of this change was that the signature of the <i>find</i> command became ambiguous and broke POSIX requirements. Suddenly, <code>find foo</code> was not equivalent anymore to <code>find foo -print</code>. In the first form, it would query the database, in the second form, it would not. So in a later version of Berkeley UNIX (BSD), the findfast part of find was extracted and made into a separate utility: <i>locate</i>. The GNU distribution did likewise in the package (<code>findutils</code>) that encloses <i>find</i>, <i>xargs</i>, and <i>locate</i>. 
 </p>
 
 <p>
-The <a href="https://simson.net/ref/ugh.pdf">UNIX-HATERS handbook</a> correctly points out that <i>find</i> wasn’t designed to work with humans, but as a companion utility to <i>cpio/—a Unix backup utility program. Both utilities were written by Dick Haight while working in AT&amp;T's Unix Support Group, appearing in 1977 in PWB/UNIX 1.0, the “Programmer's Work Bench” system for use within AT&amp;T. It was first released outside of AT&amp;T as part of System III Unix in 1981. In the early days, its peculiarities aggravated some UNIX users, <a href="https://simson.net/ref/ugh.pdf">complaining</a> about the seemingly useless /-print</i> option, or lamenting the fact that it didn't support symlinks (for a certain period), etc. Today, most issues with <i>find</i> have been addressed, but reading its man page is still a panacea for none but die-hard UNIX hackers. For the rest of us, a <a href="http://find.unixpin.com/find/index.html">web interface</a> can come handy in those instances when we want to leverage find's full power. Most of the time though, all that is needed to remember is:
+The <a href="https://simson.net/ref/ugh.pdf">UNIX-HATERS handbook</a> correctly points out that <i>find</i> wasn’t designed to work with humans, but as a companion utility to <i>cpio</i>, a Unix backup utility program. Both utilities were written by Dick Haight while working in AT&amp;T's Unix Support Group, appearing in 1977 in PWB/UNIX 1.0, the “Programmer's Work Bench” system for use within AT&amp;T. It was first released outside of AT&amp;T as part of System III Unix in 1981. In the early days, its peculiarities aggravated some UNIX users, <a href="https://simson.net/ref/ugh.pdf">complaining</a> about the seemingly useless <i>-print</i> option, or lamenting the fact that it didn't support symlinks (for a certain period), etc. Today, most issues with <i>find</i> have been addressed, but reading its man page is still a panacea for none but die-hard UNIX hackers. For the rest of us, a <a href="http://find.unixpin.com/find/index.html">web interface</a> can come handy in those instances when we want to leverage find's full power. Most of the time though, all that is needed to remember is:
 </p>
 
 <div class="org-src-container">

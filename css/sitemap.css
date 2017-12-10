@@ -50,4 +50,14 @@ header .subtitle {
     #content {
 	justify-items: center;
     }
+    header .author{
+    font-size: 1.6em;
+}
+    header .subtitle {
+	font-size: 1.2em;
+    }
+header .title {
+    font-size: 2.2em;
+}
+
 }

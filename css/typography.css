@@ -1,6 +1,5 @@
 body {
     font-family: 'charterregular', serif; 
-    font-size: 1.5rem;
 }
 
 h1,
@@ -9,6 +8,7 @@ h3,
 h4,
 h5,
 h6 {
+    font-size: 1.5em;
     text-transform: uppercase;
     font-family: 'Merriweather Sans', sans-serif;
 }
@@ -34,20 +34,45 @@ ul.org-ul > li > a:hover {
 }
 #lambda {
     font-family: 'Source Serif Pro', serif; 
-    font-size: 2rem;
+    font-size: 2em;
     font-weight: 600;
     color: #BF0000;
     text-shadow: 4px 4px 4px #aaa;
 }
 
 pre {
-    font-size: 1.5rem;
+    font-size: 1em;
 }
 p {
+    font-size: 1.2em;
     line-height: 1.35em;
     text-rendering: optimizeLegibility;
 }
 
+    li {
+	font-size: 1.2em;
+    }
+
 #content pre.src-org {
     background-color: #F5E8BC;
+}
+
+@media (min-width: 800px) {
+    p {
+	font-size: 1.5em;
+    }
+    pre {
+	font-size: 1.5em;
+    }
+    li {
+	font-size: 1.5em;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+    font-size: 2em;
+}
 }

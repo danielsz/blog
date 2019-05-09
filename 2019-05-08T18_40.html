@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-05-09 Thu 23:55 -->
+<!-- 2019-05-10 Fri 01:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -685,7 +685,7 @@ Can you spot the InputStream in the generated request?
  :uri "/french",
  :server-name "localhost",
  :body
- #object[java.io.ByteArrayInputStream 0x13b81812 "java.io.ByteArrayInputStream@13b81812"],
+ #object[java.io.ByteArrayInputStream 0x52334b8f "java.io.ByteArrayInputStream@52334b8f"],
  :scheme :http,
  :request-method :post}
 </pre>
@@ -770,7 +770,10 @@ nil
 
 
 <p>
-Oops, we got <code>nil</code>. Side-effectful middleware such as <code>wrap-params</code> consumes the request body upon reading it. The InputStream in the body is available until it is read, and if it is accessed before a route is matched, it is <a href="https://github.com/weavejester/compojure/wiki/Common-Problems">gone forever</a>. 
+Oops, we got <code>nil</code>. Side-effectful middleware such as <code>wrap-params</code>
+consumes the request body upon reading it. The InputStream in the body
+is available until it is read, and if it is accessed before a route is
+matched, it is <a href="https://github.com/weavejester/compojure/wiki/Common-Problems">gone forever</a>.
 </p>
 
 <p>
@@ -792,7 +795,21 @@ We can fix that if we shuffle things around a bit.
 
 
 <p>
-Safe for now, but that issue comes up time and again. Routes defined in separate libraries, for example a social sign-in library, have to be combined with application routes before applying such middleware. So beware of <a href="https://github.com/ptaoussanis/sente/issues/123">conflicting middleware</a>. Sente endpoints, for example, cannot share the same routing stack as the application stack because it does data format serialization on its own, while application routes will typically rely on libraries such as <code>wrap-restful-format</code> or its successor, <a href="https://github.com/metosin/muuntaja/">muuntaja</a>, for data serialization. 
+As you can see, routes defined in separate namespaces have to be
+combined before applying effectful middleware. In the real world, this
+will come up when integrating routes from third-party libraries in
+your web application. Think authentication and authorization, for
+example. Safe for now, but that issue comes up time and again.
+</p>
+
+<p>
+To mitigate the pesky middleware ordering issues, Ring provides sane
+<a href="https://github.com/ring-clojure/ring-defaults">defaults</a> for common use cases. Still, you need to beware of
+<a href="https://github.com/ptaoussanis/sente/issues/123">conflicting middleware</a>. Sente endpoints, for example, cannot share the
+same routing stack as the application. Application routes will
+typically rely on libraries such as <a href="https://github.com/ngrunwald/ring-middleware-format">ring-middleware-format</a> or its
+successor, <a href="https://github.com/metosin/muuntaja/">muuntaja</a>, for encoding and decoding of data on the wire,
+while Sente does data serialization on its own.
 </p>
 </div>
 </body>

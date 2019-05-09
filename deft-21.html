@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-05 Tue 00:04 -->
+<!-- 2019-05-08 Wed 22:16 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Live coding, take 5</title>
@@ -159,6 +159,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -189,7 +202,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2017 Free Software Foundation, Inc.
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -297,16 +310,16 @@ $ emacs src/fioritto/sketch.clj
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">s</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #6bd9db;">require</span> '<span style="color: #f5c791;">s</span>)
 
-(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">imp-clj-html</span> (buffer)
-  (<span style="color: #a020f0;">with-current-buffer</span> (get-buffer buffer)
+(<span style="color: #6bd9db;">defun</span> <span style="color: #cea2ca;">imp-clj-html</span> (buffer)
+  (<span style="color: #6bd9db;">with-current-buffer</span> (get-buffer buffer)
     (cider-eval-defun-at-point))
-  (<span style="color: #a020f0;">let*</span> ((content (<span style="color: #a020f0;">with-temp-buffer</span> 
-                    (cider-interactive-eval-print <span style="color: #8b2252;">"(fioritto.sketch/page)"</span>)
+  (<span style="color: #6bd9db;">let*</span> ((content (<span style="color: #6bd9db;">with-temp-buffer</span> 
+                    (cider-interactive-eval-print <span style="color: #65E6A7;">"(fioritto.sketch/page)"</span>)
                     (sleep-for 0.1)
                     (buffer-string)))
-         (sanitized-content (s-replace-all '((<span style="color: #8b2252;">"\\n"</span> . <span style="color: #8b2252;">""</span>) (<span style="color: #8b2252;">"\\\""</span> . <span style="color: #8b2252;">"'"</span>)) content)))
+         (sanitized-content (s-replace-all '((<span style="color: #65E6A7;">"\\n"</span> . <span style="color: #65E6A7;">""</span>) (<span style="color: #65E6A7;">"\\\""</span> . <span style="color: #65E6A7;">"'"</span>)) content)))
     (princ sanitized-content (current-buffer))
     )
   (delete-region (point-min) (+ (point-min) 1))

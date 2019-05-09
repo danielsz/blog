@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-05 Tue 00:04 -->
+<!-- 2019-05-08 Wed 22:16 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lisp's nested syntax</title>
@@ -159,6 +159,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -189,7 +202,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2017 Free Software Foundation, Inc.
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -288,7 +301,7 @@ This Ruby one-liner is used to demonstrate an elegant solution involving method 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ruby"><span style="color: #228b22;">IO</span>.readlines(<span style="color: #8b2252;">"blob.txt"</span>).map{|line| line.split.map{|s| s.to_i }}
+<pre class="src src-ruby"><span style="color: #ef6787;">IO</span>.readlines(<span style="color: #65E6A7;">"blob.txt"</span>).map{|line| line.split.map{|s| s.to_i }}
 </pre>
 </div>
 
@@ -297,19 +310,19 @@ While Lisp languages, according to Xah Lee, offer an unwieldy solution, as shown
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">read-lines</span> (file)
-  <span style="color: #8b2252;">"Return a list of lines in FILE."</span>
-  (<span style="color: #a020f0;">with-temp-buffer</span>
+<pre class="src src-emacs-lisp">(<span style="color: #6bd9db;">defun</span> <span style="color: #cea2ca;">read-lines</span> (file)
+  <span style="color: #91f368;">"Return a list of lines in FILE."</span>
+  (<span style="color: #6bd9db;">with-temp-buffer</span>
     (insert-file-contents file)
     (split-string
-     (buffer-string) <span style="color: #8b2252;">"\n"</span> t)))
+     (buffer-string) <span style="color: #65E6A7;">"\n"</span> t)))
 
 (mapcar
- (<span style="color: #a020f0;">lambda</span> (x)
+ (<span style="color: #6bd9db;">lambda</span> (x)
    (mapcar
-    (<span style="color: #a020f0;">lambda</span> (y) (string-to-number y))
-    (split-string x <span style="color: #8b2252;">" "</span>)))
- (read-lines <span style="color: #8b2252;">"blob.txt"</span>)) 
+    (<span style="color: #6bd9db;">lambda</span> (y) (string-to-number y))
+    (split-string x <span style="color: #65E6A7;">" "</span>)))
+ (read-lines <span style="color: #65E6A7;">"blob.txt"</span>)) 
 </pre>
 </div>
 
@@ -349,10 +362,10 @@ First, let's require some functionality.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>require '<span style="color: #7388d6;">[</span><span style="color: #228b22;">clojure.java.io</span> <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>reader<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span>
-         '<span style="color: #7388d6;">[</span><span style="color: #228b22;">clojure.string</span> <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>split<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>clojure.java.io <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>reader<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span>
+         '<span style="color: #80bcb6;">[</span>clojure.string <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>split<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">blob</span> <span style="color: #8b2252;">"/path/to/blox.txt"</span><span style="color: #707183;">)</span>
+<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">def</span> <span style="color: #eed891;">blob</span> <span style="color: #65E6A7;">"/path/to/blox.txt"</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
 
@@ -361,14 +374,14 @@ List comprehension in Clojure is a syntax-laden macro for the benefit of buildin
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">for</span> <span style="color: #7388d6;">[</span>line <span style="color: #909183;">(</span>line-seq <span style="color: #709870;">(</span>reader blob<span style="color: #709870;">)</span><span style="color: #909183;">)</span>
-      <span style="color: #008b8b;">:let</span> <span style="color: #909183;">[</span>line <span style="color: #709870;">(</span>split line #<span style="color: #8b2252;">"</span><span style="color: #8b2252; font-weight: bold;">\s</span><span style="color: #8b2252;">+"</span><span style="color: #709870;">)</span><span style="color: #909183;">]</span><span style="color: #7388d6;">]</span>
-  <span style="color: #7388d6;">(</span>map read-string line<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">for</span> <span style="color: #80bcb6;">[</span>line <span style="color: #c79af4;">(</span>line-seq <span style="color: #807f96;">(</span>reader blob<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span>
+      <span style="color: #f5c791;">:let</span> <span style="color: #c79af4;">[</span>line <span style="color: #807f96;">(</span>split line #<span style="color: #65E6A7;">"</span><span style="color: #65E6A7; font-weight: bold;">\s</span><span style="color: #65E6A7;">+"</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span>
+  <span style="color: #80bcb6;">(</span>map read-string line<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">((3 10 2) (4 1) (11 18))
+<pre class="src src-org">nil((3 10 2) (4 1) (11 18))
 </pre>
 </div>
 
@@ -377,12 +390,12 @@ Nested syntax is mitigated with the use of higher-order functions such as <b>com
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>map <span style="color: #7388d6;">(</span>comp <span style="color: #909183;">(</span>partial map read-string<span style="color: #909183;">)</span> #<span style="color: #909183;">(</span>split <span style="color: #a0522d;">%</span> #<span style="color: #8b2252;">"</span><span style="color: #8b2252; font-weight: bold;">\s</span><span style="color: #8b2252;">+"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span> <span style="color: #7388d6;">(</span>line-seq <span style="color: #909183;">(</span>reader blob<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>map <span style="color: #80bcb6;">(</span>comp <span style="color: #c79af4;">(</span>partial map read-string<span style="color: #c79af4;">)</span> #<span style="color: #c79af4;">(</span>split <span style="color: #eed891;">%</span> #<span style="color: #65E6A7;">"</span><span style="color: #65E6A7; font-weight: bold;">\s</span><span style="color: #65E6A7;">+"</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span> <span style="color: #80bcb6;">(</span>line-seq <span style="color: #c79af4;">(</span>reader blob<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">((3 10 2) (4 1) (11 18))
+<pre class="src src-org">nil((3 10 2) (4 1) (11 18))
 </pre>
 </div>
 
@@ -391,14 +404,14 @@ The threading operator, aka <a href="http://debasishg.blogspot.co.il/2010/04/thr
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">-&gt;&gt;</span> <span style="color: #7388d6;">(</span>line-seq <span style="color: #909183;">(</span>reader blob<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
-     <span style="color: #7388d6;">(</span>map #<span style="color: #909183;">(</span>split <span style="color: #a0522d;">%</span> #<span style="color: #8b2252;">"</span><span style="color: #8b2252; font-weight: bold;">\s</span><span style="color: #8b2252;">+"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
-     <span style="color: #7388d6;">(</span>map  <span style="color: #909183;">(</span>partial map read-string<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">-&gt;&gt;</span> <span style="color: #80bcb6;">(</span>line-seq <span style="color: #c79af4;">(</span>reader blob<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
+     <span style="color: #80bcb6;">(</span>map #<span style="color: #c79af4;">(</span>split <span style="color: #eed891;">%</span> #<span style="color: #65E6A7;">"</span><span style="color: #65E6A7; font-weight: bold;">\s</span><span style="color: #65E6A7;">+"</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
+     <span style="color: #80bcb6;">(</span>map  <span style="color: #c79af4;">(</span>partial map read-string<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">((3 10 2) (4 1) (11 18))
+<pre class="src src-org">nil((3 10 2) (4 1) (11 18))
 </pre>
 </div>
 
@@ -407,14 +420,14 @@ Let's not forget the ubiquitous <b>let</b>, which executes a series of forms wit
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">let</span> <span style="color: #7388d6;">[</span>lines <span style="color: #909183;">(</span>line-seq <span style="color: #709870;">(</span>reader blob<span style="color: #709870;">)</span><span style="color: #909183;">)</span>
-      lines <span style="color: #909183;">(</span>map #<span style="color: #709870;">(</span>split <span style="color: #a0522d;">%</span> #<span style="color: #8b2252;">"</span><span style="color: #8b2252; font-weight: bold;">\s</span><span style="color: #8b2252;">+"</span><span style="color: #709870;">)</span> lines<span style="color: #909183;">)</span><span style="color: #7388d6;">]</span>
-  <span style="color: #7388d6;">(</span>map <span style="color: #909183;">(</span>partial map read-string<span style="color: #909183;">)</span> lines<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #80bcb6;">[</span>lines <span style="color: #c79af4;">(</span>line-seq <span style="color: #807f96;">(</span>reader blob<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span>
+      lines <span style="color: #c79af4;">(</span>map #<span style="color: #807f96;">(</span>split <span style="color: #eed891;">%</span> #<span style="color: #65E6A7;">"</span><span style="color: #65E6A7; font-weight: bold;">\s</span><span style="color: #65E6A7;">+"</span><span style="color: #807f96;">)</span> lines<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
+  <span style="color: #80bcb6;">(</span>map <span style="color: #c79af4;">(</span>partial map read-string<span style="color: #c79af4;">)</span> lines<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">((3 10 2) (4 1) (11 18))
+<pre class="src src-org">nil((3 10 2) (4 1) (11 18))
 </pre>
 </div>
 
@@ -423,14 +436,14 @@ Finally, Lisp old-timers will telll you there's nothing wrong with properly form
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>map #<span style="color: #7388d6;">(</span>map read-string <span style="color: #a0522d;">%</span><span style="color: #7388d6;">)</span> 
-     <span style="color: #7388d6;">(</span>map #<span style="color: #909183;">(</span>split <span style="color: #a0522d;">%</span> #<span style="color: #8b2252;">"</span><span style="color: #8b2252; font-weight: bold;">\s</span><span style="color: #8b2252;">+"</span><span style="color: #909183;">)</span> 
-          <span style="color: #909183;">(</span>line-seq <span style="color: #709870;">(</span>reader blob<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>map #<span style="color: #80bcb6;">(</span>map read-string <span style="color: #eed891;">%</span><span style="color: #80bcb6;">)</span> 
+     <span style="color: #80bcb6;">(</span>map #<span style="color: #c79af4;">(</span>split <span style="color: #eed891;">%</span> #<span style="color: #65E6A7;">"</span><span style="color: #65E6A7; font-weight: bold;">\s</span><span style="color: #65E6A7;">+"</span><span style="color: #c79af4;">)</span> 
+          <span style="color: #c79af4;">(</span>line-seq <span style="color: #807f96;">(</span>reader blob<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">((3 10 2) (4 1) (11 18))
+<pre class="src src-org">nil((3 10 2) (4 1) (11 18))
 </pre>
 </div>
 
@@ -439,13 +452,13 @@ As Mike pointed out in the comments, the above can be made shorter like so:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>map #<span style="color: #7388d6;">(</span>map read-string <span style="color: #909183;">(</span>split <span style="color: #a0522d;">%</span> #<span style="color: #8b2252;">"</span><span style="color: #8b2252; font-weight: bold;">\s</span><span style="color: #8b2252;">+"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>       
-     <span style="color: #7388d6;">(</span>line-seq <span style="color: #909183;">(</span>reader blob<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>map #<span style="color: #80bcb6;">(</span>map read-string <span style="color: #c79af4;">(</span>split <span style="color: #eed891;">%</span> #<span style="color: #65E6A7;">"</span><span style="color: #65E6A7; font-weight: bold;">\s</span><span style="color: #65E6A7;">+"</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>       
+     <span style="color: #80bcb6;">(</span>line-seq <span style="color: #c79af4;">(</span>reader blob<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">((3 10 2) (4 1) (11 18))
+<pre class="src src-org">nil((3 10 2) (4 1) (11 18))
 </pre>
 </div>
 

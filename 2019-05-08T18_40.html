@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-05-09 Thu 23:47 -->
+<!-- 2019-05-09 Thu 23:55 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -418,6 +418,10 @@ This handler returns the same response regardless of the request. Not very usefu
 We've got ourselves some routing. Hang on, can you see a problem with this approach? If we do the routing inside the handler, we are sabotaging the most desirable property of Ring: composability. how will we go about combining handlers? We really would like to be able to define handlers in arbitrary namespaces, and ultimately assemble them together as one. This problem space is covered by routing libaries/frameworks. For the sake of fairness, we will mention <code>bidi</code>, <code>silk</code> and <code>pedestal</code>, but the remainder of this post will focus on <code>compojure</code>.
 </p>
 
+<p>
+Note: I am using a solution of my own doing, <a href="https://github.com/danielsz/system/wiki/Raamwerk">Raamwerk</a>.
+</p>
+
 <blockquote>
 <p>
 Compojure is a small routing library for Ring that allows web applications to be composed of small, independent parts.
@@ -681,7 +685,7 @@ Can you spot the InputStream in the generated request?
  :uri "/french",
  :server-name "localhost",
  :body
- #object[java.io.ByteArrayInputStream 0x5a9b3335 "java.io.ByteArrayInputStream@5a9b3335"],
+ #object[java.io.ByteArrayInputStream 0x13b81812 "java.io.ByteArrayInputStream@13b81812"],
  :scheme :http,
  :request-method :post}
 </pre>
@@ -789,11 +793,6 @@ We can fix that if we shuffle things around a bit.
 
 <p>
 Safe for now, but that issue comes up time and again. Routes defined in separate libraries, for example a social sign-in library, have to be combined with application routes before applying such middleware. So beware of <a href="https://github.com/ptaoussanis/sente/issues/123">conflicting middleware</a>. Sente endpoints, for example, cannot share the same routing stack as the application stack because it does data format serialization on its own, while application routes will typically rely on libraries such as <code>wrap-restful-format</code> or its successor, <a href="https://github.com/metosin/muuntaja/">muuntaja</a>, for data serialization. 
-</p>
-
-
-<p>
-I have using a solution of my own writing, <a href="https://github.com/danielsz/system/wiki/Raamwerk">Raamwerk</a>.
 </p>
 </div>
 </body>

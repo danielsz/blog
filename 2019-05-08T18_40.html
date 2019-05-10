@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-05-11 Sat 00:28 -->
+<!-- 2019-05-11 Sat 00:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -488,11 +488,8 @@ Note: Under the hood, Compojure relies on a library called <code>clout</code> to
 
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #707183;">(</span>require '<span style="color: #7388d6;">[</span>compojure.core <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>GET<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
-</pre>
-</div>
 
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">app</span> <span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">app</span> <span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span>
                    <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">)</span>
                  <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[]</span>
                    <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
@@ -668,7 +665,7 @@ Can you spot the InputStream in the generated request?
  :uri "/french",
  :server-name "localhost",
  :body
- #object[java.io.ByteArrayInputStream 0x36ec4bfd "java.io.ByteArrayInputStream@36ec4bfd"],
+ #object[java.io.ByteArrayInputStream 0x5664de14 "java.io.ByteArrayInputStream@5664de14"],
  :scheme :http,
  :request-method :post}
 </pre>

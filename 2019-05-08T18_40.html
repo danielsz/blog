@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-05-11 Sat 00:21 -->
+<!-- 2019-05-11 Sat 00:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -318,13 +318,12 @@ These are the foundations of web application development in Clojure. There is no
 </pre>
 
 
-
 <p>
 Note: Try the code snippets in a Clojure REPL. 
 </p>
 
 <p>
-In <i>The Little Schemer</i> by Dan P. Friedman et al, a socratic dialogue leads the reader through a concept by discussing every aspect of it. In this primer, which I dub <i>The Little Ringleader</i>, we are also going on a little adventure where the idea is to see how far you can go with just a few premises. 
+In <i>The Little Schemer</i> by Dan P. Friedman et al, a socratic dialogue leads the reader through a concept by discussing every aspect of it. In this primer, which I dub <i>The Little Ringleader</i>, we are going on a little adventure where the idea is to explore the implications of a few premises. 
 </p>
 
 <p>
@@ -411,7 +410,7 @@ This handler returns the same response regardless of the request. Not very usefu
 
 
 <p>
-We've got ourselves some routing. Hang on, can you see a problem with this approach? How will we go about combining handlers? If we do the routing inside the handler, we are sacrificing the most desirable property of Ring: modularity. We really would like to be able to define handlers in arbitrary namespaces, and ultimately assemble them together as one. 
+We've got ourselves some routing. Hang on, can you see a problem with this approach? If we do the routing inside the handler, we are sacrificing the most desirable property of Ring: modularity. We really would like to be able to define handlers in arbitrary namespaces, and ultimately assemble them together as one. 
 </p>
 
 <p>
@@ -493,19 +492,15 @@ Note: Under the hood, Compojure relies on a library called <code>clout</code> to
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>routes <span style="color: #7388d6;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #909183;">[]</span>
-          <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #7388d6;">)</span>
-        <span style="color: #7388d6;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #909183;">[]</span>
-          <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">app</span> <span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span>
+                   <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">)</span>
+                 <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[]</span>
+                   <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span>
-           <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">)</span>
-         <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[]</span>
-           <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
- <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/french"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>app <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/french"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -517,11 +512,7 @@ Note: Under the hood, Compojure relies on a library called <code>clout</code> to
 
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span>
-           <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">)</span>
-         <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[]</span>
-           <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
- <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/welsh"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>app <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/welsh"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -564,11 +555,7 @@ Compojure routes are semantically the same as Ring handlers, with the exception 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span>
-           <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">)</span>
-         <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[]</span>
-           <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
- <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>app <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -681,7 +668,7 @@ Can you spot the InputStream in the generated request?
  :uri "/french",
  :server-name "localhost",
  :body
- #object[java.io.ByteArrayInputStream 0x4e7a0ded "java.io.ByteArrayInputStream@4e7a0ded"],
+ #object[java.io.ByteArrayInputStream 0x36ec4bfd "java.io.ByteArrayInputStream@36ec4bfd"],
  :scheme :http,
  :request-method :post}
 </pre>

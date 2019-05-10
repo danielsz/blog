@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-05-11 Sat 00:19 -->
+<!-- 2019-05-11 Sat 00:21 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -277,10 +277,6 @@ Note: A handler is a first-order function, Ring middleware is higher-order: it t
 </p>
 
 <p>
-Note: Middleware may add keys to the request map in addition to the standard keys.
-</p>
-
-<p>
 Requests are being processed by the handler, which in turn generates an appropriate response. 
 </p>
 <div class="org-src-container">
@@ -352,7 +348,7 @@ Let’s define middleware that does nothing.
 
 
 <p>
-Let's define some more middleware because you chain them with impunity. 
+Let's define some more middleware. You can chain them with impunity. 
 </p>
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">wrap-noop1</span> <span style="color: #7388d6;">[</span>handler<span style="color: #7388d6;">]</span>
@@ -685,7 +681,7 @@ Can you spot the InputStream in the generated request?
  :uri "/french",
  :server-name "localhost",
  :body
- #object[java.io.ByteArrayInputStream 0x38efa8d5 "java.io.ByteArrayInputStream@38efa8d5"],
+ #object[java.io.ByteArrayInputStream 0x4e7a0ded "java.io.ByteArrayInputStream@4e7a0ded"],
  :scheme :http,
  :request-method :post}
 </pre>

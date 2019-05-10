@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-05-11 Sat 00:36 -->
+<!-- 2019-05-11 Sat 00:41 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -665,7 +665,7 @@ Can you spot the InputStream in the generated request?
  :uri "/french",
  :server-name "localhost",
  :body
- #object[java.io.ByteArrayInputStream 0x42aa99f7 "java.io.ByteArrayInputStream@42aa99f7"],
+ #object[java.io.ByteArrayInputStream 0x4094104d "java.io.ByteArrayInputStream@4094104d"],
  :scheme :http,
  :request-method :post}
 </pre>
@@ -798,7 +798,7 @@ its own.
 To mitigate pesky middleware ordering issues, Ring provides sane
 <a href="https://github.com/ring-clojure/ring-defaults">defaults</a> for common use cases. Still, you need to beware of
 <a href="https://github.com/ptaoussanis/sente/issues/123">conflicting middleware</a> and remember that, despite Clojure's embrace of
-immutability, we are not entirely out of the tar pit.
+immutability, we are not entirely <a href="https://github.com/papers-we-love/papers-we-love/blob/master/design/out-of-the-tar-pit.pdf">out of the tar pit</a>.
 </p>
 </div>
 </body>

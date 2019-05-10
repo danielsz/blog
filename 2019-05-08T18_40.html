@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-05-11 Sat 00:29 -->
+<!-- 2019-05-11 Sat 00:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -641,7 +641,7 @@ Until now, everything is perfect because our middleware is pure and everything i
 </p>
 
 <p>
-Remember the standard keys? So far we have mentioned two: <code>:uri</code> and <code>:request-method</code>. But requests that originate from html forms or ajax calls, for example, may have a <code>:body</code> key present that correspond to the user input, or the call parameters, encoded in an <code>InputStream</code>. 
+Remember the standard keys? So far we have mentioned two: <code>:uri</code> and <code>:request-method</code>. But requests that originate from html forms or ajax calls, for example, may have a <code>:body</code> key present that correspond to user input or call arguments encoded in an <code>InputStream</code>. 
 </p>
 
 <p>
@@ -665,13 +665,17 @@ Can you spot the InputStream in the generated request?
  :uri "/french",
  :server-name "localhost",
  :body
- #object[java.io.ByteArrayInputStream 0x5664de14 "java.io.ByteArrayInputStream@5664de14"],
+ #object[java.io.ByteArrayInputStream 0x42aa99f7 "java.io.ByteArrayInputStream@42aa99f7"],
  :scheme :http,
  :request-method :post}
 </pre>
 
 <p>
 Let’s compose a route with middleware that extracts that InputStream and adds a params key to the request.
+</p>
+
+<p>
+Note: Middleware often add keys to the request map in addition to the standard keys.
 </p>
 
 <div class="org-src-container">

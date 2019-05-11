@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-05-11 Sat 00:41 -->
+<!-- 2019-05-11 Sat 17:16 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -253,11 +253,12 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">Ring's idionsyncrasies</h1>
 </header><p>
-The promise of Ring is to let you assemble web applications from
-modular parts. In other words, Ring promises you composability. Images
-of Lego blocks neatly piled up into a larger structure come to mind,
-but as usual in the software world, things are a bit more involved. In
-this post, we will look in greater detail at Ring’s idiosyncrasies.
+The promise of Ring is to let us assemble web applications from
+modular parts. In other words, Ring endows us with
+composability. Images of Lego blocks neatly piled up into a larger
+structure come to mind, but as usual in the software world, things are
+a bit more involved. In this post, we will look in greater detail at
+Ring’s idiosyncrasies.
 </p>
 
 <p>
@@ -273,7 +274,7 @@ For starters, let’s recap.
 </ul>
 
 <p>
-Note: A handler is a first-order function, Ring middleware is higher-order: it takes a function as input and returns one as output. 
+Note: A handler is a <b>first-order</b> function, Ring middleware is <b>higher-order</b>: it takes a function as input and returns one as output. 
 </p>
 
 <p>
@@ -665,7 +666,7 @@ Can you spot the InputStream in the generated request?
  :uri "/french",
  :server-name "localhost",
  :body
- #object[java.io.ByteArrayInputStream 0x4094104d "java.io.ByteArrayInputStream@4094104d"],
+ #object[java.io.ByteArrayInputStream 0x191f34e0 "java.io.ByteArrayInputStream@191f34e0"],
  :scheme :http,
  :request-method :post}
 </pre>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-13 Tue 12:48 -->
+<!-- 2019-08-13 Tue 14:22 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The talk that wasn't</title>
@@ -340,7 +340,7 @@ DEFINE ((
 </p>
 
 <p>
-Regardless of stack considerations, factorial can be expressed in modern Lisps like this:   
+Ignoring for a moment stack considerations, factorial can be expressed in modern Lisps like this:   
 </p>
 
 <div class="org-src-container">
@@ -368,7 +368,7 @@ Another way to show that LISP was neater than Turing machines was to write a uni
 </blockquote>
 
 <p>
-It is also telling that while McCarthy envisioned the universal LISP function, he left the implementation as an exercise for the reader. Luckily for us, Steve Russell was that reader, and did write an implementation. This is the famous metacircular evaluator <code>apply/eval</code> that Alan Kay dubbed the Maxwell equations of computing.
+It is also telling that while McCarthy envisioned the universal LISP function, he left the implementation as an exercise for the reader. Luckily for us, Steve Russell was that reader, and did write an implementation. This is the famous metacircular evaluator <code>apply/eval</code> that Alan Kay dubbed the <i>Maxwell equations of computing</i>.
 </p>
 
 <p>
@@ -376,19 +376,19 @@ McCarthy's ambition is made overly clear in <i>A Basis For a Mathematical Theory
 </p>
 
 <p>
-In order to recall the zeitgeist, it should be stressed that computing was attracting scientists from different backgrounds. The cognitive sciences and linguistics, for example. But it was George Forsythe, a Mathematician, who coined the term <i>computer science</i> in 1961, one year after McCarthy's Lisp paper. McCarthy was paying close attention to the work done by Allen Newell, Herbert A. Simon and Cliff Shaw on IPL, where list processing originated. The three luminaries wrote an AI program before the term even existed: <i>Logic Theorist</i>, a program that proved theorems in Whitehead and Russell's <i>Principia Mathematica</i>. Yes, the same <i>Principia Mathematica</i> referenced by Gödel in his paper <i>Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I</i> where primitive recursive functions were used to encode syntactic objects to numbers.
+In order to recall the zeitgeist, it should be stressed that computing was attracting scientists from different backgrounds. The cognitive sciences and linguistics, for example. But it was George Forsythe, a Mathematician, who coined the term <i>computer science</i> in 1961, one year after McCarthy's Lisp paper. McCarthy was paying close attention to the work done by Allen Newell, Herbert A. Simon and Cliff Shaw on IPL, where list processing originated. The three luminaries wrote an AI program before the term even existed: <i>Logic Theorist</i>, a program that proved theorems in Whitehead and Russell's <i>Principia Mathematica</i>. Yes, the same <i>Principia Mathematica</i> referenced by Gödel in his paper <i>Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I</i>. And where the previously mentioned primitive recursive functions were used to encode syntactic objects to numbers.
 </p>
 
 <p>
-Giving a sense of how revolutionary that paper was is important. Starting with David Hilbert and the axiomatic method, one needs to explain how Mathematics tried and failed to establish its own consistency. This chapter in the early 20th century is known as the <i>Foundational crisis of Mathematics</i>. It is the context of the groundbreaking insights in logic, metamathematics and decidability that would change the landscape of Mathematics forever. 
+Giving a sense of how revolutionary that paper was is important. Starting with David Hilbert and the axiomatic method, one needs to explain how Mathematics tried and failed to establish its own consistency. This chapter in the early 20th century is known as the <i>Foundational crisis of Mathematics</i>. The setback was compensated with groundbreaking insights in logic, metamathematics and decidability, with Kurt Gödel as the towering figure. 
 </p>
 
 <p>
-There is no better answer to the question <i>why philosophy matters?</i> than to show how today's philosophical inquiry is tomorrow's technological foundation. This process often extends over centuries. Wilhelm Leibniz, back in the 17th century, thought it would be desirable to mechanize thought. He envisioned the <i>spécieuse générale</i>, a formal language accompanied by the first attempts at arithmetization of syntax. Three centuries later, Kurt Gödel would use this technique with such success that today it known by his name, <i>Gödel numbering</i>. 
+There is no better answer to the question <i>why philosophy matters?</i> than to show how today's philosophical inquiry is tomorrow's technological foundation. Back in the 17th century, Wilhelm Leibniz,  thought it would be desirable to mechanize thought. He envisioned the <i>spécieuse générale</i>, a formal language accompanied by the first attempts at arithmetization of syntax. Three centuries later, Kurt Gödel would use this technique with such success that today it known by his name, <i>Gödel numbering</i>. 
 </p>
 
 <p>
-For Leibniz, the ideal language is one where logical relations are so transparent that they exclude any form of ambiguity, leaving room only for  calculation. Three centuries later, David Hilbert asked if there is an algorithm capable of calculating the truth or falsity of mathematical statements. The <i>Entscheidungsproblem</i> set in motion the research that brought forth the computation models that lie at the heart of our programming languages. And yet this intellectual adventure is barely known to those who benefit from it the most, us modern day developers.  
+For Leibniz, the ideal language is one where logical relations are so transparent that they exclude any form of ambiguity, leaving room only for  calculation. Again, three centuries later, David Hilbert asked if there is an algorithm capable of calculating the truth or falsity of mathematical statements. The <i>Entscheidungsproblem</i> set in motion the research that brought forth the computation models that lie at the heart of our programming languages. And yet this intellectual adventure is barely known to those who benefit from it the most, us modern day developers.  
 </p>
 
 <p>
@@ -396,10 +396,23 @@ It doesn't help that computability theory was known as recursion theory until le
 </p>
 
 <p>
+You go there for a reason. Everybody goes there for a reason. Maybe you are driven by the desire to learn, maybe you need to hire developers, maybe you're a speaker and want to be better known. 
+You are confronted with your own persona. The others, their persona, constitute a frame of reference with which you compare yourself, how you're doing so far. It can be crushing, humbling. As you struggle through your career. Are    
+Heart of Clojure was a personal failure. Bumping into people that I had met earlier and seeing how well they were doing. 
+I was the backup speaker that never made it to the stage. But for a lightning talk. Condensing a 30 minutes talk into 5 minutes.
+The notion of community as potentialities. Normally, I shun communities. I am quite individualistic, something in itself so modern that the word itself appeared around the 1830s.
+ Just because you don't want to have this event where everybody 
+goes around, inflated with self-importance. Nobody wants that.
+How did it feel to cram all that material in 5 minutes? Like slaughtering a chicken with a blunt knife. Highly inadequate. Do I regret it? Not at all.
+I am carrying this material with me, wherever I go, and I will present the long form talk at every opportunity. It doesn't need to be a Clojure conference per se. 
+</p>
+
+<p>
 that is the true color of the beast.  questions get reformulated, problems get reframed, the domain of discourse get redefined.. 
 </p>
 
 <p>
+Those are subtle points that are not amenable to in a 5 minute talk. So what is one to do? I certainly didn't like the idea to cram a complex topic in 5 minutes, but I didn't like the idea to go home on such an anticlimax neither. 
 My long form talk was touching on those topics, and would probably fall short of any real impact due to time constraints. But now suppose you are given 5 minutes, what would you do? A conference is a place where you need to learn how to put aside your self-importance. I decided to bet on the widespread mischaracterization of Lisp as a derivative of the Lambda Calculus. When I asked for a show of hands in the room whether or not they believed Lisp was based on it, confusion ensued. 
 </p>
 
@@ -412,15 +425,6 @@ My long form talk was touching on those topics, and would probably fall short of
 <p>
 <span class="underline">Note:</span> Yes, John McCarthy borrowed the lambda notation from Alonzo Church to describe function abstraction.
 </p>
-
-<p>
-Those are subtle points that are not amenable to in a 5 minute talk. So what is one to do? I certainly didn't like the idea to cram a complex topic in 5 minutes, but I didn't like the idea to go home on such an anticlimax neither. 
- Just because you don't want to have this event where everybody 
-goes around, inflated with self-importance. Nobody wants that.
-How did it feel to cram all that material in 5 minutes? Like slaughtering a chicken with a blunt knife. Highly inadequate. Do I regret it? Not at all.
-I am carrying this material with me, wherever I go, and I will present the long form talk at every opportunity. It doesn't need to be a Clojure conference per se. 
-</p>
-
 
 
 
@@ -736,13 +740,7 @@ A community is a social unit (a group of living things) with commonality such as
 Heart of Clojure was a moment of truth for me. 
 </p>
 
-<p>
-You go there for a reason. Everybody goes there for a reason. Maybe you are driven by the desire to learn, maybe you need to hire developers, maybe you're a speaker and want to be better known. 
-You are confronted with your own persona. The others, their persona, constitute a frame of reference with which you compare yourself, how you're doing so far. It can be crushing, humbling. As you struggle through your career. Are    
-Heart of Clojure was a personal failure. Bumping into people that I had met earlier and seeing how well they were doing. 
-I was the backup speaker that never made it to the stage. But for a lightning talk. Condensing a 30 minutes talk into 5 minutes.
-The notion of community as potentialities. Normally, I shun communities. I am quite individualistic, something in itself so modern that the word itself appeared around the 1830s.
-</p>
+
 
 <p>
 Lisp was a layer in the foundations.

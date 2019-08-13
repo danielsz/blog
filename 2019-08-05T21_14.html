@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-13 Tue 14:29 -->
+<!-- 2019-08-13 Tue 18:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The talk that wasn't</title>
@@ -293,6 +293,10 @@ My topic was Lisp in the broader context of science. The recursive functions men
 </p>
 
 <p>
+<span class="underline">Note:</span> Recursion is the process that consists in defining the value of a function by using other values of the same function. 
+</p>
+
+<p>
 The primitive recursive functions originated with the proof Gödel provided for his incompleteness theorems. They evolved over time with contributions by Jacques Herbrand, Stephen Cole Kleene and Rózsa Péter, among others. With only minor additions, like a minimisation operator, a broader set of functions could be defined, equivalent to those computable by a Turing machine. They are known as the μ-recursive functions.
 </p>
 
@@ -324,7 +328,7 @@ Takes this form:
 </p>
 
 <p>
-On a real world Lisp 1.5 implementation: 
+McCarthy's formalism is regarded as <i>a precise and substantial refinement of the partial recursive functions</i> (Moschovakis, 2001, p. 919). On a real world Lisp 1.5 implementation: 
 </p>
 
 <pre class="example">
@@ -352,7 +356,7 @@ Ignoring for a moment stack considerations, factorial can be expressed in modern
 </div>
 
 <p>
-Isn't that neat? Well, it's sure what McCarthy cared about.
+Isn't that neat? Well, that is not a coincidence. 
 </p>
 
 <blockquote>
@@ -362,7 +366,7 @@ Then mathematical neatness became a goal and led to pruning some features from t
 </blockquote>
 
 <p>
-To understand Lisp's origin story is to understand that John McCarthy was foremost a Mathematician. For example, the Lisp system presented in his paper was purely functional, while the real world implementation from the lab had side-effecting constructs. Preserving referential transparency is important to a Mathematician. 
+To understand Lisp's origin story is to understand that John McCarthy was foremost a Mathematician. For example, the Lisp system presented in his paper was purely functional, while the real world implementation from the lab had side-effecting constructs. Preserving referential transparency is a Mathematician's virtue. 
 </p>
 
 <blockquote>
@@ -372,15 +376,15 @@ Another way to show that LISP was neater than Turing machines was to write a uni
 </blockquote>
 
 <p>
-It is also telling that while McCarthy envisioned the universal LISP function, he left the implementation as an exercise for the reader. Luckily for us, Steve Russell was that reader, and did write an implementation. This is the famous metacircular evaluator <code>apply/eval</code> that Alan Kay dubbed the <i>Maxwell equations of computing</i>.
+It is also telling that while McCarthy envisioned the universal LISP function, he left the implementation as an exercise for the reader. Luckily for us, Steve Russell was that reader, and he did write an implementation. This is the famous metacircular evaluator <code>apply/eval</code> that Alan Kay dubbed the <i>Maxwell equations of computing</i>.
 </p>
 
 <p>
-McCarthy's ambition is made overly clear in <i>A Basis For a Mathematical Theory of Computation</i>, published soon after the seminal paper we mentioned, in which he explains the deficiencies of the current theories, including recursive function theory, and defines the goals of a new formalism for the science of computation.
+McCarthy's ambition is made overly clear in <i>A Basis For a Mathematical Theory of Computation</i>, published soon after the seminal paper we mentioned, in which he explains the deficiencies of the current theories, and defines the goals of a new formalism for the science of computation.
 </p>
 
 <p>
-In order to recall the zeitgeist, it should be stressed that computing was attracting scientists from different backgrounds. The cognitive sciences and linguistics, for example. But it was George Forsythe, a Mathematician, who coined the term <i>computer science</i> in 1961, one year after McCarthy's Lisp paper. McCarthy was paying close attention to the work done by Allen Newell, Herbert A. Simon and Cliff Shaw on IPL, where list processing originated. The three luminaries wrote an AI program before the term even existed: <i>Logic Theorist</i>, a program that proved theorems in Whitehead and Russell's <i>Principia Mathematica</i>. Yes, the same <i>Principia Mathematica</i> referenced by Gödel in his paper <i>Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I</i>. And where the previously mentioned primitive recursive functions were used to encode syntactic objects to numbers.
+In order to recall the zeitgeist, it should be stressed that computing was attracting scientists from different backgrounds, not only mathematics: the cognitive sciences, linguistics, etc. The field was emerging, amorphous, malleable. The term <i>computer science</i> was coined in 1961, one year after McCarthy's Lisp paper. McCarthy, in turn, was paying close attention to the work done by Allen Newell, Herbert A. Simon and Cliff Shaw on IPL, where list processing originated. The three luminaries wrote an AI program before the term even existed: <i>Logic Theorist</i>, a program that proved theorems in Whitehead and Russell's <i>Principia Mathematica</i>. Yes, the same <i>Principia Mathematica</i> referenced by Gödel in his paper <i>Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I</i>. And where the previously mentioned recursive functions played a strategic role. 
 </p>
 
 <p>
@@ -388,7 +392,12 @@ Giving a sense of how revolutionary that paper was is important. Starting with D
 </p>
 
 <p>
-There is no better answer to the question <i>why philosophy matters?</i> than to show how today's philosophical inquiry is tomorrow's technological foundation. Back in the 17th century, Wilhelm Leibniz,  thought it would be desirable to mechanize thought. He envisioned the <i>spécieuse générale</i>, a formal language accompanied by the first attempts at arithmetization of syntax. Three centuries later, Kurt Gödel would use this technique with such success that today it known by his name, <i>Gödel numbering</i>. 
+At this point, 
+Back to <i>Heart of Clojure</i>.
+</p>
+
+<p>
+There is no better answer to the question <i>why philosophy matters?</i> than to show how today's philosophical inquiry is tomorrow's technological foundation. Back in the 17th century, Wilhelm Leibniz,  thought it would be desirable to mechanize thought. He envisioned the <i>spécieuse générale</i>, a formal language accompanied by the first attempts at arithmetization of syntax. Three centuries later, Kurt Gödel would use this technique with such success that today it bears his name, <i>Gödel numbering</i>. 
 </p>
 
 <p>
@@ -400,6 +409,11 @@ It doesn't help that computability theory was known as recursion theory until le
 </p>
 
 <p>
+Back to <i>Heart of Clojure</i>. So what is one to do? I certainly didn't like the idea to cram a complex topic in 5 minutes, but I didn't like the idea to go home on such an anticlimax neither. 
+</p>
+
+<p>
+ was a moment of truth for me. 
 You go there for a reason. Everybody goes there for a reason. Maybe you are driven by the desire to learn, maybe you need to hire developers, maybe you're a speaker and want to be better known. 
 You are confronted with your own persona. The others, their persona, constitute a frame of reference with which you compare yourself, how you're doing so far. It can be crushing, humbling. As you struggle through your career. Are    
 Heart of Clojure was a personal failure. Bumping into people that I had met earlier and seeing how well they were doing. 
@@ -416,7 +430,10 @@ that is the true color of the beast.  questions get reformulated, problems get r
 </p>
 
 <p>
-Those are subtle points that are not amenable to in a 5 minute talk. So what is one to do? I certainly didn't like the idea to cram a complex topic in 5 minutes, but I didn't like the idea to go home on such an anticlimax neither. 
+Those are subtle points that are not amenable to in a 5 minute talk. 
+</p>
+
+<p>
 My long form talk was touching on those topics, and would probably fall short of any real impact due to time constraints. But now suppose you are given 5 minutes, what would you do? A conference is a place where you need to learn how to put aside your self-importance. I decided to bet on the widespread mischaracterization of Lisp as a derivative of the Lambda Calculus. When I asked for a show of hands in the room whether or not they believed Lisp was based on it, confusion ensued. 
 </p>
 
@@ -469,12 +486,6 @@ The first part of my long form talk is devoted to the <i>Foundational Crisis of 
 John McCarthy. 
 </p>
 
-
-
-<p>
-John McCarthy wasn't merely designing a programming language, he was engaged in mathematical theory. 
-</p>
-
 <p>
 This angle of attack startles programmers, as made evident  There are many reason for this confusion. 
 </p>
@@ -488,8 +499,8 @@ Furthermore, it is often forgotten that
 Indeed, the recursive functions 
 </p>
 
+
 <p>
-Recursion is the process that consists in defining the value of a function by using other values of the same function. 
 A fact that spurred 
 </p>
 
@@ -740,23 +751,16 @@ A community is a social unit (a group of living things) with commonality such as
 </blockquote>
 
 
-<p>
-Heart of Clojure was a moment of truth for me. 
-</p>
 
 
 
-<p>
-Lisp was a layer in the foundations.
-</p>
+
+
+
 
 
 <p>
-in IPL, a huge influence on Lisp.
-This shouldn't be surprising. 
-One of the most striking and characteristic is that 
-the general recursive functions, then
-Giving a sense of how revolutionary these were is important. Starting with David Hilbert and the axiomatic method, I was going to explain how Mathematics tried and failed to establish its own consistency. This chapter in the early 20th century is known as the Foundational crisis of Mathematics. Gödel's primitive recursive functions.
+George Forsythe helped turn computer science into a discipline, peer reviewing algorithms, publishing 
 </p>
 </div>
 </body>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-09 Mon 13:04 -->
+<!-- 2020-03-09 Mon 19:49 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The plot against Leiningen</title>
@@ -282,7 +282,7 @@ The POM files produced by <code>tools.deps</code> were bare bones and unusable a
 </p>
 
 <p>
-My strategy was simple but effective: muster desired Maven plugins and coax them in a custom POM that could then be executed via Maven. I named the project <i>Meyvn</i>. The astute reader might note that so far my efforts seem to replicate those of Leiningen: yet another a Maven wrapper. I would concede him the point with the following caveat: Meyvn is a next-gen build tool. With that I mean any tool that incorporates the semantics of <code>deps.edn</code>. By providing an &ldquo;official&rdquo; way to resolve dependencies and populating the classpath, Cognitect&rsquo;s <code>tools.deps</code> drew a line in the sand. 
+My strategy was simple but effective: muster desired Maven plugins and coax them in a custom POM that could then be executed via Maven. I named the project <i>Meyvn</i>. An astute reader might note that so far my efforts seem to replicate those of Leiningen: yet another a Maven wrapper. I would concede the point with the following caveat: Meyvn is a next-gen build tool. With that I mean any tool that incorporates the semantics of <code>deps.edn</code>. By providing an &ldquo;official&rdquo; way to resolve dependencies and populate the classpath, Cognitect&rsquo;s <code>tools.deps</code> drew a line in the sand. 
 No judgment is implied on preexisting tools beyond the observation that they wouldn&rsquo;t have been the same had <code>tools.deps</code> been around when they were written. 
 </p>
 
@@ -291,7 +291,7 @@ The <i>checkouts</i> feature illustrates this point aptly. In Leiningen, you nee
 </p>
 
 <p>
-Today, I have no use for Boot nor Leiningen anymore: Meyvn builds and deploys my artifacts. A template system inherited from Maven&rsquo;s archetypes enables kick-starting projects with all the bits and pieces connected. Meyvn has a good story for the web. Specialized mojos implement an asset pipeline: Clojurescript compilation, CSS minification and image compression. The live coding facilities of Meyvn builds on top of Cider. I have already mentioned hot loading for out-of-tree source files, but the Meyvn and its Emacs <a href="https://github.com/danielsz/meyvn-el">client</a> has other features that you can check out. 
+Today, I have no use for Boot nor Leiningen anymore: Meyvn builds and deploys my artifacts. A template system inherited from Maven&rsquo;s archetypes enables kick-starting projects with all the bits and pieces connected. Meyvn has a good story for the web. Specialized mojos implement an asset pipeline: Clojurescript compilation, CSS minification and image compression. The live coding facilities of Meyvn builds on top of Cider. I have already mentioned hot loading for out-of-tree source files, but Meyvn and its Emacs <a href="https://github.com/danielsz/meyvn-el">client</a> has other features that you can check out. 
 </p>
 
 <p>

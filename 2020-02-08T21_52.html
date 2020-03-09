@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-09 Mon 12:15 -->
+<!-- 2020-03-09 Mon 12:32 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The plot against Leiningen</title>
@@ -254,15 +254,15 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">The plot against Leiningen</h1>
 </header><p>
-When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We'd be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is and has been lurking in the dark all along. Consider the fact that Leiningen, as its name indicates, emerged as a Maven wrapper. The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
+When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is and has been lurking in the dark all along. Consider the fact that Leiningen, as its name indicates, emerged as a Maven wrapper. The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
 </p>
 
 <p>
-tl;dr It's 2010 and it's <code>mvn install</code>, not <code>lein install</code>
+tl;dr It&rsquo;s 2010 and it&rsquo;s <code>mvn install</code>, not <code>lein install</code>
 </p>
 
 <p>
-Clojars is set up as a Maven repository serving dependencies in the language of Maven coordinates. <code>Pomegranate</code>, the library used by Boot, bills itself as the "sane Clojure API for the Maven resolver". <code>tools.deps</code>, introduced two years ago by Cognitect, does its own thing with dependency resolution <i>via</i> the Maven APIs. Start digging underneath any piece of Clojure tooling and you'll soon arrive at Maven.
+Clojars is set up as a Maven repository serving dependencies in the language of Maven coordinates. <code>Pomegranate</code>, the library used by Boot, bills itself as the &ldquo;sane Clojure API for the Maven resolver&rdquo;. <code>tools.deps</code>, introduced two years ago by Cognitect, does its own thing with dependency resolution <i>via</i> the Maven APIs. Start digging underneath any piece of Clojure tooling and you&rsquo;ll soon arrive at Maven.
 </p>
 
 <p>
@@ -278,24 +278,24 @@ I think I know how to answer this question because, strangely enough, that alter
 </p>
 
 <p>
-The POM files produced by <code>tools.deps</code> were bare bones and unusable as such, but if you tweaked them, and crucially, summoned the Clojure compiler, you could build jars and uberjars straight out the box. What else could you get for free? It turned out: a whole lot. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. To hook into that lifecycle, one writes mojos, a pun on pojos (Maven plain Old Java Object). One or several related mojos packaged together constitute a plugin, and plugins are to be found for nearly every thing that comes to mind due to Maven's penetration and reach. 
+The POM files produced by <code>tools.deps</code> were bare bones and unusable as such, but if you tweaked them, and crucially, summoned the Clojure compiler, you could build jars and uberjars straight out the box. What else could you get for free? It turned out: a whole lot. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. To hook into that lifecycle, one writes mojos, a pun on pojos (Maven plain Old Java Object). One or several related mojos packaged together constitute a plugin, and plugins are to be found for nearly every thing that comes to mind due to Maven&rsquo;s penetration and reach. 
 </p>
 
 <p>
-My strategy was simple but effective: muster desired Maven plugins and coax them in a custom POM that could then be executed via Maven. I named the project <i>Meyvn</i>. The astute reader might note that so far my efforts seem to replicate those of Leiningen: yet another a Maven wrapper. I would concede him the point with the following caveat: Meyvn is a next-gen build tool. With that I mean any tool that incorporates the semantics of <code>deps.edn</code>. By providing an "official" way to resolve dependencies and populating the classpath, Cognitect's <code>tools.deps</code> drew a line in the sand. 
-No judgment is implied on preexisting tools beyond the observation that they wouldn't have been the same had <code>tools.deps</code> been around when they were written. 
+My strategy was simple but effective: muster desired Maven plugins and coax them in a custom POM that could then be executed via Maven. I named the project <i>Meyvn</i>. The astute reader might note that so far my efforts seem to replicate those of Leiningen: yet another a Maven wrapper. I would concede him the point with the following caveat: Meyvn is a next-gen build tool. With that I mean any tool that incorporates the semantics of <code>deps.edn</code>. By providing an &ldquo;official&rdquo; way to resolve dependencies and populating the classpath, Cognitect&rsquo;s <code>tools.deps</code> drew a line in the sand. 
+No judgment is implied on preexisting tools beyond the observation that they wouldn&rsquo;t have been the same had <code>tools.deps</code> been around when they were written. 
 </p>
 
 <p>
-The <i>checkouts</i> feature illustrates this point aptly. In Leiningen, you need to create a <a href="https://github.com/technomancy/leiningen/blob/83898c0f540345eaa5bc7770835a98c17cff9eb6/doc/TUTORIAL.md#checkout-dependencies">magic</a> directory and symbolic links to extraneous source trees. Boot's <i>checkouts</i> <a href="https://github.com/boot-clj/boot/wiki/Checkout-Dependencies">facility</a> involves a configuration option and a command invocation in the directory of the projects whose source you want to pull. Today, thanks to <code>tools.deps</code>, we have a way to indicate that dependencies are on disk via the <code>:local/root</code> key. When you launch a REPL with Meyvn, it will recognize local dependencies from that notation, track changes that happen in their source trees and reload the project as necessary. 
+The <i>checkouts</i> feature illustrates this point aptly. In Leiningen, you need to create a <a href="https://github.com/technomancy/leiningen/blob/83898c0f540345eaa5bc7770835a98c17cff9eb6/doc/TUTORIAL.md#checkout-dependencies">magic</a> directory and symbolic links to extraneous source trees. Boot&rsquo;s <i>checkouts</i> <a href="https://github.com/boot-clj/boot/wiki/Checkout-Dependencies">facility</a> involves a configuration option and a command invocation in the directory of the projects whose source you want to pull. Today, thanks to <code>tools.deps</code>, we have a way to indicate that dependencies are on disk via the <code>:local/root</code> key. When you launch a REPL with Meyvn, it will recognize local dependencies from that notation, track changes that happen in their source trees and reload the project as necessary. 
 </p>
 
 <p>
-Today, I have no use for Boot nor Leiningen anymore: Meyvn builds and deploys my artifacts. A template system inherited from Maven's archetypes enables kick-starting projects with all the bits and pieces connected. Meyvn has a good story for the web. Specialized mojos implement an asset pipeline: Clojurescript compilation, CSS minification and image compression. The live coding facilities of Meyvn builds on top of Cider. I have already mentioned hot loading for out-of-tree source files, but the Meyvn and its Emacs <a href="https://github.com/danielsz/meyvn-el">client</a> has other features that you can check out. 
+Today, I have no use for Boot nor Leiningen anymore: Meyvn builds and deploys my artifacts. A template system inherited from Maven&rsquo;s archetypes enables kick-starting projects with all the bits and pieces connected. Meyvn has a good story for the web. Specialized mojos implement an asset pipeline: Clojurescript compilation, CSS minification and image compression. The live coding facilities of Meyvn builds on top of Cider. I have already mentioned hot loading for out-of-tree source files, but the Meyvn and its Emacs <a href="https://github.com/danielsz/meyvn-el">client</a> has other features that you can check out. 
 </p>
 
 <p>
-It is only natural that the release of <code>tools.deps</code> heralded a <a href="https://github.com/clojure/tools.deps.alpha/wiki/Tools">new age</a> of Clojure tooling. That is the effect of introducing richer semantics. As hinted by Alex Miller, <code>tools.build</code> is coming, and while we don't have the details just yet, I'd venture to say that it will further leverage the foundation laid by <code>tools.deps</code>. But it's a level playing field, and practitioners can and should do what artisans have always done: build their own tools. 
+It is only natural that the release of <code>tools.deps</code> heralded a <a href="https://github.com/clojure/tools.deps.alpha/wiki/Tools">new age</a> of Clojure tooling. That is the effect of introducing richer semantics. As hinted by Alex Miller, <code>tools.build</code> is coming, and while we don&rsquo;t have the details just yet, I&rsquo;d venture to say that it will further leverage the foundation laid by <code>tools.deps</code>. But it&rsquo;s a level playing field, and practitioners can and should do what artisans have always done: build their own tools. 
 </p>
 
 <p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-09 Mon 12:02 -->
+<!-- 2020-03-09 Mon 12:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The plot against Leiningen</title>
@@ -254,19 +254,19 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">The plot against Leiningen</h1>
 </header><p>
-tl:dr It's 2010 and it's <code>mvn install</code>, not <code>lein install</code>
-</p>
-
-<p>
 When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We'd be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is and has been lurking in the dark all along. Consider the fact that Leiningen, as its name indicates, emerged as a Maven wrapper. The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
 </p>
 
 <p>
-Clojars is set up as a Maven repository serving dependencies in the language of Maven coordinates. `Pomegranate`, the library used by `Boot`, bills itself as the "sane Clojure API for the Maven resolver". <code>tools.deps</code>, introduced two years ago by Cognitect, does its own thing with dependency resolution <b>via</b> the Maven APIs. Start digging underneath any piece of Clojure tooling and you'll soon arrive at Maven.
+tl;dr It's 2010 and it's <code>mvn install</code>, not <code>lein install</code>
 </p>
 
 <p>
-So what is Maven and why is it inescapable? Notably, it advertises itself as project management software, setting itself a scope larger than mere build automation. The notion of a project is taken in its broadest sense, one that includes documentation, version control, reporting, tests, etc. The *P*roject *O*bject *M*odel, or POM in short, codifies a project along all those axes and dimensions. I believe this openendedness is what made Maven such a resilient piece of infrastructure. 
+Clojars is set up as a Maven repository serving dependencies in the language of Maven coordinates. <code>Pomegranate</code>, the library used by Boot, bills itself as the "sane Clojure API for the Maven resolver". <code>tools.deps</code>, introduced two years ago by Cognitect, does its own thing with dependency resolution <i>via</i> the Maven APIs. Start digging underneath any piece of Clojure tooling and you'll soon arrive at Maven.
+</p>
+
+<p>
+So what is Maven and why is it inescapable? Notably, it advertises itself as project management software, setting itself a scope larger than mere build automation. The notion of a project is taken in its broadest sense, one that includes documentation, version control, reporting, tests, etc. The Project Object Model, or <b>POM</b> in short, codifies a project along all those axes and dimensions. I believe this openendedness is what made Maven such a resilient piece of infrastructure. 
 </p>
 
 <p>

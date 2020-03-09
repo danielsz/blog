@@ -4,7 +4,7 @@
 <!-- 2020-03-09 Mon 12:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Perfumed nightmare</title>
+<title>The plot against Leiningen</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Daniel Szmulewicz">
 <style type="text/css">
@@ -192,21 +192,12 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/grid.css">
+<link rel="stylesheet" type="text/css" href="css/post.css">
 <link rel="stylesheet" type="text/css" href="assets/fonts/charter/webfonts/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="css/typography.css">
-<link rel="stylesheet" type="text/css" href="css/sitemap.css">
 <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Roboto+Condensed|Source+Serif+Pro|Inconsolata" rel="stylesheet">
 <script src="js/grid.js"></script>
-<script src="js/sitemap.js"></script>
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@danielszmu" />
-<meta name="twitter:creator" content="@danielszmu" />
-<meta property="og:url" content="https://danielsz.github.io/blog/" />
-<meta property="og:title" content="Perfumed Nightmare" />
-<meta property="og:description" content="A blog for somnambulisps" />
-<meta property="og:image" content="https://danielsz.github.io/blog/images/perfumed_nightmare.jpg" />
-<meta property="og:site_name" content="Perfumed Nightmare"/>
-<meta property="og:type" content="blog"/>
+<script src="js/analytics.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -255,26 +246,61 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
 <header>
-<h1 class="title">Perfumed nightmare</h1>
-<p class="subtitle">A blog for the somnambulisp</p>
-</header><ul class="org-ul">
-<li><a href="2017-12-04T11_17.html">Finding files</a></li>
-<li><a href="2017-12-04T23_53.html">Forrest Gump and the Kibbutz</a></li>
-<li><a href="2017-12-05T20_22.html">From coworking to coshoring</a></li>
-<li><a href="deft-49.html">Ghosts in the machine</a></li>
-<li><a href="deft-4.html">How is printing to the console a side effect</a></li>
-<li><a href="blog_on_lisp.html">In the mood for Lisp</a></li>
-<li><a href="deft-20.html">Lisp's nested syntax</a></li>
-<li><a href="deft-21.html">Live coding, take 5</a></li>
-<li><a href="2017-12-04T12_20.html">Modernism and the Web</a></li>
-<li><a href="deft-37.html">Om, no DOM</a></li>
-<li><a href="2019-05-08T18_40.html">Ring's idionsyncrasies</a></li>
-<li><a href="2020-02-08T21_52.html">The plot against Leiningen</a></li>
-<li><a href="2019-08-05T21_14.html">The talk that wasn't</a></li>
-<li><a href="2017-07-31T16_31.html">Timed Idempotency</a></li>
-</ul>
+<h1 class="title">The plot against Leiningen</h1>
+</header><p>
+tl:dr It's 2010 and it's <code>mvn install</code>, not <code>lein install</code>
+</p>
+
+<p>
+When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We'd be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is and has been lurking in the dark all along. Consider the fact that Leiningen, as its name indicates, emerged as a Maven wrapper. The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
+</p>
+
+<p>
+Clojars is set up as a Maven repository serving dependencies in the language of Maven coordinates. `Pomegranate`, the library used by `Boot`, bills itself as the "sane Clojure API for the Maven resolver". <code>tools.deps</code>, introduced two years ago by Cognitect, does its own thing with dependency resolution <b>via</b> the Maven APIs. Start digging underneath any piece of Clojure tooling and you'll soon arrive at Maven.
+</p>
+
+<p>
+So what is Maven and why is it inescapable? Notably, it advertises itself as project management software, setting itself a scope larger than mere build automation. The notion of a project is taken in its broadest sense, one that includes documentation, version control, reporting, tests, etc. The *P*roject *O*bject *M*odel, or POM in short, codifies a project along all those axes and dimensions. I believe this openendedness is what made Maven such a resilient piece of infrastructure. 
+</p>
+
+<p>
+The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the Clojure Maven plugin. Leiningen saw the light seven months <b>later</b>. While the latter became the tool of choice in the Clojure community, the Clojure Maven plugin continued to exist in its own timeline. The question imposes itself, what if it were the opposite? What if, circa 2010, Clojure projects were built with <code>mvn install</code> and not <code>lein install</code>? 
+</p>
+
+<p>
+I think I know how to answer this question because, strangely enough, that alternate history became my reality. Around two years ago, I discovered the ability of <code>tools.deps</code> to generate POM files from a <code>deps.edn</code>. <code>tools.deps</code> was still new but it had already spurred a reconfiguration of practices. Some were happy to ditch the all-in-one build tools of yore in favor of a tailored user-level <code>deps.edn</code>, striving to replace piecemeal the lost functionality. Others were sticking to the traditions, seeing no reason to upset workflows with a proven track record. Initially, I was seduced by carefully assembling specialized tools invoked on the command line, but soon I was at work on something that grew to be an overarching build tool on its own. 
+</p>
+
+<p>
+The POM files produced by <code>tools.deps</code> were bare bones and unusable as such, but if you tweaked them, and crucially, summoned the Clojure compiler, you could build jars and uberjars straight out the box. What else could you get for free? It turned out: a whole lot. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. To hook into that lifecycle, one writes mojos, a pun on pojos (*M*aven plain *O*ld *J*ava *O*bject). One or several related mojos packaged together constitute a plugin, and plugins are to be found for nearly every thing that comes to mind due to Maven's penetration and reach. 
+</p>
+
+<p>
+My strategy was simple but effective: muster desired Maven plugins and coax them in a custom POM that could then be executed via Maven. I named the project <i>Meyvn</i>. The astute reader might note that so far my efforts seem to replicate those of Leiningen: yet another a Maven wrapper. I would concede him the point with the following caveat: Meyvn is a next-gen build tool. With that I mean any tool that incorporates the semantics of <code>deps.edn</code>. By providing an "official" way to resolve dependencies and populating the classpath, Cognitect's <code>tools.deps</code> drew a line in the sand. 
+No judgment is implied on preexisting tools beyond the observation that they wouldn't have been the same had <code>tools.deps</code> been around when they were written. 
+</p>
+
+<p>
+The <i>checkouts</i> feature illustrates this point aptly. In Leiningen, you need to create a <a href="https://github.com/technomancy/leiningen/blob/83898c0f540345eaa5bc7770835a98c17cff9eb6/doc/TUTORIAL.md#checkout-dependencies">magic</a> directory and symbolic links to extraneous source trees. Boot's <i>checkouts</i> <a href="https://github.com/boot-clj/boot/wiki/Checkout-Dependencies">facility</a> involves a configuration option and a command invocation in the directory of the projects whose source you want to pull. Today, thanks to <code>tools.deps</code>, we have a way to indicate that dependencies are on disk via the <code>:local/root</code> key. When you launch a REPL with Meyvn, it will recognize local dependencies from that notation, track changes that happen in their source trees and reload the project as necessary. 
+</p>
+
+<p>
+Today, I have no use for Boot nor Leiningen anymore: Meyvn builds and deploys my artifacts. A template system inherited from Maven's archetypes enables kick-starting projects with all the bits and pieces connected. Meyvn has a good story for the web. Specialized mojos implement an asset pipeline: Clojurescript compilation, CSS minification and image compression. The live coding facilities of Meyvn builds on top of Cider. I have already mentioned hot loading for out-of-tree source files, but the Meyvn and its Emacs <a href="https://github.com/danielsz/meyvn-el">client</a> has other features that you can check out. 
+</p>
+
+<p>
+It is only natural that the release of <code>tools.deps</code> heralded a <a href="https://github.com/clojure/tools.deps.alpha/wiki/Tools">new age</a> of Clojure tooling. That is the effect of introducing richer semantics. As hinted by Alex Miller, <code>tools.build</code> is coming, and while we don't have the details just yet, I'd venture to say that it will further leverage the foundation laid by <code>tools.deps</code>. But it's a level playing field, and practitioners can and should do what artisans have always done: build their own tools. 
+</p>
+
+<p>
+Meyvn is the vehicle through which I am delivering commercial services. As the EULA goes, Meyvn is licensed, not sold. The commercial license bestows on companies the right to host and distribute private software on infrastructure accessible via Meyvn. A non-commercial license is available on request free of charge.
+</p>
 </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-25 Wed 06:46 -->
+<!-- 2020-03-25 Wed 06:47 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Meyvn or next-gen Clojure tooling</title>
@@ -254,7 +254,7 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">Meyvn or next-gen Clojure tooling</h1>
 </header><p>
-Let&rsquo;s talk about Maven 
+<b>Let&rsquo;s talk about Maven</b>
 </p>
 
 <p>
@@ -269,9 +269,10 @@ So what is Maven and why is it inescapable? Notably, it advertises itself as pro
 The Project Object Model, or <b>POM</b> in short, codifies a project along all those axes and dimensions. The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the Clojure Maven plugin. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the Clojure Maven plugin continued to exist in its own timeline. What if Clojure projects were being built with <code>mvn install</code> and not <code>lein install</code>? 
 </p>
 
-<div id="outline-container-org7b8284f" class="outline-2">
-<h2 id="org7b8284f">Let&rsquo;s talk about Meyvn</h2>
-<div class="outline-text-2" id="text-org7b8284f">
+<p>
+<b>Let&rsquo;s talk about Meyvn</b>
+</p>
+
 <p>
 Strangely enough, that alternate history became my reality. Around two years ago, I discovered that <code>tools.deps</code> could generate POM files from a <code>deps.edn</code>. <code>tools.deps</code> was still new but it had already spurred a reconfiguration of practices. Some were happy to ditch the all-in-one build tools of yore in favor of a tailored user-level <code>deps.edn</code>, striving to replace piecemeal the lost functionality. Others were sticking to the traditions, seeing no reason to upset workflows with a proven track record. Initially, I was seduced by carefully assembling specialized tools invoked on the command line, but soon I was at work on something that became an overarching build tool of its own. 
 </p>
@@ -313,8 +314,6 @@ That is the effect of introducing richer semantics.
 Clojars is set up as a Maven repository serving dependencies in the language of Maven coordinates. <code>Pomegranate</code>, the library used by Boot, bills itself as the &ldquo;sane Clojure API for the Maven resolver&rdquo;. <code>tools.deps</code>, introduced two years ago by Cognitect, does its own thing with dependency resolution <i>via</i> the Maven APIs. Start digging underneath any piece of Clojure tooling and you&rsquo;ll soon arrive at Maven.
 The question imposes itself, what if it were the opposite? 
 </p>
-</div>
-</div>
 </div>
 </body>
 </html>

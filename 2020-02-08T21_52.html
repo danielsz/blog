@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-25 Wed 07:11 -->
+<!-- 2020-03-25 Wed 08:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Next-gen Clojure tooling</title>
@@ -254,23 +254,15 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">Next-gen Clojure tooling</h1>
 </header><p>
-<b>Let&rsquo;s talk about Maven</b>
+When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven has been lurking in the dark all along. Consider the fact that Leiningen, as its name indicates, emerged as a Maven wrapper. The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
 </p>
 
 <p>
-When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is and has been lurking in the dark all along. Consider the fact that Leiningen, as its name indicates, emerged as a Maven wrapper. The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
-</p>
-
-<p>
-So what is Maven and why is it inescapable? Notably, it advertises itself as project management software, eschewing the terminology of build automation. Indeed, it aims higher. The notion of project is taken in its broadest sense, one that includes documentation, version control, reporting, tests, etc. I believe this openendedness is what made Maven such a resilient piece of infrastructure. 
+So what is Maven and why is it inescapable? Notably, it advertises itself as project management software, eschewing the terminology of build automation. Indeed, it sets a broader scope. The notion of project is taken to mean, well, everything: documentation, version control, reporting, tests, etc. I believe this openendedness is what made Maven such a resilient piece of infrastructure. 
 </p>
 
 <p>
 The Project Object Model, or <b>POM</b> in short, codifies a project along all those axes and dimensions. The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the Clojure Maven plugin. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the Clojure Maven plugin continued to exist in its own timeline. What if Clojure projects were being built with <code>mvn install</code> and not <code>lein install</code>? 
-</p>
-
-<p>
-<b>Let&rsquo;s talk about Meyvn</b>
 </p>
 
 <p>
@@ -282,7 +274,7 @@ The POM files produced by <code>tools.deps</code> were bare bones and unusable a
 </p>
 
 <p>
-My strategy was simple but effective: muster desired Maven plugins and coax them in a custom POM that could then be executed via Maven. I named the project <i>Meyvn</i>. An astute reader might note that so far my efforts seemed to replicate those of Leiningen: yet another a Maven wrapper. I would concede them the point with the following caveat: Meyvn is a next-gen build tool. With that I mean any tool that incorporates the semantics of <code>deps.edn</code>. No judgment is implied on preexisting tools beyond the observation that they wouldn&rsquo;t have been the same had <code>tools.deps</code> been around when they were written. 
+My strategy was simple but effective: muster desired Maven plugins and coax them in a custom POM that could then be executed via Maven. I named the project <i>Meyvn</i>. An astute reader might note that so far my efforts seemed to replicate those of Leiningen: yet another a Maven wrapper. I would concede them the point with the following caveat: Meyvn is a next-gen build tool. With that I mean a tool that incorporates the semantics of <code>deps.edn</code>. 
 </p>
 
 <p>
@@ -290,29 +282,15 @@ The <i>checkouts</i> feature illustrates this point aptly. In Leiningen, you nee
 </p>
 
 <p>
-It is only natural that the release of <code>tools.deps</code> heralded a <a href="https://github.com/clojure/tools.deps.alpha/wiki/Tools">new age</a> of Clojure tooling. By providing an &ldquo;official&rdquo; way to resolve dependencies and populate the classpath, Cognitect&rsquo;s <code>tools.deps</code> drew a line in the sand. As <a href="https://insideclojure.org/2020/02/28/journal/">hinted</a> by Alex Miller, <code>tools.build</code> is coming, and while we don&rsquo;t have the details just yet, I&rsquo;d venture to say that it will further leverage the foundation laid by <code>tools.deps</code>. But it&rsquo;s a level playing field, and practitioners can and should do what artisans have always done: build their own tools. 
+It is only natural that the release of <code>tools.deps</code> heralded a <a href="https://github.com/clojure/tools.deps.alpha/wiki/Tools">new age</a> of Clojure tooling. By providing an &ldquo;official&rdquo; way to resolve dependencies and populate the classpath, Cognitect&rsquo;s <code>tools.deps</code> drew a line in the sand. As <a href="https://insideclojure.org/2020/02/28/journal/">hinted</a> by Alex Miller, <code>tools.build</code> is coming, and while we don&rsquo;t have the details just yet, I&rsquo;d venture to say that it will further leverage the foundation laid by <code>tools.deps</code>. 
 </p>
 
 <p>
-Today, Meyvn builds and deploys my artifacts. It is the vehicle through which I am delivering commercial services. As the EULA goes, Meyvn is licensed, not sold. A non-commercial license is available on request.
+Today, Meyvn builds and deploys my artifacts. It boosts a template system inherited from Maven&rsquo;s archetypes that enables kick-starting projects with all the bits and pieces connected. Meyvn has a good story for the web. Specialized mojos implement an asset pipeline: Clojurescript compilation, CSS minification and image compression. The live coding facilities of Meyvn builds on top of Cider. I have already mentioned hot loading for out-of-tree source files, but Meyvn and its Emacs <a href="https://github.com/danielsz/meyvn-el">client</a> has other features that you can check out. 
 </p>
 
 <p>
-I have no use for Boot nor Leiningen anymore. 
-</p>
-
-<p>
-A template system inherited from Maven&rsquo;s archetypes enables kick-starting projects with all the bits and pieces connected. Meyvn has a good story for the web. Specialized mojos implement an asset pipeline: Clojurescript compilation, CSS minification and image compression. The live coding facilities of Meyvn builds on top of Cider. I have already mentioned hot loading for out-of-tree source files, but Meyvn and its Emacs <a href="https://github.com/danielsz/meyvn-el">client</a> has other features that you can check out. 
-</p>
-
-<p>
-That is the effect of introducing richer semantics.
-<b>Note:</b> <a href="https://meyvn.org/">Meyvn</a> The commercial license bestows on companies the right to host and distribute private software on infrastructure accessible via Meyvn. 
-</p>
-
-<p>
-Clojars is set up as a Maven repository serving dependencies in the language of Maven coordinates. <code>Pomegranate</code>, the library used by Boot, bills itself as the &ldquo;sane Clojure API for the Maven resolver&rdquo;. <code>tools.deps</code>, introduced two years ago by Cognitect, does its own thing with dependency resolution <i>via</i> the Maven APIs. Start digging underneath any piece of Clojure tooling and you&rsquo;ll soon arrive at Maven.
-The question imposes itself, what if it were the opposite? 
+<a href="https://meyvn.org">Meyvn</a> is the vehicle through which I am delivering commercial services. As the EULA goes, Meyvn is licensed, not sold. A non-commercial license is available on request.
 </p>
 </div>
 </body>

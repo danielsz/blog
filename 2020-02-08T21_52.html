@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-25 Wed 06:45 -->
+<!-- 2020-03-25 Wed 06:46 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Meyvn or next-gen Clojure tooling</title>
@@ -253,10 +253,10 @@ for the JavaScript code in this tag.
 </div><div id="content">
 <header>
 <h1 class="title">Meyvn or next-gen Clojure tooling</h1>
-</header>
-<div id="outline-container-org4cde713" class="outline-4">
-<h4 id="org4cde713">Let&rsquo;s talk about Maven</h4>
-<div class="outline-text-4" id="text-org4cde713">
+</header><p>
+Let&rsquo;s talk about Maven 
+</p>
+
 <p>
 When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is and has been lurking in the dark all along. Consider the fact that Leiningen, as its name indicates, emerged as a Maven wrapper. The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
 </p>
@@ -268,8 +268,6 @@ So what is Maven and why is it inescapable? Notably, it advertises itself as pro
 <p>
 The Project Object Model, or <b>POM</b> in short, codifies a project along all those axes and dimensions. The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the Clojure Maven plugin. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the Clojure Maven plugin continued to exist in its own timeline. What if Clojure projects were being built with <code>mvn install</code> and not <code>lein install</code>? 
 </p>
-</div>
-</div>
 
 <div id="outline-container-org7b8284f" class="outline-2">
 <h2 id="org7b8284f">Let&rsquo;s talk about Meyvn</h2>

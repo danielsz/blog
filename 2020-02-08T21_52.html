@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-26 Thu 15:41 -->
+<!-- 2020-03-26 Thu 15:44 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Next-gen Clojure tooling</title>
@@ -270,11 +270,7 @@ The Project Object Model, or <b>POM</b> in short, codifies a project along all i
 </p>
 
 <p>
-What if Clojure projects were being built with <code>mvn install</code> and not <code>lein install</code>? Strangely enough, that alternate history became my reality. Around two years ago, I discovered that <code>tools.deps</code> could generate POM files from a <code>deps.edn</code>. <code>tools.deps</code> was still new but it had already spurred a reconfiguration of practices. Some were happy to ditch the all-in-one build tools of yore in favor of a tailored user-level <code>deps.edn</code>, striving to replace piecemeal the lost functionality. Others were sticking to the traditions, seeing no reason to upset workflows with a proven track record. Initially, I was seduced by carefully assembling specialized tools invoked on the command line, but soon I was at work on something that became an overarching build tool of its own. 
-</p>
-
-<p>
-The POM files produced by <code>tools.deps</code> were bare bones and unusable as such, but if you tweaked them, and crucially, summoned the Clojure compiler at the right phase, you could build jars and uberjars straight out the box. What else could you get for free? It turned out: a whole lot. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. To hook into that lifecycle, one writes mojos, a pun on pojos (Maven plain Old Java Object). One or several related mojos packaged together constitute a plugin, and plugins are to be found for nearly every thing that comes to mind due to Maven&rsquo;s penetration and reach. 
+What if Clojure projects were being built with <code>mvn install</code> and not <code>lein install</code>? Strangely enough, that alternate history became my reality. I  had discovered that <code>tools.deps</code> could generate POM files from a <code>deps.edn</code>. Oh, they were bare bones and unusable as such, but if you tweaked them, and crucially, summoned the Clojure compiler at the right phase, you could build jars and uberjars straight out the box. What else could you get for free? It turned out: a whole lot. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. To hook into that lifecycle, one writes mojos, a pun on pojos (Maven plain Old Java Object). One or several related mojos packaged together constitute a plugin, and plugins are to be found for nearly every thing that comes to mind due to Maven&rsquo;s penetration and reach. 
 </p>
 
 <p>

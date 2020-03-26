@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-26 Thu 15:44 -->
+<!-- 2020-03-26 Thu 17:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Next-gen Clojure tooling</title>
@@ -258,11 +258,11 @@ When we we say that Clojure is hosted on the JVM, we often forget the corollary,
 </p>
 
 <p>
-<b>tl;dr</b> By introducing richer semantics, <code>tools.deps</code> is enabling a new generation of Clojure tooling.
+<b>tl;dr</b> By introducing richer semantics when talking about dependencies, <code>tools.deps</code> is enabling a new generation of Clojure tooling.
 </p>
 
 <p>
-So what is Maven and why is it inescapable? Notably, it advertises itself as project management software, eschewing the terminology of build automation. Indeed, it sets for itself a broader scope. The notion of project is taken to include things such as documentation, version control, reporting, tests, etc. I believe this <i>openendedness</i> is what made Maven such a resilient piece of infrastructure. 
+It&rsquo;s interesting to note that Maven advertises itself as project management software, eschewing the terminology of build automation. Indeed, it really hammers the point at every opportunity:  our scope is broad. The notion of project is taken to include things such as documentation, version control, reporting, tests, etc. Project comprehension is how Maven refers to this. This <i>openendedness</i> is likely to have contributed to Maven&rsquo;s dominant position in the ecosystem. 
 </p>
 
 <p>
@@ -270,7 +270,11 @@ The Project Object Model, or <b>POM</b> in short, codifies a project along all i
 </p>
 
 <p>
-What if Clojure projects were being built with <code>mvn install</code> and not <code>lein install</code>? Strangely enough, that alternate history became my reality. I  had discovered that <code>tools.deps</code> could generate POM files from a <code>deps.edn</code>. Oh, they were bare bones and unusable as such, but if you tweaked them, and crucially, summoned the Clojure compiler at the right phase, you could build jars and uberjars straight out the box. What else could you get for free? It turned out: a whole lot. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. To hook into that lifecycle, one writes mojos, a pun on pojos (Maven plain Old Java Object). One or several related mojos packaged together constitute a plugin, and plugins are to be found for nearly every thing that comes to mind due to Maven&rsquo;s penetration and reach. 
+What if Clojure projects were being built with <code>mvn install</code> and not <code>lein install</code>? Strangely enough, that alternate history became my reality. When <code>tools.deps</code> was released, I saw that it had the ability to generate POM files from a <code>deps.edn</code>. Oh, those were bare bones and unusable as such, but if you tweaked them, and crucially, summoned the Clojure compiler at the right phase, you could build jars and uberjars straight out the box. What else could you get for free? It turned out: a whole lot. 
+</p>
+
+<p>
+The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. To hook into that lifecycle, one writes mojos, a pun on pojos (Maven plain Old Java Object). One or several related mojos packaged together constitute a plugin, and plugins are to be found for nearly every thing that comes to mind due to Maven&rsquo;s penetration and reach. 
 </p>
 
 <p>
@@ -278,7 +282,7 @@ My strategy was simple but effective: muster desired Maven plugins and coax them
 </p>
 
 <p>
-The <i>checkouts</i> feature illustrates this point aptly. In Leiningen, you need to create a <a href="https://github.com/technomancy/leiningen/blob/83898c0f540345eaa5bc7770835a98c17cff9eb6/doc/TUTORIAL.md#checkout-dependencies">magic</a> directory and symbolic links to extraneous source trees. Boot&rsquo;s <i>checkouts</i> <a href="https://github.com/boot-clj/boot/wiki/Checkout-Dependencies">facility</a> involves a configuration option and a command invocation in the directory of the projects whose source you want to pull. Today, thanks to <code>tools.deps</code>, we have a way to indicate that dependencies are on disk via the <code>:local/root</code> key. When you launch a REPL with Meyvn, it will recognize local dependencies from that notation, track changes that happen in their source trees and reload the project as necessary. 
+The <i>checkouts</i> feature illustrates this point aptly. In Leiningen, you need to create a <a href="https://github.com/technomancy/leiningen/blob/83898c0f540345eaa5bc7770835a98c17cff9eb6/doc/TUTORIAL.md#checkout-dependencies">magic</a> directory and symbolic links to extraneous source trees. Boot&rsquo;s <i>checkouts</i> <a href="https://github.com/boot-clj/boot/wiki/Checkout-Dependencies">facility</a> involves a configuration option and a command invocation in the directory of the projects whose source you want to pull. Today, thanks to <code>tools.deps</code>, we have a way to indicate that dependencies are on disk via the <code>:local/root</code> key. When you launch a REPL with Meyvn, it will recognize local dependencies from that notation, track changes in the source trees and reload the project as necessary. 
 </p>
 
 <p>

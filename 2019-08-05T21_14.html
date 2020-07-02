@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-03-25 Wed 07:34 -->
+<!-- 2020-07-03 Fri 00:03 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lisp &ne; Lambda Calculus</title>
@@ -296,7 +296,7 @@ The primitive recursive functions originated with the proof Gödel provided for 
 </p>
 
 <p>
-One can envision the title of McCarthy's paper as a one-liner that stands in for his theory. It seems to tell us: here is how to mechanically compute a set of partial functions that operate on symbolic expressions. Remember that McCarthy's goal was AI research. The <i>Advice Taker</i> was going to operate on sentences, not numbers, in order to infer facts from them. John McCarthy needed a system that could process formal languages, hence the symbolic expressions. And indeed, differentiation of algebraic expressions was among the first achievements of Lisp systems.
+One can envision the title of McCarthy's paper as a one-liner that stands in for his theory. It seems to tell us: here is how to mechanically compute a set of partial functions that operate on symbolic expressions. Remember that McCarthy's goal was AI research. The <i>Advice Taker</i> was going to operate on sentences, not numbers. In order to infer facts from them. John McCarthy needed a system that could process formal languages, hence <i>symbolic</i> expressions. And indeed, differentiation of algebraic expressions was among the first achievements of Lisp systems.
 </p>
 
 <p>
@@ -343,10 +343,10 @@ Ignoring for a moment stack considerations, factorial can be expressed in modern
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">factorial</span> <span style="color: #7388d6;">[</span>n<span style="color: #7388d6;">]</span>
-  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>&lt;= n 0<span style="color: #909183;">)</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">factorial</span> <span style="color: #80bcb6;">[</span>n<span style="color: #80bcb6;">]</span>
+  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">if</span> <span style="color: #c79af4;">(</span>&lt;= n 0<span style="color: #c79af4;">)</span>
       1
-      <span style="color: #909183;">(</span>* n <span style="color: #709870;">(</span>factorial <span style="color: #907373;">(</span>dec n<span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+      <span style="color: #c79af4;">(</span>* n <span style="color: #807f96;">(</span>factorial <span style="color: #91b9c7;">(</span>dec n<span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
 
@@ -405,7 +405,11 @@ Sure, it was a gimmick, but it seemed to work. There was some bemusement. People
 </p>
 
 <p>
-Thinking is not driven by answers but by questions. On the stage of <i>Heart of Clojure</i>, I wished I could dwell longer on some points pertaining to the philosophy of science. But in the front row someone was flashing cue cards. Two minutes left. Back in the days of McCarthy, computing was attracting scientists from different backgrounds. Mathematics, that we have already established, but also the cognitive sciences, linguistics, etc. The field was emerging, amorphous, malleable. The term <i>computer science</i> was coined in 1961, one year after McCarthy's Lisp paper. McCarthy, in turn, was paying close attention to the work done by Allen Newell, Herbert A. Simon and Cliff Shaw on <i>IPL</i>, where list processing originated. The three luminaries wrote an AI program before the term even existed: <i>Logic Theorist</i>, a program that proved theorems in Whitehead and Russell's <i>Principia Mathematica</i>. Yes, the same <i>Principia Mathematica</i> referenced by Gödel in his paper <i>Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I</i> and where our famous recursive functions come from.
+Thinking is not driven by answers but by questions. On the stage of <i>Heart of Clojure</i>, I wished I could dwell longer on some points pertaining to the philosophy of science. But in the front row someone was flashing cue cards. Two minutes left. 
+</p>
+
+<p>
+Back in the days of McCarthy, computing was attracting scientists from different backgrounds. Mathematics, that we have already established, but also the cognitive sciences, linguistics, etc. The field was emerging, amorphous, malleable. The term <i>computer science</i> was coined in 1961 (a year after McCarthy's Lisp paper). McCarthy was paying close attention to the work done by Allen Newell, Herbert A. Simon and Cliff Shaw on <i>IPL</i>, where list processing originated. The three luminaries wrote an AI program before the term even existed: <i>Logic Theorist</i>, a program that proved theorems in Whitehead and Russell's <i>Principia Mathematica</i>. Yes, the same <i>Principia Mathematica</i> referenced by Gödel in his paper <i>Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I</i> and where our famous recursive functions come from.
 </p>
 
 <p>

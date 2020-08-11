@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-08-11 Tue 20:16 -->
+<!-- 2020-08-11 Tue 20:17 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Timed Idempotency</title>
@@ -329,8 +329,8 @@ Consider the following snippet of code:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">doseq</span> <span style="color: #80bcb6;">[</span>user users<span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span>send-newsletter user<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">doseq</span> <span style="color: #7388d6;">[</span>user users<span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span>send-newsletter user<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -378,7 +378,7 @@ One way to do it is with a logbook. It looks like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">{</span><span style="color: #f5c791;">:logbook</span> <span style="color: #80bcb6;">[</span><span style="color: #c79af4;">{</span><span style="color: #f5c791;">:newsletter</span> timestamp<span style="color: #c79af4;">}</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">}</span>
+<pre class="src src-clojure"><span style="color: #707183;">{</span><span style="color: #008b8b;">:logbook</span> <span style="color: #7388d6;">[</span><span style="color: #909183;">{</span><span style="color: #008b8b;">:newsletter</span> timestamp<span style="color: #909183;">}</span><span style="color: #7388d6;">]</span><span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -387,9 +387,9 @@ Over time, we will send many newsletters, and our logbook will look like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">{</span><span style="color: #f5c791;">:logbook</span> <span style="color: #80bcb6;">[</span><span style="color: #c79af4;">{</span><span style="color: #f5c791;">:newsletter</span> timestamp<span style="color: #c79af4;">}</span>
-           <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:newsletter</span> timestamp<span style="color: #c79af4;">}</span>
-           <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:newsletter</span> timestamp<span style="color: #c79af4;">}</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">}</span>
+<pre class="src src-clojure"><span style="color: #707183;">{</span><span style="color: #008b8b;">:logbook</span> <span style="color: #7388d6;">[</span><span style="color: #909183;">{</span><span style="color: #008b8b;">:newsletter</span> timestamp<span style="color: #909183;">}</span>
+           <span style="color: #909183;">{</span><span style="color: #008b8b;">:newsletter</span> timestamp<span style="color: #909183;">}</span>
+           <span style="color: #909183;">{</span><span style="color: #008b8b;">:newsletter</span> timestamp<span style="color: #909183;">}</span><span style="color: #7388d6;">]</span><span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -398,16 +398,16 @@ A logbook is flexible because you can record all kinds of events that occured wi
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">{</span><span style="color: #f5c791;">:first-name</span> <span style="color: #65E6A7;">"Benjamin"</span>
- <span style="color: #f5c791;">:last-name</span> <span style="color: #65E6A7;">"Peirce"</span>
- <span style="color: #f5c791;">:occupation</span> <span style="color: #65E6A7;">"Mathematician"</span>
- <span style="color: #f5c791;">:email</span> <span style="color: #65E6A7;">"benjamin.peirce@harvard.edu"</span>
- <span style="color: #f5c791;">:logbook</span> <span style="color: #80bcb6;">[</span><span style="color: #c79af4;">{</span><span style="color: #f5c791;">:welcome-email</span> timestamp<span style="color: #c79af4;">}</span>
-           <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:subscription-reminder</span> timestamp<span style="color: #c79af4;">}</span>
-           <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:subscription-reminder</span> timestamp<span style="color: #c79af4;">}</span>
-           <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:newsletter</span> timestamp<span style="color: #c79af4;">}</span>
-           <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:newsletter</span> timestamp<span style="color: #c79af4;">}</span>
-           <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:newsletter</span> timestamp<span style="color: #c79af4;">}</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">}</span>
+<pre class="src src-clojure"><span style="color: #707183;">{</span><span style="color: #008b8b;">:first-name</span> <span style="color: #8b2252;">"Benjamin"</span>
+ <span style="color: #008b8b;">:last-name</span> <span style="color: #8b2252;">"Peirce"</span>
+ <span style="color: #008b8b;">:occupation</span> <span style="color: #8b2252;">"Mathematician"</span>
+ <span style="color: #008b8b;">:email</span> <span style="color: #8b2252;">"benjamin.peirce@harvard.edu"</span>
+ <span style="color: #008b8b;">:logbook</span> <span style="color: #7388d6;">[</span><span style="color: #909183;">{</span><span style="color: #008b8b;">:welcome-email</span> timestamp<span style="color: #909183;">}</span>
+           <span style="color: #909183;">{</span><span style="color: #008b8b;">:subscription-reminder</span> timestamp<span style="color: #909183;">}</span>
+           <span style="color: #909183;">{</span><span style="color: #008b8b;">:subscription-reminder</span> timestamp<span style="color: #909183;">}</span>
+           <span style="color: #909183;">{</span><span style="color: #008b8b;">:newsletter</span> timestamp<span style="color: #909183;">}</span>
+           <span style="color: #909183;">{</span><span style="color: #008b8b;">:newsletter</span> timestamp<span style="color: #909183;">}</span>
+           <span style="color: #909183;">{</span><span style="color: #008b8b;">:newsletter</span> timestamp<span style="color: #909183;">}</span><span style="color: #7388d6;">]</span><span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -420,9 +420,9 @@ We can now write:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">doseq</span> <span style="color: #80bcb6;">[</span>user users
-        <span style="color: #f5c791;">:when</span> <span style="color: #c79af4;">(</span>some #<span style="color: #807f96;">(</span>is-timestamp-outside-range? <span style="color: #eed891;">%</span><span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span>filter <span style="color: #f5c791;">:newsletter</span> <span style="color: #91b9c7;">(</span><span style="color: #f5c791;">:logbook</span> user<span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span>send-newsletter user<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">doseq</span> <span style="color: #7388d6;">[</span>user users
+        <span style="color: #008b8b;">:when</span> <span style="color: #909183;">(</span>some #<span style="color: #709870;">(</span>is-timestamp-outside-range? <span style="color: #a0522d;">%</span><span style="color: #709870;">)</span> <span style="color: #709870;">(</span>filter <span style="color: #008b8b;">:newsletter</span> <span style="color: #907373;">(</span><span style="color: #008b8b;">:logbook</span> user<span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span>send-newsletter user<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -435,9 +435,9 @@ On the other hand, our welcome email gets sent only once, so an idempotent <code
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">doseq</span> <span style="color: #80bcb6;">[</span>user users
-        <span style="color: #f5c791;">:when</span> <span style="color: #c79af4;">(</span>empty? <span style="color: #807f96;">(</span>filter <span style="color: #f5c791;">:welcome-email</span> <span style="color: #91b9c7;">(</span><span style="color: #f5c791;">:logbook</span> user<span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span>send-welcome-email user<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">doseq</span> <span style="color: #7388d6;">[</span>user users
+        <span style="color: #008b8b;">:when</span> <span style="color: #909183;">(</span>empty? <span style="color: #709870;">(</span>filter <span style="color: #008b8b;">:welcome-email</span> <span style="color: #907373;">(</span><span style="color: #008b8b;">:logbook</span> user<span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span>send-welcome-email user<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -446,10 +446,10 @@ Let’s standardize our predicates and make them operate uniformly on one logboo
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">unique?</span> #<span style="color: #80bcb6;">(</span>some? <span style="color: #eed891;">%</span><span style="color: #80bcb6;">)</span>
-<span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">last-month?</span> #<span style="color: #c79af4;">(</span><span style="color: #6bd9db;">if-let</span> <span style="color: #807f96;">[</span>date <span style="color: #91b9c7;">(</span>first <span style="color: #687184;">(</span>vals <span style="color: #eed891;">%</span><span style="color: #687184;">)</span><span style="color: #91b9c7;">)</span><span style="color: #807f96;">]</span>
-                     <span style="color: #807f96;">(</span><span style="color: #ef6787;">time</span>/last-month? date<span style="color: #807f96;">)</span>
-                     <span style="color: #f5c791;">false</span><span style="color: #c79af4;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">unique?</span> #<span style="color: #7388d6;">(</span>some? <span style="color: #a0522d;">%</span><span style="color: #7388d6;">)</span>
+<span style="color: #7388d6;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">last-month?</span> #<span style="color: #909183;">(</span><span style="color: #a020f0;">if-let</span> <span style="color: #709870;">[</span>date <span style="color: #907373;">(</span>first <span style="color: #6276ba;">(</span>vals <span style="color: #a0522d;">%</span><span style="color: #6276ba;">)</span><span style="color: #907373;">)</span><span style="color: #709870;">]</span>
+                     <span style="color: #709870;">(</span><span style="color: #228b22;">time</span>/last-month? date<span style="color: #709870;">)</span>
+                     <span style="color: #008b8b;">false</span><span style="color: #909183;">)</span>
 </pre>
 </div>
 
@@ -458,12 +458,12 @@ This allows us to compose them neatly with logbook sequences.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>some unique? <span style="color: #80bcb6;">(</span>filter <span style="color: #f5c791;">:welcome-email</span> <span style="color: #c79af4;">(</span><span style="color: #f5c791;">:logbook</span> user<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>some unique? <span style="color: #7388d6;">(</span>filter <span style="color: #008b8b;">:welcome-email</span> <span style="color: #909183;">(</span><span style="color: #008b8b;">:logbook</span> user<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>some last-month? <span style="color: #80bcb6;">(</span>filter <span style="color: #f5c791;">:newsletter</span> <span style="color: #c79af4;">(</span><span style="color: #f5c791;">:logbook</span> user<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>some last-month? <span style="color: #7388d6;">(</span>filter <span style="color: #008b8b;">:newsletter</span> <span style="color: #909183;">(</span><span style="color: #008b8b;">:logbook</span> user<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -472,9 +472,9 @@ We architecture our solution around events and predicates. In our example, the e
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">doseq</span> <span style="color: #80bcb6;">[</span>user users
-        <span style="color: #f5c791;">:when</span> <span style="color: #c79af4;">(</span>some last-month? <span style="color: #807f96;">(</span>filter <span style="color: #f5c791;">:newsletter</span> <span style="color: #91b9c7;">(</span><span style="color: #f5c791;">:logbook</span> user<span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span>send-newsletter user<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">doseq</span> <span style="color: #7388d6;">[</span>user users
+        <span style="color: #008b8b;">:when</span> <span style="color: #909183;">(</span>some last-month? <span style="color: #709870;">(</span>filter <span style="color: #008b8b;">:newsletter</span> <span style="color: #907373;">(</span><span style="color: #008b8b;">:logbook</span> user<span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span>send-newsletter user<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -483,11 +483,11 @@ Something is missing, isn’t it? If the newsletter is sent successfully, we nee
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">doseq</span> <span style="color: #80bcb6;">[</span>user users
-        <span style="color: #f5c791;">:when</span> <span style="color: #c79af4;">(</span>some last-month? <span style="color: #807f96;">(</span>filter <span style="color: #f5c791;">:newsletter</span> <span style="color: #91b9c7;">(</span><span style="color: #f5c791;">:logbook</span> user<span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #c79af4;">[</span>response <span style="color: #807f96;">(</span>send-newsletter user<span style="color: #807f96;">)</span><span style="color: #c79af4;">]</span>
-    <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">when</span> <span style="color: #807f96;">(</span>success? response<span style="color: #807f96;">)</span>
-      <span style="color: #807f96;">(</span>write-to-logbook user<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">doseq</span> <span style="color: #7388d6;">[</span>user users
+        <span style="color: #008b8b;">:when</span> <span style="color: #909183;">(</span>some last-month? <span style="color: #709870;">(</span>filter <span style="color: #008b8b;">:newsletter</span> <span style="color: #907373;">(</span><span style="color: #008b8b;">:logbook</span> user<span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">let</span> <span style="color: #909183;">[</span>response <span style="color: #709870;">(</span>send-newsletter user<span style="color: #709870;">)</span><span style="color: #909183;">]</span>
+    <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span>success? response<span style="color: #709870;">)</span>
+      <span style="color: #709870;">(</span>write-to-logbook user<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -500,11 +500,11 @@ problems. What our solution lacks is generality.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">doseq</span> <span style="color: #80bcb6;">[</span>user users
-        <span style="color: #f5c791;">:when</span> <span style="color: #c79af4;">(</span>some last-month? <span style="color: #807f96;">(</span>filter <span style="color: #f5c791;">:newsletter</span> <span style="color: #91b9c7;">(</span><span style="color: #f5c791;">:logbook</span> user<span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #c79af4;">[</span>response <span style="color: #807f96;">(</span>send-newsletter user<span style="color: #807f96;">)</span><span style="color: #c79af4;">]</span>
-    <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">when</span> <span style="color: #807f96;">(</span>success? response<span style="color: #807f96;">)</span>
-      <span style="color: #807f96;">(</span>write-to-logbook user<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">doseq</span> <span style="color: #7388d6;">[</span>user users
+        <span style="color: #008b8b;">:when</span> <span style="color: #909183;">(</span>some last-month? <span style="color: #709870;">(</span>filter <span style="color: #008b8b;">:newsletter</span> <span style="color: #907373;">(</span><span style="color: #008b8b;">:logbook</span> user<span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">let</span> <span style="color: #909183;">[</span>response <span style="color: #709870;">(</span>send-newsletter user<span style="color: #709870;">)</span><span style="color: #909183;">]</span>
+    <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span>success? response<span style="color: #709870;">)</span>
+      <span style="color: #709870;">(</span>write-to-logbook user<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -513,11 +513,11 @@ This ad-hoc snippet really boils down to:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">doseq</span> <span style="color: #80bcb6;">[</span>entity entities
-        <span style="color: #f5c791;">:when</span> <span style="color: #c79af4;">(</span>some pred logbook<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #c79af4;">[</span>response <span style="color: #807f96;">(</span>operation<span style="color: #807f96;">)</span><span style="color: #c79af4;">]</span>
-    <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">when</span> <span style="color: #807f96;">(</span>success? response<span style="color: #807f96;">)</span>
-      <span style="color: #807f96;">(</span>write logbook<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">doseq</span> <span style="color: #7388d6;">[</span>entity entities
+        <span style="color: #008b8b;">:when</span> <span style="color: #909183;">(</span>some pred logbook<span style="color: #909183;">)</span><span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">let</span> <span style="color: #909183;">[</span>response <span style="color: #709870;">(</span>operation<span style="color: #709870;">)</span><span style="color: #909183;">]</span>
+    <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span>success? response<span style="color: #709870;">)</span>
+      <span style="color: #709870;">(</span>write logbook<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -526,9 +526,9 @@ With proper design and the magic of macros, we can actually write the following:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">doseq</span> <span style="color: #80bcb6;">[</span>entity entities<span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span>with-logbook entity event
-    body<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">doseq</span> <span style="color: #7388d6;">[</span>entity entities<span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span>with-logbook entity event
+    body<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 

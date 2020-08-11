@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-08-11 Tue 20:16 -->
+<!-- 2020-08-11 Tue 20:18 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Live coding, take 5</title>
@@ -311,16 +311,16 @@ $ emacs src/fioritto/sketch.clj
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #6bd9db;">require</span> '<span style="color: #f5c791;">s</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">s</span>)
 
-(<span style="color: #6bd9db;">defun</span> <span style="color: #cea2ca;">imp-clj-html</span> (buffer)
-  (<span style="color: #6bd9db;">with-current-buffer</span> (get-buffer buffer)
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">imp-clj-html</span> (buffer)
+  (<span style="color: #a020f0;">with-current-buffer</span> (get-buffer buffer)
     (cider-eval-defun-at-point))
-  (<span style="color: #6bd9db;">let*</span> ((content (<span style="color: #6bd9db;">with-temp-buffer</span> 
-                    (cider-interactive-eval-print <span style="color: #65E6A7;">"(fioritto.sketch/page)"</span>)
+  (<span style="color: #a020f0;">let*</span> ((content (<span style="color: #a020f0;">with-temp-buffer</span> 
+                    (cider-interactive-eval-print <span style="color: #8b2252;">"(fioritto.sketch/page)"</span>)
                     (sleep-for 0.1)
                     (buffer-string)))
-         (sanitized-content (s-replace-all '((<span style="color: #65E6A7;">"\\n"</span> . <span style="color: #65E6A7;">""</span>) (<span style="color: #65E6A7;">"\\\""</span> . <span style="color: #65E6A7;">"'"</span>)) content)))
+         (sanitized-content (s-replace-all '((<span style="color: #8b2252;">"\\n"</span> . <span style="color: #8b2252;">""</span>) (<span style="color: #8b2252;">"\\\""</span> . <span style="color: #8b2252;">"'"</span>)) content)))
     (princ sanitized-content (current-buffer))
     )
   (delete-region (point-min) (+ (point-min) 1))

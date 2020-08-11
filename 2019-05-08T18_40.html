@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-08-11 Tue 20:16 -->
+<!-- 2020-08-11 Tue 20:18 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -282,10 +282,10 @@ Note: A handler is a <b>first-order</b> function, Ring middleware is <b>higher-o
 Requests are being processed by the handler, which in turn generates an appropriate response. 
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">handler</span> <span style="color: #80bcb6;">[</span>req<span style="color: #80bcb6;">]</span> 
- <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:status</span>  200
-  <span style="color: #f5c791;">:headers</span> <span style="color: #c79af4;">{</span><span style="color: #65E6A7;">"content-type"</span> <span style="color: #65E6A7;">"text/plain"</span><span style="color: #c79af4;">}</span>
-  <span style="color: #f5c791;">:body</span>    <span style="color: #65E6A7;">"Some text"</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">handler</span> <span style="color: #7388d6;">[</span>req<span style="color: #7388d6;">]</span> 
+ <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:status</span>  200
+  <span style="color: #008b8b;">:headers</span> <span style="color: #909183;">{</span><span style="color: #8b2252;">"content-type"</span> <span style="color: #8b2252;">"text/plain"</span><span style="color: #909183;">}</span>
+  <span style="color: #008b8b;">:body</span>    <span style="color: #8b2252;">"Some text"</span><span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -293,7 +293,7 @@ Requests are being processed by the handler, which in turn generates an appropri
 You can now typically write something like: 
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>run handler <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:port</span> 4040<span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span> 
+<pre class="src src-clojure"><span style="color: #707183;">(</span>run handler <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:port</span> 4040<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span> 
 </pre>
 </div>
 
@@ -302,7 +302,7 @@ Where <code>run</code> or <code>serve</code> is the entry point for a particular
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>serve handler <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:port</span> 4040<span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span> 
+<pre class="src src-clojure"><span style="color: #707183;">(</span>serve handler <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:port</span> 4040<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span> 
 </pre>
 </div>
 
@@ -311,7 +311,7 @@ These are the foundations of web application development in Clojure. There is no
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>handler <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/doc/10"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>handler <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -333,14 +333,14 @@ In <i>The Little Schemer</i> by Dan P. Friedman et al, a socratic dialogue leads
 Let’s define middleware that does nothing.
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">middleware</span> <span style="color: #80bcb6;">[</span>handler<span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">fn</span> <span style="color: #c79af4;">[</span>request<span style="color: #c79af4;">]</span>
-    <span style="color: #c79af4;">(</span>handler request<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">middleware</span> <span style="color: #7388d6;">[</span>handler<span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">fn</span> <span style="color: #909183;">[</span>request<span style="color: #909183;">]</span>
+    <span style="color: #909183;">(</span>handler request<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>middleware handler<span style="color: #80bcb6;">)</span>  <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/doc/10"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>middleware handler<span style="color: #7388d6;">)</span>  <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -354,19 +354,19 @@ No such namespace: mock
 Let's define some more middleware. You can chain them with impunity. 
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">wrap-noop1</span> <span style="color: #80bcb6;">[</span>handler<span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">fn</span> <span style="color: #c79af4;">[</span>request<span style="color: #c79af4;">]</span>
-    <span style="color: #c79af4;">(</span>handler request<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">wrap-noop1</span> <span style="color: #7388d6;">[</span>handler<span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">fn</span> <span style="color: #909183;">[</span>request<span style="color: #909183;">]</span>
+    <span style="color: #909183;">(</span>handler request<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">wrap-noop2</span> <span style="color: #80bcb6;">[</span>handler<span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">fn</span> <span style="color: #c79af4;">[</span>request<span style="color: #c79af4;">]</span>
-    <span style="color: #c79af4;">(</span>handler request<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">wrap-noop2</span> <span style="color: #7388d6;">[</span>handler<span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">fn</span> <span style="color: #909183;">[</span>request<span style="color: #909183;">]</span>
+    <span style="color: #909183;">(</span>handler request<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span><span style="color: #c79af4;">(</span>comp wrap-noop1 wrap-noop2<span style="color: #c79af4;">)</span> handler<span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/doc/10"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span><span style="color: #909183;">(</span>comp wrap-noop1 wrap-noop2<span style="color: #909183;">)</span> handler<span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -381,20 +381,20 @@ This handler returns the same response regardless of the request. Not very usefu
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">handler-with-routing</span> <span style="color: #80bcb6;">[</span>req<span style="color: #80bcb6;">]</span> 
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">if</span> <span style="color: #c79af4;">(</span>= <span style="color: #807f96;">(</span><span style="color: #f5c791;">:uri</span> req<span style="color: #807f96;">)</span> <span style="color: #65E6A7;">"/doc/10"</span><span style="color: #c79af4;">)</span>
-    <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:status</span>  200
-     <span style="color: #f5c791;">:headers</span> <span style="color: #807f96;">{</span><span style="color: #65E6A7;">"content-type"</span> <span style="color: #65E6A7;">"text/plain"</span><span style="color: #807f96;">}</span>
-     <span style="color: #f5c791;">:body</span>    <span style="color: #65E6A7;">"Some text"</span><span style="color: #c79af4;">}</span>
-    <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:status</span>  200
-     <span style="color: #f5c791;">:headers</span> <span style="color: #807f96;">{</span><span style="color: #65E6A7;">"content-type"</span> <span style="color: #65E6A7;">"text/plain"</span><span style="color: #807f96;">}</span>
-     <span style="color: #f5c791;">:body</span>    <span style="color: #65E6A7;">"404"</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">handler-with-routing</span> <span style="color: #7388d6;">[</span>req<span style="color: #7388d6;">]</span> 
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>= <span style="color: #709870;">(</span><span style="color: #008b8b;">:uri</span> req<span style="color: #709870;">)</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #909183;">)</span>
+    <span style="color: #909183;">{</span><span style="color: #008b8b;">:status</span>  200
+     <span style="color: #008b8b;">:headers</span> <span style="color: #709870;">{</span><span style="color: #8b2252;">"content-type"</span> <span style="color: #8b2252;">"text/plain"</span><span style="color: #709870;">}</span>
+     <span style="color: #008b8b;">:body</span>    <span style="color: #8b2252;">"Some text"</span><span style="color: #909183;">}</span>
+    <span style="color: #909183;">{</span><span style="color: #008b8b;">:status</span>  200
+     <span style="color: #008b8b;">:headers</span> <span style="color: #709870;">{</span><span style="color: #8b2252;">"content-type"</span> <span style="color: #8b2252;">"text/plain"</span><span style="color: #709870;">}</span>
+     <span style="color: #008b8b;">:body</span>    <span style="color: #8b2252;">"404"</span><span style="color: #909183;">}</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span><span style="color: #c79af4;">(</span>comp wrap-noop1 wrap-noop2<span style="color: #c79af4;">)</span> handler-with-routing<span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/doc/10"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span><span style="color: #909183;">(</span>comp wrap-noop1 wrap-noop2<span style="color: #909183;">)</span> handler-with-routing<span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -405,8 +405,8 @@ No such namespace: mock
 
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span><span style="color: #c79af4;">(</span>comp wrap-noop1 wrap-noop2<span style="color: #c79af4;">)</span> handler-with-routing<span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/doc/11"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span><span style="color: #909183;">(</span>comp wrap-noop1 wrap-noop2<span style="color: #909183;">)</span> handler-with-routing<span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/11"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -435,27 +435,27 @@ In Compojure, one combines handlers with the <code>routes</code> function. Build
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">in-ns</span> 'france<span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span><span style="color: #ef6787;">clojure.core</span>/refer 'clojure.core<span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">in-ns</span> 'france<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #228b22;">clojure.core</span>/refer 'clojure.core<span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">handler</span> <span style="color: #80bcb6;">[</span>req<span style="color: #80bcb6;">]</span> 
- <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:status</span>  200
-  <span style="color: #f5c791;">:headers</span> <span style="color: #c79af4;">{</span><span style="color: #65E6A7;">"content-type"</span> <span style="color: #65E6A7;">"text/plain"</span><span style="color: #c79af4;">}</span>
-  <span style="color: #f5c791;">:body</span>    <span style="color: #65E6A7;">"Bonsoir"</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">handler</span> <span style="color: #7388d6;">[</span>req<span style="color: #7388d6;">]</span> 
+ <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:status</span>  200
+  <span style="color: #008b8b;">:headers</span> <span style="color: #909183;">{</span><span style="color: #8b2252;">"content-type"</span> <span style="color: #8b2252;">"text/plain"</span><span style="color: #909183;">}</span>
+  <span style="color: #008b8b;">:body</span>    <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">in-ns</span> 'wales<span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span><span style="color: #ef6787;">clojure.core</span>/refer 'clojure.core<span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">in-ns</span> 'wales<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #228b22;">clojure.core</span>/refer 'clojure.core<span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">handler</span> <span style="color: #80bcb6;">[</span>req<span style="color: #80bcb6;">]</span> 
- <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:status</span>  200
-  <span style="color: #f5c791;">:headers</span> <span style="color: #c79af4;">{</span><span style="color: #65E6A7;">"content-type"</span> <span style="color: #65E6A7;">"text/plain"</span><span style="color: #c79af4;">}</span>
-  <span style="color: #f5c791;">:body</span>    <span style="color: #65E6A7;">"Noswaith dda"</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">handler</span> <span style="color: #7388d6;">[</span>req<span style="color: #7388d6;">]</span> 
+ <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:status</span>  200
+  <span style="color: #008b8b;">:headers</span> <span style="color: #909183;">{</span><span style="color: #8b2252;">"content-type"</span> <span style="color: #8b2252;">"text/plain"</span><span style="color: #909183;">}</span>
+  <span style="color: #008b8b;">:body</span>    <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>routes <span style="color: #ef6787;">france</span>/handler <span style="color: #ef6787;">wales</span>/handler<span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/doc/10"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes <span style="color: #228b22;">france</span>/handler <span style="color: #228b22;">wales</span>/handler<span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -470,8 +470,8 @@ Did you notice something? Our response was in French! Let’s try again, but wit
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>routes <span style="color: #ef6787;">wales</span>/handler <span style="color: #ef6787;">france</span>/handler<span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/doc/10"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes <span style="color: #228b22;">wales</span>/handler <span style="color: #228b22;">france</span>/handler<span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -494,17 +494,17 @@ Note: Under the hood, Compojure relies on a library called <code>clout</code> to
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>compojure.core <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>GET<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>require '<span style="color: #7388d6;">[</span>compojure.core <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>GET<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">def</span> <span style="color: #eed891;">app</span> <span style="color: #80bcb6;">(</span>routes <span style="color: #c79af4;">(</span>GET <span style="color: #65E6A7;">"/french"</span> <span style="color: #807f96;">[]</span>
-                   <span style="color: #65E6A7;">"Bonsoir"</span><span style="color: #c79af4;">)</span>
-                 <span style="color: #c79af4;">(</span>GET <span style="color: #65E6A7;">"/welsh"</span> <span style="color: #807f96;">[]</span>
-                   <span style="color: #65E6A7;">"Noswaith dda"</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">app</span> <span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span>
+                   <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">)</span>
+                 <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[]</span>
+                   <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>app <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/french"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>app <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/french"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -515,7 +515,7 @@ No such namespace: mock
 
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>app <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/welsh"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>app <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/welsh"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -534,12 +534,12 @@ Typically, you would pass a response map.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>routes
-  <span style="color: #c79af4;">(</span>GET <span style="color: #65E6A7;">"/french"</span> <span style="color: #807f96;">[]</span> <span style="color: #807f96;">{</span><span style="color: #f5c791;">:status</span>  200
-                     <span style="color: #f5c791;">:headers</span> <span style="color: #91b9c7;">{</span><span style="color: #65E6A7;">"content-type"</span> <span style="color: #65E6A7;">"text/plain"</span><span style="color: #91b9c7;">}</span>
-                     <span style="color: #f5c791;">:body</span>    <span style="color: #65E6A7;">"Bonsoir"</span><span style="color: #807f96;">}</span><span style="color: #c79af4;">)</span>
-  <span style="color: #c79af4;">(</span>GET <span style="color: #65E6A7;">"/welsh"</span> <span style="color: #807f96;">[]</span> <span style="color: #65E6A7;">"Noswaith dda"</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/french"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes
+  <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span> <span style="color: #709870;">{</span><span style="color: #008b8b;">:status</span>  200
+                     <span style="color: #008b8b;">:headers</span> <span style="color: #907373;">{</span><span style="color: #8b2252;">"content-type"</span> <span style="color: #8b2252;">"text/plain"</span><span style="color: #907373;">}</span>
+                     <span style="color: #008b8b;">:body</span>    <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #709870;">}</span><span style="color: #909183;">)</span>
+  <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[]</span> <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/french"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -558,7 +558,7 @@ Compojure routes are semantically the same as Ring handlers, with the exception 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>app <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/doc/10"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>app <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -573,19 +573,19 @@ At the risk of being pedantic, let’s prove that we can combine compiled routes
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">in-ns</span> 'france<span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>compojure.core <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>routes GET<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">in-ns</span> 'france<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>require '<span style="color: #7388d6;">[</span>compojure.core <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>routes GET<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">def</span> <span style="color: #eed891;">french-routes</span> <span style="color: #80bcb6;">(</span>routes
-                    <span style="color: #c79af4;">(</span>GET <span style="color: #65E6A7;">"/french"</span> <span style="color: #807f96;">[]</span>
-                      <span style="color: #65E6A7;">"Bonsoir"</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">french-routes</span> <span style="color: #7388d6;">(</span>routes
+                    <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[]</span>
+                      <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">in-ns</span> 'wales<span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>compojure.core <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>routes GET<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">in-ns</span> 'wales<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>require '<span style="color: #7388d6;">[</span>compojure.core <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>routes GET<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">def</span> <span style="color: #eed891;">welsh-routes</span> <span style="color: #80bcb6;">(</span>routes
-                   <span style="color: #c79af4;">(</span>GET <span style="color: #65E6A7;">"/welsh"</span> <span style="color: #807f96;">[]</span>
-                     <span style="color: #65E6A7;">"Noswaith dda"</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">welsh-routes</span> <span style="color: #7388d6;">(</span>routes
+                   <span style="color: #909183;">(</span>GET <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[]</span>
+                     <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -594,8 +594,8 @@ As before, we have a composable system:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>routes <span style="color: #ef6787;">wales</span>/welsh-routes <span style="color: #ef6787;">france</span>/french-routes<span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/french"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes <span style="color: #228b22;">wales</span>/welsh-routes <span style="color: #228b22;">france</span>/french-routes<span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/french"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -610,9 +610,9 @@ Look how we can freely compose middleware and handlers in this system.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>routes <span style="color: #c79af4;">(</span>wrap-noop1 <span style="color: #ef6787;">wales</span>/welsh-routes<span style="color: #c79af4;">)</span> 
-         <span style="color: #c79af4;">(</span>wrap-noop2 <span style="color: #ef6787;">france</span>/french-routes<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/french"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>wrap-noop1 <span style="color: #228b22;">wales</span>/welsh-routes<span style="color: #909183;">)</span> 
+         <span style="color: #909183;">(</span>wrap-noop2 <span style="color: #228b22;">france</span>/french-routes<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/french"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -627,16 +627,16 @@ Or even:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>middleware <span style="color: #c79af4;">(</span>routes
-              <span style="color: #807f96;">(</span>wrap-noop1 <span style="color: #ef6787;">wales</span>/welsh-routes<span style="color: #807f96;">)</span>
-              <span style="color: #807f96;">(</span>wrap-noop2 <span style="color: #ef6787;">france</span>/french-routes<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:get</span> <span style="color: #65E6A7;">"/french"</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>middleware <span style="color: #909183;">(</span>routes
+              <span style="color: #709870;">(</span>wrap-noop1 <span style="color: #228b22;">wales</span>/welsh-routes<span style="color: #709870;">)</span>
+              <span style="color: #709870;">(</span>wrap-noop2 <span style="color: #228b22;">france</span>/french-routes<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/french"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: middleware in this context
+class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:41).
+Unable to resolve symbol: routes in this context
 </pre>
 
 
@@ -652,7 +652,7 @@ Remember the standard keys? So far we have mentioned two: <code>:uri</code> and 
 Can you spot the InputStream in the generated request?
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:post</span> <span style="color: #65E6A7;">"/french"</span> <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:msg</span> <span style="color: #65E6A7;">"Bonsoir"</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:post</span> <span style="color: #8b2252;">"/french"</span> <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:msg</span> <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -671,14 +671,14 @@ Note: Middleware often add keys to the request map in addition to the standard k
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>compojure.core <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>POST<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span> 
-         '<span style="color: #80bcb6;">[</span>ring.middleware.params <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>wrap-params<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>require '<span style="color: #7388d6;">[</span>compojure.core <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>POST<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span> 
+         '<span style="color: #7388d6;">[</span>ring.middleware.params <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>wrap-params<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>wrap-params <span style="color: #c79af4;">(</span>POST <span style="color: #65E6A7;">"/french"</span> <span style="color: #807f96;">[</span>msg<span style="color: #807f96;">]</span> msg<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:post</span> <span style="color: #65E6A7;">"/french"</span> <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:msg</span> <span style="color: #65E6A7;">"Bonsoir"</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>wrap-params <span style="color: #909183;">(</span>POST <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[</span>msg<span style="color: #709870;">]</span> msg<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:post</span> <span style="color: #8b2252;">"/french"</span> <span style="color: #909183;">{</span><span style="color: #008b8b;">:msg</span> <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">}</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -699,16 +699,16 @@ Note: Actually, <code>wrap-params</code> adds three keys to the request:
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">in-ns</span> 'france<span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">in-ns</span> 'france<span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>compojure.core <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>routes POST<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span>require '<span style="color: #7388d6;">[</span>compojure.core <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>routes POST<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">def</span> <span style="color: #eed891;">french-routes</span> <span style="color: #80bcb6;">(</span>routes <span style="color: #c79af4;">(</span>POST <span style="color: #65E6A7;">"/french"</span> <span style="color: #807f96;">[</span>msg<span style="color: #807f96;">]</span> msg<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">french-routes</span> <span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>POST <span style="color: #8b2252;">"/french"</span> <span style="color: #709870;">[</span>msg<span style="color: #709870;">]</span> msg<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">in-ns</span> 'wales<span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>compojure.core <span style="color: #f5c791;">:refer</span> <span style="color: #c79af4;">[</span>routes POST<span style="color: #c79af4;">]</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">in-ns</span> 'wales<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>require '<span style="color: #7388d6;">[</span>compojure.core <span style="color: #008b8b;">:refer</span> <span style="color: #909183;">[</span>routes POST<span style="color: #909183;">]</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
 
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">def</span> <span style="color: #eed891;">welsh-routes</span> <span style="color: #80bcb6;">(</span>routes <span style="color: #c79af4;">(</span>POST <span style="color: #65E6A7;">"/welsh"</span> <span style="color: #807f96;">[</span>msg<span style="color: #807f96;">]</span> msg<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">def</span> <span style="color: #a0522d;">welsh-routes</span> <span style="color: #7388d6;">(</span>routes <span style="color: #909183;">(</span>POST <span style="color: #8b2252;">"/welsh"</span> <span style="color: #709870;">[</span>msg<span style="color: #709870;">]</span> msg<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -717,10 +717,10 @@ You might be tempted to write something like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>routes
-  <span style="color: #c79af4;">(</span>wrap-params <span style="color: #ef6787;">wales</span>/welsh-routes<span style="color: #c79af4;">)</span>
-  <span style="color: #c79af4;">(</span>wrap-params <span style="color: #ef6787;">france</span>/french-routes<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:post</span> <span style="color: #65E6A7;">"/welsh"</span> <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:msg</span> <span style="color: #65E6A7;">"Noswaith dda"</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes
+  <span style="color: #909183;">(</span>wrap-params <span style="color: #228b22;">wales</span>/welsh-routes<span style="color: #909183;">)</span>
+  <span style="color: #909183;">(</span>wrap-params <span style="color: #228b22;">france</span>/french-routes<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:post</span> <span style="color: #8b2252;">"/welsh"</span> <span style="color: #909183;">{</span><span style="color: #008b8b;">:msg</span> <span style="color: #8b2252;">"Noswaith dda"</span><span style="color: #909183;">}</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -731,10 +731,10 @@ Unable to resolve symbol: routes in this context
 
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>routes
-  <span style="color: #c79af4;">(</span>wrap-params <span style="color: #ef6787;">wales</span>/welsh-routes<span style="color: #c79af4;">)</span>
-  <span style="color: #c79af4;">(</span>wrap-params <span style="color: #ef6787;">france</span>/french-routes<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:post</span> <span style="color: #65E6A7;">"/french"</span> <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:msg</span> <span style="color: #65E6A7;">"Bonsoir"</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>routes
+  <span style="color: #909183;">(</span>wrap-params <span style="color: #228b22;">wales</span>/welsh-routes<span style="color: #909183;">)</span>
+  <span style="color: #909183;">(</span>wrap-params <span style="color: #228b22;">france</span>/french-routes<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:post</span> <span style="color: #8b2252;">"/french"</span> <span style="color: #909183;">{</span><span style="color: #008b8b;">:msg</span> <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">}</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -756,9 +756,9 @@ We can fix that if we shuffle things around a bit.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #80bcb6;">(</span>wrap-params
-  <span style="color: #c79af4;">(</span>routes <span style="color: #ef6787;">wales</span>/welsh-routes <span style="color: #ef6787;">france</span>/french-routes<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
- <span style="color: #80bcb6;">(</span><span style="color: #ef6787;">mock</span>/request <span style="color: #f5c791;">:post</span> <span style="color: #65E6A7;">"/french"</span> <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:msg</span> <span style="color: #65E6A7;">"Bonsoir"</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span>wrap-params
+  <span style="color: #909183;">(</span>routes <span style="color: #228b22;">wales</span>/welsh-routes <span style="color: #228b22;">france</span>/french-routes<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+ <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:post</span> <span style="color: #8b2252;">"/french"</span> <span style="color: #909183;">{</span><span style="color: #008b8b;">:msg</span> <span style="color: #8b2252;">"Bonsoir"</span><span style="color: #909183;">}</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 

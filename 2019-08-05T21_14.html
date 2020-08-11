@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-08-11 Tue 20:16 -->
+<!-- 2020-08-11 Tue 20:18 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lisp &ne; Lambda Calculus</title>
@@ -343,10 +343,10 @@ Ignoring for a moment stack considerations, factorial can be expressed in modern
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">factorial</span> <span style="color: #80bcb6;">[</span>n<span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">if</span> <span style="color: #c79af4;">(</span>&lt;= n 0<span style="color: #c79af4;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">factorial</span> <span style="color: #7388d6;">[</span>n<span style="color: #7388d6;">]</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>&lt;= n 0<span style="color: #909183;">)</span>
       1
-      <span style="color: #c79af4;">(</span>* n <span style="color: #807f96;">(</span>factorial <span style="color: #91b9c7;">(</span>dec n<span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+      <span style="color: #909183;">(</span>* n <span style="color: #709870;">(</span>factorial <span style="color: #907373;">(</span>dec n<span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 

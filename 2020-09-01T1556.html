@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 01:14 -->
+<!-- 2020-09-03 Thu 01:18 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -305,7 +305,7 @@ Separate from the Maven commands, Meyvn understands additional modes of operatio
 </p>
 
 <p>
-Meyvn is driven by a configuration file in the project directory, <code>meyvn.edn</code>. Upon invocation, Meyvn checks if a configuration file is present and if not prompts the user for its creation. The configuration map can be overwhelming at first, so it helps to understand its structure, which is simple and predictable. The top level <code>:packaging</code> key, for example, has two children, <code>:uberjar</code> and <code>:jar</code>. They themselves contain maps. All nested maps have an <code>:enabled</code> key which determines if it is active or ignored. So if one wants to create an uberjar, one will want to set <code>:enabled</code> to true under <code>:uberjar</code> and false under <code>:jar</code>. Let&rsquo;s take a look at another example. 
+Meyvn is driven by a configuration file in the project directory, <code>meyvn.edn</code>. Upon invocation, Meyvn checks if it is present and if not prompts the user for its creation. The configuration map can be overwhelming at first, so it helps to understand its structure, which is simple and predictable. The top level <code>:packaging</code> key, for example, has two children, <code>:uberjar</code> and <code>:jar</code>. They themselves contain maps. All nested maps have an <code>:enabled</code> key which determines if it is active or ignored. So if one wants to create an uberjar, one will want to set <code>:enabled</code> to true under <code>:uberjar</code> and false under <code>:jar</code>. Let&rsquo;s take a look at another example. 
 </p>
 
 <div class="org-src-container">
@@ -325,13 +325,12 @@ Meyvn is driven by a configuration file in the project directory, <code>meyvn.ed
 </div>
 
 <p>
-This instructs Meyvn to launch a Clojurescript pass in the build when creating the uberjar. The paths and dependencies are inferred from the local <code>deps.edn</code> file, under the <code>:cljs</code> key. Notice that the <code>:compiler-opts</code> use the terminology from the Clojurescript project verbatim. This one-to-one mapping of terms ensures that Meyvn doesn&rsquo;t force upon the user new concepts. This philosophy of cognitive restraint has been adopted throughout the project. 
+This instructs Meyvn to launch a Clojurescript pass in the build when creating the uberjar. The paths and dependencies are inferred from the local <code>deps.edn</code> file, under the <code>:cljs</code> key (hint provided by <code>:tools-deps-alias</code>). Notice that the <code>:compiler-opts</code> use the terminology from the Clojurescript project verbatim. This one-to-one mapping of terms ensures that Meyvn doesn&rsquo;t force upon the user new concepts. This philosophy of cognitive restraint has been adopted throughout the project. 
 </p>
 
 <p>
-If the user is not sure what kind of build will result from a particular configuration, they can type <code>myvn -a buildplan</code> or <code>myvn -a plan -g install</code> to get a tabular representation of the plugins that will be invoked during the various stages of the build lifecycle. They can also inspect the effective POM for the current build when typing <code>myvn -a pom</code>. What version of a dependency is being pulled? Type <code>myvn -a conflicts -a ring</code>. Meyvn offers many ways to approach the build, debug it and optimize it. 
+If the user is not sure what kind of build will result from a particular configuration, they can type <code>myvn -a buildplan</code> to get a tabular representation of the plugins that will be invoked during the various stages of the build lifecycle. They can also inspect the effective POM for the current build when typing <code>myvn -a pom</code>. What version of a dependency is being pulled? Type <code>myvn -a conflicts -a ring</code>. Meyvn offers many ways to approach the build, debug it and optimize it. 
 </p>
-
 
 <p>
 In the next part of the series, we are going to investigate the facilities offered by Meyvn&rsquo;s interactive environment. See you then!

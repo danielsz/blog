@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 00:42 -->
+<!-- 2020-09-03 Thu 00:59 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -254,7 +254,7 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">Understanding Meyvn, part I</h1>
 </header><p>
-This write-up is intended to help with the understanding of Meyvn, how it works, what decisions led its design and how its feature set is implemented. We should note that while we tend to call Leiningen and Boot build tools, they are actually more than that since we entrust them also with launching our interactive environment (REPL). From a tooling perspective the commonality is overbearing: resolving dependencies, assembling a classpath, launching effectful commands&#x2026; No wonder that those concerns often find themselves served in the same breath. However, these are orthogonal concerns from a user perspective, and this means that a discussion can be had separately about each line of operation. In this chapter we are going to focus on Meyvn the build tool, and later we&rsquo;ll turn to the interactive environment. By the end of this two parts series you should have a solid mental model of what Meyvn can do for you.
+This write-up is intended to help with the understanding of Meyvn: how it works, what decisions led its design, how its feature set is implemented. We should note that while we tend to call Leiningen and Boot build tools, they are actually more than that since we entrust them also with launching our interactive environment (REPL). From a tooling perspective the commonality is overbearing: resolving dependencies, assembling a classpath, launching effectful commands&#x2026; No wonder that those concerns often find themselves served in the same breath. However, these are orthogonal concerns from a user perspective, and this means that a discussion can be had separately about each line of operation. In this chapter we are going to focus on Meyvn the build tool, and later we&rsquo;ll turn to the interactive environment. By the end of this two parts series you should have a solid mental model of what Meyvn can do for you.
 </p>
 
 <p>

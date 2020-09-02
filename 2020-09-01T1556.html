@@ -305,7 +305,7 @@ Separate from the Maven commands, Meyvn understands additional modes of operatio
 </p>
 
 <p>
-Meyvn is driven by a configuration file in the project direcorty, <code>meyvn.edn</code>. Upon invocation, Meyvn checks if a configuration file is present and if not prompts the user for its creation. The configuration map can be overwhelming at first, so it helps to understand its structure, which is simple and predictable. The top level <code>:packaging</code> key, for example, has two children, <code>:uberjar</code> and <code>:jar</code>. They themselves contain maps. All nested maps have an <code>:enabled</code> key which determines if it is active or ignored. So if one wants to create an uberjar, one will want to set <code>:enabled</code> to true under <code>:uberjar</code> and false under <code>:jar</code>. Let&rsquo;s take a look at another example. 
+Meyvn is driven by a configuration file in the project directory, <code>meyvn.edn</code>. Upon invocation, Meyvn checks if a configuration file is present and if not prompts the user for its creation. The configuration map can be overwhelming at first, so it helps to understand its structure, which is simple and predictable. The top level <code>:packaging</code> key, for example, has two children, <code>:uberjar</code> and <code>:jar</code>. They themselves contain maps. All nested maps have an <code>:enabled</code> key which determines if it is active or ignored. So if one wants to create an uberjar, one will want to set <code>:enabled</code> to true under <code>:uberjar</code> and false under <code>:jar</code>. Let&rsquo;s take a look at another example. 
 </p>
 
 <div class="org-src-container">

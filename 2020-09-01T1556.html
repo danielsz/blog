@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 01:11 -->
+<!-- 2020-09-03 Thu 01:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -301,11 +301,11 @@ The Project Object Model, or <b>POM</b> in short, codifies a project along its a
 </blockquote>
 
 <p>
-Separate from the Maven commands, Meyvn understands additional modes of operation. The scope of Meyvn operations are arranged under three flags, <code>-a</code>, <code>-x</code> and <code>-t</code>. The <code>-t</code> flag is easy: create a project based on a template. Meyvn stores Maven archetypes in the cloud, custom-made for the companies and users that have adopted it. Type <code>-t</code> with no arguments to show available templates. You&rsquo;ll notice a <code>Hello, World</code> starter project and one for web development. The <code>-x</code> flag is for auxiliary commands. Meyvn can launch Figwheel, compile Clojurescript, manage system properties (environment variables), etc. More on that later. The <code>-a</code> flag is for aliases. Predefined aliases exist to start a nREPL, analyze the classpath or show updates for your dependencies. It is an open system: you add aliases of your own in <code>~/.clojure/meyvn.edn</code>.
+Separate from the Maven commands, Meyvn understands additional modes of operation. The scope of Meyvn operations are arranged under three flags, <code>-a</code>, <code>-x</code> and <code>-t</code>. The <code>-t</code> flag is easy: create a project based on a template. Meyvn stores Maven archetypes in the cloud, custom-made for the companies and users that have adopted it. Type <code>-t</code> with no arguments to show available templates. You&rsquo;ll notice a <code>Hello, World</code> starter project and one for web development. The <code>-x</code> flag is for auxiliary commands. Meyvn can launch Figwheel, compile Clojurescript, manage system properties (environment variables), etc. More on that later. The <code>-a</code> flag is for aliases. Predefined aliases exist to start a nREPL, analyze the classpath or show updates for your dependencies. It is an open system: you add aliases of your own in the global <code>~/.clojure/meyvn.edn</code>.
 </p>
 
 <p>
-Meyvn is driven by a configuration file, <code>meyvn.edn</code>. Upon invocation, Meyvn checks if a configuration file is present and if not prompts the user for its creation. The configuration map can be overwhelming at first, so it helps to understand its structure, which is simple and predictable. The top level <code>:packaging</code> key, for example, has two children, <code>:uberjar</code> and <code>:jar</code>. They themselves contain maps. All nested maps have an <code>:enabled</code> key which determines if it is active or ignored. So if one wants to create an uberjar, one will want to set <code>:enabled</code> to true under <code>:uberjar</code> and false under <code>:jar</code>. Let&rsquo;s take a look at another example. 
+Meyvn is driven by a configuration file in the project direcorty, <code>meyvn.edn</code>. Upon invocation, Meyvn checks if a configuration file is present and if not prompts the user for its creation. The configuration map can be overwhelming at first, so it helps to understand its structure, which is simple and predictable. The top level <code>:packaging</code> key, for example, has two children, <code>:uberjar</code> and <code>:jar</code>. They themselves contain maps. All nested maps have an <code>:enabled</code> key which determines if it is active or ignored. So if one wants to create an uberjar, one will want to set <code>:enabled</code> to true under <code>:uberjar</code> and false under <code>:jar</code>. Let&rsquo;s take a look at another example. 
 </p>
 
 <div class="org-src-container">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 00:38 -->
+<!-- 2020-09-03 Thu 00:42 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -267,28 +267,22 @@ In the beginning was the installer, and the authoritative place to find its most
 </div>
 
 <p>
-When you type <code>myvn</code> in the command line, you can feed it with any familiar Maven command (<code>clean</code>, <code>install</code>, <code>test</code>, <code>deploy</code>) as well as chain them together, reflecting Maven&rsquo;s grammar. Meyvn is indeed a strict super-set of Maven. When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is everywhere: Clojars (Maven repository format), Pomegranate, an API for the Maven resolver (used by Boot), Leiningen of course, which emerged as a Maven wrapper, up to the innards of <code>tools.deps</code>. Meyvn goes a step further and delegates its tasks to Maven&rsquo;s execution engine. 
+When you type <code>myvn</code> in the command line, you can feed it with any familiar Maven command (<code>clean</code>, <code>install</code>, <code>test</code>, <code>deploy</code>) as well as chain them together, reflecting Maven&rsquo;s grammar. Meyvn is indeed a strict super-set of Maven. When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is everywhere: Clojars (Maven repository format), Pomegranate, an API for the Maven resolver (used by Boot) up to the innards of <code>tools.deps</code>. Meyvn goes a step further and delegates its tasks to Maven&rsquo;s execution engine. 
 </p>
 
 <blockquote>
 <p>
-The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
+Leiningen emerged as a Maven wrapper. The indication is not so much in the name as in the reference to a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world.
 </p>
 </blockquote>
 
 <p>
-Meyvn relies entirely and exclusively on <code>tools.deps</code> for declaring paths and dependencies. Crucially, it uses the ability of <code>tools.deps</code> to generate a POM which it then augments with a set of curated plugins and <b>hands over</b> the build to Maven. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. Mojos, a pun on pojos (Maven plain Old Java Object), hook into that lifecycle, and when packaged together they form a plugin. Plugins are to be found for nearly everything that comes to mind due to Maven&rsquo;s penetration and reach. 
+Meyvn relies entirely and exclusively on <code>tools.deps</code> for declaring paths and dependencies. Crucially, it uses the ability of <code>tools.deps</code> to generate a POM which it then augments with a set of curated plugins and <b>hands over</b> the build to Maven. The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the <i>Clojure Maven plugin</i>. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the <i>Clojure Maven plugin</i> continued to exist in its own timeline. 
 </p>
 
 <blockquote>
 <p>
-The Project Object Model, or <b>POM</b> in short, codifies a project along its axes, its dimensions. Maven advertises itself as project management software, eschewing the terminology of build automation. Indeed, it hammers the point at every opportunity: our scope is broad. The notion of project is taken to include things such as documentation, version control, reporting, tests, etc.  This is sometimes referred to as <i>project comprehension</i>. This openendedness is likely to have contributed to Maven’s resilience, its dominant position in the java landscape.
-</p>
-</blockquote>
-
-<blockquote>
-<p>
-The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the <i>Clojure Maven plugin</i>. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the <i>Clojure Maven plugin</i> continued to exist in its own timeline. 
+The Project Object Model, or <b>POM</b> in short, codifies a project along its axes, its dimensions. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. Mojos, a pun on pojos (Maven plain Old Java Object), hook into that lifecycle, and when packaged together they form a plugin. Plugins are to be found for nearly everything that comes to mind due to Maven&rsquo;s penetration and reach. 
 </p>
 </blockquote>
 
@@ -324,6 +318,11 @@ This instructs Meyvn to launch a Clojurescript pass in the build when creating t
 If the user is not sure what kind of build will result from a particular configuration, they can type <code>myvn -a buildplan</code> or <code>myvn -a plan -g install</code> to get a tabular representation of the plugins that will be invoked during the various stages of the build lifecycle. They can also inspect the effective POM for the current build when typing <code>myvn -a pom</code>. What version of a dependency is being pulled? Type <code>myvn -a conflicts -a ring</code>. Meyvn offers many ways to approach the build, debug it and optimize it. 
 </p>
 
+<blockquote>
+<p>
+Maven advertises itself as project management software, eschewing the terminology of build automation. Indeed, it hammers the point at every opportunity: our scope is broad. The notion of project is taken to include things such as documentation, version control, reporting, tests, etc.  This is sometimes referred to as <i>project comprehension</i>. This openendedness is likely to have contributed to Maven’s resilience, its dominant position in the java landscape.
+</p>
+</blockquote>
 
 <p>
 In the next part of the series, we are going to investigate the facilities offered by Meyvn&rsquo;s interactive environment. See you then!

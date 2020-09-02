@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 01:02 -->
+<!-- 2020-09-03 Thu 01:03 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -271,7 +271,17 @@ In the beginning was the installer, and the authoritative place to find its most
 </div>
 
 <p>
-When you type <code>myvn</code> in the command line, you can feed it with any familiar Maven command (<code>clean</code>, <code>install</code>, <code>test</code>, <code>deploy</code>) as well as chain them together, reflecting Maven&rsquo;s grammar. Meyvn is indeed a strict super-set of Maven. When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is everywhere: Clojars (Maven repository format), Pomegranate, an API for the Maven resolver (used by Boot) up to the innards of <code>tools.deps</code>. Meyvn goes a step further and delegates its tasks to Maven&rsquo;s execution engine. 
+When you type <code>myvn</code> in the command line, you can feed it with any familiar Maven command (<code>clean</code>, <code>install</code>, <code>test</code>, <code>deploy</code>) as well as chain them together, reflecting Maven&rsquo;s grammar. Meyvn is indeed a strict super-set of Maven. 
+</p>
+
+<blockquote>
+<p>
+Maven advertises itself as project management software, eschewing the terminology of build automation. Indeed, it hammers the point at every opportunity: our scope is broad. The notion of project is taken to include things such as documentation, version control, reporting, tests, etc.  This is sometimes referred to as <i>project comprehension</i>. This openendedness is likely to have contributed to Maven’s resilience, its dominant position in the java landscape.
+</p>
+</blockquote>
+
+<p>
+When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is everywhere: Clojars (Maven repository format), Pomegranate, an API for the Maven resolver (used by Boot) up to the innards of <code>tools.deps</code>. Meyvn goes a step further and delegates its tasks to Maven&rsquo;s execution engine. 
 </p>
 
 <blockquote>
@@ -322,11 +332,6 @@ This instructs Meyvn to launch a Clojurescript pass in the build when creating t
 If the user is not sure what kind of build will result from a particular configuration, they can type <code>myvn -a buildplan</code> or <code>myvn -a plan -g install</code> to get a tabular representation of the plugins that will be invoked during the various stages of the build lifecycle. They can also inspect the effective POM for the current build when typing <code>myvn -a pom</code>. What version of a dependency is being pulled? Type <code>myvn -a conflicts -a ring</code>. Meyvn offers many ways to approach the build, debug it and optimize it. 
 </p>
 
-<blockquote>
-<p>
-Maven advertises itself as project management software, eschewing the terminology of build automation. Indeed, it hammers the point at every opportunity: our scope is broad. The notion of project is taken to include things such as documentation, version control, reporting, tests, etc.  This is sometimes referred to as <i>project comprehension</i>. This openendedness is likely to have contributed to Maven’s resilience, its dominant position in the java landscape.
-</p>
-</blockquote>
 
 <p>
 In the next part of the series, we are going to investigate the facilities offered by Meyvn&rsquo;s interactive environment. See you then!

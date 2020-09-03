@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 15:57 -->
+<!-- 2020-09-03 Thu 16:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -281,7 +281,7 @@ Maven advertises itself as project management software, eschewing the terminolog
 </blockquote>
 
 <p>
-When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is everywhere: in Clojars as the repository format, in Boot where Pomegranate is used as interface for the Maven resolver, including the recent <code>tools.deps</code> which harnesses the Maven resolver directly. Meyvn takes the ubiquity of Maven to its logical conclusion, delegating all tasks to Maven&rsquo;s execution engine. 
+When we we say that Clojure is hosted on the JVM, we often forget the corollary, that Clojure tooling is built on Maven. We&rsquo;d be forgiven for the oversight: the tooling is good at keeping Maven out of sight. But Maven is everywhere: in Clojars as the repository format, in Boot where Pomegranate is used as interface for the Maven resolver, in the more recent <code>tools.deps</code> which harnesses the Maven resolver directly. Meyvn takes the ubiquity of Maven to its logical conclusion, delegating all tasks to Maven&rsquo;s execution engine. 
 </p>
 
 <blockquote>

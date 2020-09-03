@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 14:41 -->
+<!-- 2020-09-03 Thu 14:46 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -291,21 +291,17 @@ Leiningen itself emerged as a Maven wrapper, sort of. Stuart Halloway had previo
 </blockquote>
 
 <p>
-Meyvn relies entirely and exclusively on <code>tools.deps</code> for declaring paths and dependencies. Crucially, it uses the ability of <code>tools.deps</code> to generate a POM which it then augments with a set of curated plugins and <b>hands over</b> the build to Maven. Curated plugins include for example the Shade Plugin (used in uberjar creation), the Graalvm plugin (for native code compilation), and many more which can be enabled or disabled in the project configuration. 
+The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the <i>Clojure Maven plugin</i>. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the <i>Clojure Maven plugin</i> continued to exist in its own timeline. 
 </p>
 
 <blockquote>
 <p>
-The Project Object Model, or <b>POM</b> in short, codifies a project along its axes, its dimensions. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. Mojos, a pun on pojos (Maven plain Old Java Object), hook into that lifecycle, and when packaged together they form a plugin. Plugins are to be found for nearly everything that comes to mind due to Maven&rsquo;s penetration and reach.
+The Project Object Model, or <b>POM</b> in short, codifies a project along its axes, its dimensions. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. Mojos, a pun on pojos (Maven plain Old Java Object), hook into that lifecycle, and when packaged together they form a plugin. Plugins are to be found for nearly everything that comes to mind due to Maven&rsquo;s penetration and reach. Meyvn implements the Clojurescript Mojo on its own, as well a those involved in the web asset pipeline (CSS minification, image compression). 
 </p>
 </blockquote>
 
 <p>
-On top of plugins from the Maven ecosystem, Meyvn implements custom Mojos of its own, notably the Clojurescript Mojo and those involved in the web asset pipeline (CSS minification, image compression). 
-</p>
-
-<p>
-The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the <i>Clojure Maven plugin</i>. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the <i>Clojure Maven plugin</i> continued to exist in its own timeline. 
+Meyvn relies entirely and exclusively on <code>tools.deps</code> for declaring paths and dependencies. Crucially, it uses the ability of <code>tools.deps</code> to generate a POM which it then augments with a set of curated plugins and <b>hands over</b> the build to Maven. Curated plugins include for example the Shade Plugin (used in uberjar creation), the Graalvm plugin (for native code compilation), and many more which can be enabled or disabled in the project configuration. 
 </p>
 
 <p>

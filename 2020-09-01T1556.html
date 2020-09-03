@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 03:29 -->
+<!-- 2020-09-03 Thu 04:11 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -266,7 +266,7 @@ In the beginning was the installer, and the authoritative place to find its most
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure">clj -Sdeps '<span style="color: #9d81ba;">{</span><span style="color: #f5c791;">:deps</span> <span style="color: #80bcb6;">{</span><span style="color: #ef6787;">org.danielsz</span>/meyvn-installer <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:</span><span style="color: #ef6787;">mvn</span><span style="color: #e6e6e8; background-color: #212026;">/</span><span style="color: #f5c791;">version</span> <span style="color: #65E6A7;">"1.2.4"</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">}</span>' -m meyvn-installer.core
+<pre class="src src-clojure">clj -Sdeps '<span style="color: #707183;">{</span><span style="color: #008b8b;">:deps</span> <span style="color: #7388d6;">{</span><span style="color: #228b22;">org.danielsz</span>/meyvn-installer <span style="color: #909183;">{</span><span style="color: #008b8b;">:</span><span style="color: #228b22;">mvn</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #008b8b;">version</span> <span style="color: #8b2252;">"1.2.4"</span><span style="color: #909183;">}</span><span style="color: #7388d6;">}</span><span style="color: #707183;">}</span>' -m meyvn-installer.core
 </pre>
 </div>
 
@@ -286,7 +286,7 @@ When we we say that Clojure is hosted on the JVM, we often forget the corollary,
 
 <blockquote>
 <p>
-Leiningen itself emerged as a Maven wrapper, sort of. Stuart Halloway had previously authored Lancet, a Clojure build tool with Ant support. Phil Hagelberg, the author of Leinigen, was depending on that project, but used Maven to wrap the Ant tasks (via the now defunct Maven ant tasks plugin). Hence the name referencing a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world. 
+Leiningen itself emerged as a Maven wrapper, sort of. Stuart Halloway had previously authored Lancet, a Clojure build tool with Ant support. Phil Hagelberg, the author of Leinigen, was depending on that project, but used Maven to wrap the Ant tasks (via the now defunct Maven ant tasks plugin). Hence the name, referencing a short story, <i>Leiningen versus the Ants</i>, echoing the rivalry between Maven and Ant, tools that at one point were competing for mind-share in the Java world. 
 </p>
 </blockquote>
 
@@ -309,18 +309,18 @@ Meyvn is driven by a configuration file in the project directory, <code>meyvn.ed
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">{</span><span style="color: #f5c791;">:uberjar</span> <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:enabled</span> <span style="color: #f5c791;">true</span>
-           <span style="color: #f5c791;">:resources</span> <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:cljs</span> <span style="color: #807f96;">{</span><span style="color: #f5c791;">:enabled</span> <span style="color: #f5c791;">true</span>
-                              <span style="color: #f5c791;">:compiler-opts</span> <span style="color: #91b9c7;">{</span><span style="color: #f5c791;">:infer-externs</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:optimizations</span> <span style="color: #f5c791;">:advanced</span>
-                                              <span style="color: #f5c791;">:parallel-build</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:verbose</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:aot-cache</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:output-to</span> <span style="color: #65E6A7;">"js/my-app.js"</span>
-                                              <span style="color: #f5c791;">:output-wrapper</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:foreign-libs</span> <span style="color: #687184;">[]</span>
-                                              <span style="color: #f5c791;">:main</span> <span style="color: #65E6A7;">"myapp.core"</span><span style="color: #91b9c7;">}</span>
-                              <span style="color: #f5c791;">:tools-deps-alias</span> <span style="color: #f5c791;">:cljs</span><span style="color: #807f96;">}</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">}</span>
+<pre class="src src-clojure"><span style="color: #707183;">{</span><span style="color: #008b8b;">:uberjar</span> <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:enabled</span> <span style="color: #008b8b;">true</span>
+           <span style="color: #008b8b;">:resources</span> <span style="color: #909183;">{</span><span style="color: #008b8b;">:cljs</span> <span style="color: #709870;">{</span><span style="color: #008b8b;">:enabled</span> <span style="color: #008b8b;">true</span>
+                              <span style="color: #008b8b;">:compiler-opts</span> <span style="color: #907373;">{</span><span style="color: #008b8b;">:infer-externs</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:optimizations</span> <span style="color: #008b8b;">:advanced</span>
+                                              <span style="color: #008b8b;">:parallel-build</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:verbose</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:aot-cache</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:output-to</span> <span style="color: #8b2252;">"js/my-app.js"</span>
+                                              <span style="color: #008b8b;">:output-wrapper</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:foreign-libs</span> <span style="color: #6276ba;">[]</span>
+                                              <span style="color: #008b8b;">:main</span> <span style="color: #8b2252;">"myapp.core"</span><span style="color: #907373;">}</span>
+                              <span style="color: #008b8b;">:tools-deps-alias</span> <span style="color: #008b8b;">:cljs</span><span style="color: #709870;">}</span><span style="color: #909183;">}</span><span style="color: #7388d6;">}</span><span style="color: #707183;">}</span>
 </pre>
 </div>
 

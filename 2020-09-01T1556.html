@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-03 Thu 14:03 -->
+<!-- 2020-09-03 Thu 14:21 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -291,17 +291,25 @@ Leiningen itself emerged as a Maven wrapper, sort of. Stuart Halloway had previo
 </blockquote>
 
 <p>
-Meyvn relies entirely and exclusively on <code>tools.deps</code> for declaring paths and dependencies. Crucially, it uses the ability of <code>tools.deps</code> to generate a POM which it then augments with a set of curated plugins and <b>hands over</b> the build to Maven. The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the <i>Clojure Maven plugin</i>. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the <i>Clojure Maven plugin</i> continued to exist in its own timeline. 
+Meyvn relies entirely and exclusively on <code>tools.deps</code> for declaring paths and dependencies. Crucially, it uses the ability of <code>tools.deps</code> to generate a POM which it then augments with a set of curated plugins and <b>hands over</b> the build to Maven. Curated plugins include for example the Shade Plugin (used in uberjar creation), the Graalvm plugin (for native code compilation), and many more which can be enabled or disabled in the project configuration. 
 </p>
 
 <blockquote>
 <p>
-The Project Object Model, or <b>POM</b> in short, codifies a project along its axes, its dimensions. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. Mojos, a pun on pojos (Maven plain Old Java Object), hook into that lifecycle, and when packaged together they form a plugin. Plugins are to be found for nearly everything that comes to mind due to Maven&rsquo;s penetration and reach. Meyvn implements Mojos of its own, the Clojurescript Mojo and those involved in the asset pipeline, minifying CSS or compressing images. 
+The Project Object Model, or <b>POM</b> in short, codifies a project along its axes, its dimensions. The Maven model is predicated on a build lifecycle with different phases where goals can be attached and executed. Mojos, a pun on pojos (Maven plain Old Java Object), hook into that lifecycle, and when packaged together they form a plugin. Plugins are to be found for nearly everything that comes to mind due to Maven&rsquo;s penetration and reach.
 </p>
 </blockquote>
 
 <p>
-Separate from the Maven commands, Meyvn understands additional modes of operation. The scope of Meyvn operations are arranged under three flags, <code>-a</code>, <code>-x</code> and <code>-t</code>. The <code>-t</code> flag is easy: create a project based on a template. Meyvn stores Maven archetypes in the cloud, custom-made for the companies and users that have adopted it. Type <code>-t</code> with no arguments to show available templates. You&rsquo;ll notice a <code>Hello, World</code> starter project and one for web development. The <code>-x</code> flag is for auxiliary commands. Meyvn can launch Figwheel, compile Clojurescript, manage system properties (environment variables), etc. More on that later. The <code>-a</code> flag is for aliases. Predefined aliases exist to start a nREPL, analyze the classpath or show updates for your dependencies. It is an open system: you add aliases of your own in the global <code>~/.clojure/meyvn.edn</code>.
+On top of plugins from the Maven ecosystem, Meyvn implements custom Mojos of its own, notably the Clojurescript Mojo and those involved in the web asset pipeline (CSS minification, image compression). 
+</p>
+
+<p>
+The ability to compile Clojure source code from a POM exists since February 2009, when Mark Derricutt pushed the first commit of the <i>Clojure Maven plugin</i>. That was seven months <b>before</b> Leiningen emerged. While the latter became the tool of choice in the Clojure community, the <i>Clojure Maven plugin</i> continued to exist in its own timeline. 
+</p>
+
+<p>
+Separate from the Maven commands, Meyvn understands additional modes of operation. Those are arranged under three flags, <code>-a</code>, <code>-x</code> and <code>-t</code>. The <code>-t</code> flag: create a project based on a template. Meyvn stores Maven archetypes in the cloud, custom-made for the companies and users that have adopted it. Type <code>-t</code> with no arguments to show available templates. You&rsquo;ll notice a <code>Hello, World</code> starter project and one for web development. The <code>-x</code> flag is for auxiliary commands. Meyvn can launch Figwheel, compile Clojurescript, manage system properties (environment variables), etc. More on that later. The <code>-a</code> flag is for aliases. Predefined aliases exist to start a nREPL, analyze the classpath or show updates for your dependencies. It is an open system: you add aliases of your own in the global <code>~/.clojure/meyvn.edn</code>.
 </p>
 
 <p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-12-04 Fri 16:01 -->
+<!-- 2020-12-04 Fri 16:04 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Is this sentence a question?</title>
@@ -230,11 +230,11 @@
 <header>
 <h1 class="title">Is this sentence a question?</h1>
 </header><p>
-One way to answer this is via Part of Speech parsing (PoS). It is trivial for a Clojurian to turn to CoreNLP, a Java library, and parse a sentence for its constituent parts. You get not only word and phrase level tags (this is a noun, this is a verb phrase), but also clause level tags that tell you <i>this is a direct question</i> (SBARQ) or <i>this is a yes/no question</i> (SQ).
+One way to answer this is via Part of Speech parsing (PoS). It is trivial for a Clojurian to turn to CoreNLP, a Java library, and parse a sentence for its constituent parts. You get not only word and phrase level tags (<i>this is a noun</i>, <i>this is a verb phrase</i>), but also clause level tags that tell you <i>this is a direct question</i> (SBARQ) or <i>this is a yes/no question</i> (SQ).
 </p>
 
 <p>
-<code>coreNLP</code> allows us to feed a sentence to it and get a data structure where all this tag goodness is buried. That data structure is called a <code>LabeledScoredTreeNode</code>, and it has an API that undoubtedly will allow us to determine whether the parse tree includes the sought-after tags. However, I haven't read the documentation but I did notice that the string representation of that data structure is a list. As a Lisper, I think to myself, say no more.
+<code>coreNLP</code> allows us to feed a sentence to it and get a data structure where all this tag goodness is buried. That data structure is called a <code>LabeledScoredTreeNode</code>, and it has an API that undoubtedly will allow us to determine whether the parse tree includes the sought-after tags. However, I haven't read the documentation because I noticed that the string representation of that data structure is a list. As a Lisper, I think to myself, say no more.
 </p>
 
 <div class="org-src-container">

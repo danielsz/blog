@@ -4,7 +4,7 @@
 <!-- 2020-12-04 Fri 15:56 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Perfumed nightmare</title>
+<title>Is this sentence a question?</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Daniel Szmulewicz">
 <style type="text/css">
@@ -192,22 +192,12 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/grid.css">
+<link rel="stylesheet" type="text/css" href="css/post.css">
 <link rel="stylesheet" type="text/css" href="assets/fonts/charter/webfonts/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="css/typography.css">
-<link rel="stylesheet" type="text/css" href="css/sitemap.css">
 <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Roboto+Condensed|Source+Serif+Pro|Inconsolata" rel="stylesheet">
 <script src="js/grid.js"></script>
-<script src="js/sitemap.js"></script>
 <script src="js/fathom.js"></script>
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@danielszmu" />
-<meta name="twitter:creator" content="@danielszmu" />
-<meta property="og:url" content="https://danielsz.github.io/blog/" />
-<meta property="og:title" content="Perfumed Nightmare" />
-<meta property="og:description" content="A blog for somnambulisps" />
-<meta property="og:image" content="https://danielsz.github.io/blog/images/perfumed_nightmare.jpg" />
-<meta property="og:site_name" content="Perfumed Nightmare"/>
-<meta property="og:type" content="blog"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -232,27 +222,58 @@
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
 <header>
-<h1 class="title">Perfumed nightmare</h1>
-<p class="subtitle">A blog for the somnambulisp</p>
-</header><ul class="org-ul">
-<li><a href="2017-12-04T11_17.html">Finding files</a></li>
-<li><a href="2017-12-04T23_53.html">Forrest Gump and the Kibbutz</a></li>
-<li><a href="2017-12-05T20_22.html">From coworking to coshoring</a></li>
-<li><a href="deft-49.html">Ghosts in the machine</a></li>
-<li><a href="deft-4.html">How is printing to the console a side effect</a></li>
-<li><a href="blog_on_lisp.html">In the mood for Lisp</a></li>
-<li><a href="2020-12-04T15_08.html">Is this sentence a question?</a></li>
-<li><a href="2019-08-05T21_14.html">Lisp ≠ Lambda Calculus</a></li>
-<li><a href="deft-20.html">Lisp's nested syntax</a></li>
-<li><a href="deft-21.html">Live coding, take 5</a></li>
-<li><a href="2017-12-04T12_20.html">Modernism and the Web</a></li>
-<li><a href="deft-37.html">Om, no DOM</a></li>
-<li><a href="2019-05-08T18_40.html">Ring's idionsyncrasies</a></li>
-<li><a href="2017-07-31T16_31.html">Timed Idempotency</a></li>
-<li><a href="2020-09-01T1556.html">Understanding Meyvn</a></li>
-</ul>
+<h1 class="title">Is this sentence a question?</h1>
+</header><p>
+One way to answer this is via Part of Speech parsing (PoS). It is trivial for a Clojurian to turn to CoreNLP, a Java library, and parse a sentence for its constituent parts. You get not only word and phrase level tags (this is a noun, this is a verb phrase), but also clause level tags that tell you "this is a direct question" (SBARQ) or "this is a yes/no question" (SQ).
+</p>
+
+<p>
+<code>coreNLP</code> allows us to feed a sentence to it and get a data structure where all this tag goodness is buried. That data structure is called a <code>LabeledScoredTreeNode</code>, and it has an API that undoubtedly will allow us to determine whether the parse tree includes the sought-after tags. However, this is my first foray in this area, and I notice that the string representation of that data structure is a list.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #ff1f8b;">"(ROOT (SQ (VBZ Is) (NP (DT this) (NN sentence)) (NP (DT a) (NN question)) (. ?)))"</span>  
+</pre>
+</div>
+
+<p>
+As a Lisper, I think to myself, say no more. The Lisp reader will instantly recognizes its favorite nugget and turn that string into a S-expression. 
+</p>
+
+<p>
+(ROOT (SQ (VBZ Is) (NP (DT this) (NN sentence)) (NP (DT a) (NN question)) (. ?)))
+</p>
+
+<p>
+Now we have a data structure where each element is either a symbol or another list.
+</p>
+
+<p>
+By now, my brain is in recursion mode: give me the first element of the list, is this a symbol? If yes, check if the symbol is equal to SBARQ or SQ. If it is, exit with true. If not, recur with the rest of the list. If the first element is not a symbol but a list, recur with the rest of the list. If the first element is neither a symbol nor a list, it must be nil and we're done processing.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">loop</span> <span style="color: #1f5bff; font-weight: bold;">[</span>x tree<span style="color: #1f5bff; font-weight: bold;">]</span>
+      <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">let</span> <span style="color: #00af00; font-weight: bold;">[</span>elm <span style="color: #ff4ea3; font-weight: bold;">(</span>first x<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">]</span>
+        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">cond</span>
+          <span style="color: #ff4ea3; font-weight: bold;">(</span>list? elm<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">recur</span> elm<span style="color: #ff4ea3; font-weight: bold;">)</span>
+          <span style="color: #ff4ea3; font-weight: bold;">(</span>symbol? elm<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">if</span> <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">or</span> <span style="color: #ff8700; font-weight: bold;">(</span>= elm 'SBARQ<span style="color: #ff8700; font-weight: bold;">)</span>
+                                <span style="color: #ff8700; font-weight: bold;">(</span>= elm 'SQ<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                          <span style="color: #1f5bff;">true</span>
+                          <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">recur</span> <span style="color: #ff8700; font-weight: bold;">(</span>rest x<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
+          <span style="color: #1f5bff;">:else</span> <span style="color: #1f5bff;">false</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>  
+</pre>
+</div>
+
+<p>
+My first foray in natural language processing leads me to libraries that do part of speech tagging.
+</p>
 </div>
 </body>
 </html>

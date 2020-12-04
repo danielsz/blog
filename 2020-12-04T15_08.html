@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-12-04 Fri 16:25 -->
+<!-- 2020-12-04 Fri 16:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Is this sentence a question?</title>
@@ -230,15 +230,15 @@
 <header>
 <h1 class="title">Is this sentence a question?</h1>
 </header><p>
-One way to answer this is via Part of Speech parsing (PoS). It is trivial for a Clojurian to turn to CoreNLP, a Java library, and parse a sentence for its constituent parts. You get not only word and phrase level tags (<i>this is a noun</i>, <i>this is a verb phrase</i>), but also clause level tags that tell you <i>this is a direct question</i> (SBARQ) or <i>this is a yes/no question</i> (SQ).
+One way to answer this is via Part of Speech parsing (PoS). It is trivial for a Clojurian to turn to Stanford's <code>coreNLP</code>, a Java library, and parse a sentence for its constituent parts. You get not only word and phrase level tags (<i>this is a noun</i>, <i>this is a verb phrase</i>), but also clause level tags that tell you <i>this is a direct question</i> (<code>SBARQ</code>) or <i>this is a yes/no question</i> (<code>SQ</code>).
 </p>
 
 <p>
-<code>coreNLP</code> allows us to feed a sentence to it and get a data structure where all this tag goodness is buried. That data structure is called a <code>LabeledScoredTreeNode</code>, and it has an API that undoubtedly will allow us to determine whether the parse tree includes the sought-after tags. However, I haven't read the documentation because I noticed that the string representation of that data structure is a list. As a Lisper, I think to myself, say no more.
+<code>coreNLP</code> will parse a sentence into an elaborate data structure where all this tag goodness is buried. Said <code>LabeledScoredTreeNode</code> has an API that undoubtedly will allow us to determine whether the parse tree includes the sought-after tags. However, I haven't read the documentation because I noticed that the string representation of that data structure is a list. As a Lisper, I think to myself, say no more.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #ff1f8b;">"(ROOT (SQ (VBZ Is) (NP (DT this) (NN sentence)) (NP (DT a) (NN question)) (. ?)))"</span>
+<pre class="src src-clojure"><span style="color: #65E6A7;">"(ROOT (SQ (VBZ Is) (NP (DT this) (NN sentence)) (NP (DT a) (NN question)) (. ?)))"</span>
 </pre>
 </div>
 
@@ -246,7 +246,7 @@ One way to answer this is via Part of Speech parsing (PoS). It is trivial for a 
 The Lisp reader will instantly recognizes its favorite nugget and turn it into a S-expression. 
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>ROOT <span style="color: #1f5bff; font-weight: bold;">(</span>SQ <span style="color: #00af00; font-weight: bold;">(</span>VBZ Is<span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span>NP <span style="color: #ff4ea3; font-weight: bold;">(</span>DT this<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>NN sentence<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span>NP <span style="color: #ff4ea3; font-weight: bold;">(</span>DT a<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>NN question<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">.</span> ?<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>  
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>ROOT <span style="color: #80bcb6;">(</span>SQ <span style="color: #c79af4;">(</span>VBZ Is<span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span>NP <span style="color: #807f96;">(</span>DT this<span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span>NN sentence<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span>NP <span style="color: #807f96;">(</span>DT a<span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span>NN question<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">.</span> ?<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>  
 </pre>
 </div>
 
@@ -255,24 +255,24 @@ Now we have a data structure where each element is either a symbol or another li
 </p>
 
 <p>
-By now, my brain is in recursion mode: give me the first element of the list, is this a symbol? If yes, check if the symbol is equal to SBARQ or SQ. If it is, exit with true. If not, recur with the rest of the list. If the first element is not a symbol but a list, recur with the rest of the list. If the first element is neither a symbol nor a list, it must be nil and we're done processing.
+By now, my brain is in recursion mode: give me the first element of the list, is this a symbol? If yes, check if the symbol is equal to <code>SBARQ</code> or <code>SQ</code>. If it is, exit with true. If not, recur with the rest of the list. If the first element is not a symbol but a list, recur with the rest of the list. If the first element is neither a symbol nor a list, it must be nil and we're done processing.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">loop</span> <span style="color: #1f5bff; font-weight: bold;">[</span>x parse-tree<span style="color: #1f5bff; font-weight: bold;">]</span>
-      <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">let</span> <span style="color: #00af00; font-weight: bold;">[</span>elm <span style="color: #ff4ea3; font-weight: bold;">(</span>first x<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">]</span>
-        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">cond</span>
-          <span style="color: #ff4ea3; font-weight: bold;">(</span>list? elm<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">recur</span> elm<span style="color: #ff4ea3; font-weight: bold;">)</span>
-          <span style="color: #ff4ea3; font-weight: bold;">(</span>symbol? elm<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">if</span> <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">or</span> <span style="color: #ff8700; font-weight: bold;">(</span>= elm 'SBARQ<span style="color: #ff8700; font-weight: bold;">)</span>
-                                <span style="color: #ff8700; font-weight: bold;">(</span>= elm 'SQ<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>
-                          <span style="color: #1f5bff;">true</span>
-                          <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">recur</span> <span style="color: #ff8700; font-weight: bold;">(</span>rest x<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
-          <span style="color: #1f5bff;">:else</span> <span style="color: #1f5bff;">false</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>  
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">loop</span> <span style="color: #80bcb6;">[</span>x parse-tree<span style="color: #80bcb6;">]</span>
+      <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #c79af4;">[</span>elm <span style="color: #807f96;">(</span>first x<span style="color: #807f96;">)</span><span style="color: #c79af4;">]</span>
+        <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">cond</span>
+          <span style="color: #807f96;">(</span>list? elm<span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span><span style="color: #6bd9db;">recur</span> elm<span style="color: #807f96;">)</span>
+          <span style="color: #807f96;">(</span>symbol? elm<span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span><span style="color: #6bd9db;">if</span> <span style="color: #91b9c7;">(</span><span style="color: #6bd9db;">or</span> <span style="color: #687184;">(</span>= elm 'SBARQ<span style="color: #687184;">)</span>
+                                <span style="color: #687184;">(</span>= elm 'SQ<span style="color: #687184;">)</span><span style="color: #91b9c7;">)</span>
+                          <span style="color: #f5c791;">true</span>
+                          <span style="color: #91b9c7;">(</span><span style="color: #6bd9db;">recur</span> <span style="color: #687184;">(</span>rest x<span style="color: #687184;">)</span><span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span>
+          <span style="color: #f5c791;">:else</span> <span style="color: #f5c791;">false</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>  
 </pre>
 </div>
 
 <p>
-Sure, a Perl hacker would have slapped a regex on the string and be done with it. Maybe I should have read the javadoc for <code>LabeledScoredTreeNode</code>, but solutions based on recursion carry an elegance that draws me back into its fold every single time. 
+Sure, a Perl hacker would have slapped a regex on the string representation and be done with it. And maybe I should have read the <code>Javadoc</code> for <code>LabeledScoredTreeNode</code> in the first place. But recursion carries an elegance that gets to me every single time. 
 </p>
 </div>
 </body>

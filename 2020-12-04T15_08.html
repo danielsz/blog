@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-12-04 Fri 16:13 -->
+<!-- 2020-12-04 Fri 16:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Is this sentence a question?</title>
@@ -243,7 +243,7 @@ One way to answer this is via Part of Speech parsing (PoS). It is trivial for a 
 </div>
 
 <p>
-The Lisp reader will instantly recognizes its favorite nugget and turn that string into a S-expression. 
+The Lisp reader will instantly recognizes its favorite nugget and turn it into a S-expression. 
 </p>
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>ROOT <span style="color: #1f5bff; font-weight: bold;">(</span>SQ <span style="color: #00af00; font-weight: bold;">(</span>VBZ Is<span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span>NP <span style="color: #ff4ea3; font-weight: bold;">(</span>DT this<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>NN sentence<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span>NP <span style="color: #ff4ea3; font-weight: bold;">(</span>DT a<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>NN question<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">.</span> ?<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>  
@@ -259,7 +259,7 @@ By now, my brain is in recursion mode: give me the first element of the list, is
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">loop</span> <span style="color: #1f5bff; font-weight: bold;">[</span>x tree<span style="color: #1f5bff; font-weight: bold;">]</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">loop</span> <span style="color: #1f5bff; font-weight: bold;">[</span>x parse-tree<span style="color: #1f5bff; font-weight: bold;">]</span>
       <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">let</span> <span style="color: #00af00; font-weight: bold;">[</span>elm <span style="color: #ff4ea3; font-weight: bold;">(</span>first x<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">]</span>
         <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">cond</span>
           <span style="color: #ff4ea3; font-weight: bold;">(</span>list? elm<span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">recur</span> elm<span style="color: #ff4ea3; font-weight: bold;">)</span>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-12-04 Fri 16:53 -->
+<!-- 2020-12-04 Fri 16:58 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Is this sentence a question?</title>
@@ -238,7 +238,7 @@ One way to answer this is via Part of Speech parsing (PoS). It is trivial for a 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #65E6A7;">"(ROOT (SQ (VBZ Is) (NP (DT this) (NN sentence)) (NP (DT a) (NN question)) (. ?)))"</span>
+<pre class="src src-clojure"><span style="color: #744DF7;">"(ROOT (SQ (VBZ Is) (NP (DT this) (NN sentence)) (NP (DT a) (NN question)) (. ?)))"</span>
 </pre>
 </div>
 
@@ -246,7 +246,7 @@ One way to answer this is via Part of Speech parsing (PoS). It is trivial for a 
 The Lisp reader will instantly recognizes its favorite nugget and turn it into a S-expression. 
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>ROOT <span style="color: #80bcb6;">(</span>SQ <span style="color: #c79af4;">(</span>VBZ Is<span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span>NP <span style="color: #807f96;">(</span>DT this<span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span>NN sentence<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span>NP <span style="color: #807f96;">(</span>DT a<span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span>NN question<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">.</span> ?<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>  
+<pre class="src src-clojure"><span style="color: #4d9391;">(</span>ROOT <span style="color: #47ba99;">(</span>SQ <span style="color: #9d81ba;">(</span>VBZ Is<span style="color: #9d81ba;">)</span> <span style="color: #9d81ba;">(</span>NP <span style="color: #787096;">(</span>DT this<span style="color: #787096;">)</span> <span style="color: #787096;">(</span>NN sentence<span style="color: #787096;">)</span><span style="color: #9d81ba;">)</span> <span style="color: #9d81ba;">(</span>NP <span style="color: #787096;">(</span>DT a<span style="color: #787096;">)</span> <span style="color: #787096;">(</span>NN question<span style="color: #787096;">)</span><span style="color: #9d81ba;">)</span> <span style="color: #9d81ba;">(</span><span style="color: #0D7A75;">.</span> ?<span style="color: #9d81ba;">)</span><span style="color: #47ba99;">)</span><span style="color: #4d9391;">)</span>  
 </pre>
 </div>
 
@@ -259,17 +259,18 @@ By now, my brain is in recursion mode: give me the first element of the list, is
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">loop</span> <span style="color: #80bcb6;">[</span>x parse-tree<span style="color: #80bcb6;">]</span>
-      <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #c79af4;">[</span>elm <span style="color: #807f96;">(</span>first x<span style="color: #807f96;">)</span><span style="color: #c79af4;">]</span>
-        <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">cond</span>
-          <span style="color: #807f96;">(</span>list? elm<span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span><span style="color: #6bd9db;">recur</span> elm<span style="color: #807f96;">)</span>
-          <span style="color: #807f96;">(</span>symbol? elm<span style="color: #807f96;">)</span> <span style="color: #807f96;">(</span><span style="color: #6bd9db;">if</span> <span style="color: #91b9c7;">(</span><span style="color: #6bd9db;">or</span> <span style="color: #687184;">(</span>= elm 'SBARQ<span style="color: #687184;">)</span>
-                                <span style="color: #687184;">(</span>= elm 'SQ<span style="color: #687184;">)</span><span style="color: #91b9c7;">)</span>
-                          <span style="color: #f5c791;">true</span>
-                          <span style="color: #91b9c7;">(</span><span style="color: #6bd9db;">recur</span> <span style="color: #687184;">(</span>rest x<span style="color: #687184;">)</span><span style="color: #91b9c7;">)</span><span style="color: #807f96;">)</span>
-          <span style="color: #f5c791;">:else</span> <span style="color: #f5c791;">false</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>  
+<pre class="src src-clojure"><span style="color: #4d9391;">(</span><span style="color: #0D7A75;">loop</span> <span style="color: #47ba99;">[</span>x parse-tree<span style="color: #47ba99;">]</span>
+      <span style="color: #47ba99;">(</span><span style="color: #0D7A75;">let</span> <span style="color: #9d81ba;">[</span>elm <span style="color: #787096;">(</span>first x<span style="color: #787096;">)</span><span style="color: #9d81ba;">]</span>
+        <span style="color: #9d81ba;">(</span><span style="color: #0D7A75;">cond</span>
+          <span style="color: #787096;">(</span>list? elm<span style="color: #787096;">)</span> <span style="color: #787096;">(</span><span style="color: #0D7A75;">recur</span> elm<span style="color: #787096;">)</span>
+          <span style="color: #787096;">(</span>symbol? elm<span style="color: #787096;">)</span> <span style="color: #787096;">(</span><span style="color: #0D7A75;">if</span> <span style="color: #cd9575;">(</span><span style="color: #0D7A75;">or</span> <span style="color: #B08C77;">(</span>= elm 'SBARQ<span style="color: #B08C77;">)</span>
+                                <span style="color: #B08C77;">(</span>= elm 'SQ<span style="color: #B08C77;">)</span><span style="color: #cd9575;">)</span>
+                          <span style="color: #D6224D;">true</span>
+                          <span style="color: #cd9575;">(</span><span style="color: #0D7A75;">recur</span> <span style="color: #B08C77;">(</span>rest x<span style="color: #B08C77;">)</span><span style="color: #cd9575;">)</span><span style="color: #787096;">)</span>
+          <span style="color: #D6224D;">:else</span> <span style="color: #D6224D;">false</span><span style="color: #9d81ba;">)</span><span style="color: #47ba99;">)</span><span style="color: #4d9391;">)</span>  
 </pre>
 </div>
+
 
 <p>
 Sure, a Perl hacker would have slapped a regex on the string representation and be done with it. And maybe I should have read the <code>Javadoc</code> for <code>LabeledScoredTreeNode</code> in the first place. But recursion carries an elegance that gets to me every single time. 

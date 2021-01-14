@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-09-04 Fri 00:55 -->
+<!-- 2021-01-14 Thu 10:33 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -38,7 +38,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -50,7 +50,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -199,50 +199,26 @@
 <script src="js/grid.js"></script>
 <script src="js/fathom.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -266,7 +242,7 @@ In the beginning was the installer, and the authoritative place to find its most
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure">clj -Sdeps '<span style="color: #9d81ba;">{</span><span style="color: #f5c791;">:deps</span> <span style="color: #80bcb6;">{</span><span style="color: #ef6787;">org.danielsz</span>/meyvn-installer <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:</span><span style="color: #ef6787;">mvn</span><span style="color: #e6e6e8; background-color: #212026;">/</span><span style="color: #f5c791;">version</span> <span style="color: #65E6A7;">"1.2.4"</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">}</span>' -m meyvn-installer.core
+<pre class="src src-clojure">clj -Sdeps '<span style="color: #cc0000; font-weight: bold;">{</span><span style="color: #1f5bff;">:deps</span> <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #18b2b2;">org.danielsz</span>/meyvn-installer <span style="color: #00af00; font-weight: bold;">{</span><span style="color: #1f5bff;">:</span><span style="color: #18b2b2;">mvn</span><span style="color: #5f5f5f; background-color: #fdfde7;">/</span><span style="color: #1f5bff;">version</span> <span style="color: #ff1f8b;">"1.3.0"</span><span style="color: #00af00; font-weight: bold;">}</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">}</span>' -m meyvn-installer.core
 </pre>
 </div>
 
@@ -313,18 +289,18 @@ Meyvn is driven by a configuration file found in the project directory, <code>me
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">{</span><span style="color: #f5c791;">:uberjar</span> <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:enabled</span> <span style="color: #f5c791;">true</span>
-           <span style="color: #f5c791;">:resources</span> <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:cljs</span> <span style="color: #807f96;">{</span><span style="color: #f5c791;">:enabled</span> <span style="color: #f5c791;">true</span>
-                              <span style="color: #f5c791;">:compiler-opts</span> <span style="color: #91b9c7;">{</span><span style="color: #f5c791;">:infer-externs</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:optimizations</span> <span style="color: #f5c791;">:advanced</span>
-                                              <span style="color: #f5c791;">:parallel-build</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:verbose</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:aot-cache</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:output-to</span> <span style="color: #65E6A7;">"js/my-app.js"</span>
-                                              <span style="color: #f5c791;">:output-wrapper</span> <span style="color: #f5c791;">true</span>
-                                              <span style="color: #f5c791;">:foreign-libs</span> <span style="color: #687184;">[]</span>
-                                              <span style="color: #f5c791;">:main</span> <span style="color: #65E6A7;">"myapp.core"</span><span style="color: #91b9c7;">}</span>
-                              <span style="color: #f5c791;">:tools-deps-alias</span> <span style="color: #f5c791;">:cljs</span><span style="color: #807f96;">}</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">}</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">{</span><span style="color: #1f5bff;">:uberjar</span> <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #1f5bff;">:enabled</span> <span style="color: #1f5bff;">true</span>
+           <span style="color: #1f5bff;">:resources</span> <span style="color: #00af00; font-weight: bold;">{</span><span style="color: #1f5bff;">:cljs</span> <span style="color: #ff4ea3; font-weight: bold;">{</span><span style="color: #1f5bff;">:enabled</span> <span style="color: #1f5bff;">true</span>
+                              <span style="color: #1f5bff;">:compiler-opts</span> <span style="color: #00d7af; font-weight: bold;">{</span><span style="color: #1f5bff;">:infer-externs</span> <span style="color: #1f5bff;">true</span>
+                                              <span style="color: #1f5bff;">:optimizations</span> <span style="color: #1f5bff;">:advanced</span>
+                                              <span style="color: #1f5bff;">:parallel-build</span> <span style="color: #1f5bff;">true</span>
+                                              <span style="color: #1f5bff;">:verbose</span> <span style="color: #1f5bff;">true</span>
+                                              <span style="color: #1f5bff;">:aot-cache</span> <span style="color: #1f5bff;">true</span>
+                                              <span style="color: #1f5bff;">:output-to</span> <span style="color: #ff1f8b;">"js/my-app.js"</span>
+                                              <span style="color: #1f5bff;">:output-wrapper</span> <span style="color: #1f5bff;">true</span>
+                                              <span style="color: #1f5bff;">:foreign-libs</span> <span style="color: #ff8700; font-weight: bold;">[]</span>
+                                              <span style="color: #1f5bff;">:main</span> <span style="color: #ff1f8b;">"myapp.core"</span><span style="color: #00d7af; font-weight: bold;">}</span>
+                              <span style="color: #1f5bff;">:tools-deps-alias</span> <span style="color: #1f5bff;">:cljs</span><span style="color: #ff4ea3; font-weight: bold;">}</span><span style="color: #00af00; font-weight: bold;">}</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">}</span>
 </pre>
 </div>
 

@@ -1,63 +1,67 @@
 #content {
-    display: grid;
-    grid-template-areas:
+  display: grid;
+  grid-template-areas:
     "hd"
     "toc";
 }
 
 #content header {
-    grid-area: hd;
-    padding: 1rem;
+  grid-area: hd;
+  padding: 1rem;
 }
 
 #content ul {
-    grid-area: toc;
+  grid-area: toc;
 }
 
 #content > ul.org-ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
-header .author{
-    font-family: 'EB Garamond', serif;
-    font-style: italic;
-    font-size: 1.3em;
-    letter-spacing: 0.1em;
-    text-transform: capitalize;
+header .author {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.3em;
+  letter-spacing: 0.1em;
+  text-transform: capitalize;
 }
+
 header .title {
-    font-family: 'EB Garamond', serif;
-    font-size: 2em;
-    text-shadow: 4px 4px 4px #aaa;
-    text-transform: capitalize;
+  font-family: 'EB Garamond', serif;
+  font-size: 2em;
+  text-shadow: 4px 4px 4px #aaa;
+  text-transform: capitalize;
 }
 
-header .subtitle { 
-    font-family: 'Inconsolota', sans-serif;
-    text-align: right;
-        /* margin-top: 5rem; */
-    font-size: 1em;
-    font-weight: 200;
-    text-transform: uppercase;
+header .subtitle {
+  font-family: 'Inconsolota', sans-serif;
+  text-align: right;
+  /* margin-top: 5rem; */
+  font-size: 1em;
+  font-weight: 200;
+  text-transform: uppercase;
 }
 
 @media (min-width: 800px) {
-    #content ul {
-	column-count: 2;
-	column-gap: 3rem;
-	column-rule: 1px solid #C79C87;
-    }
-    #content {
-	justify-items: center;
-    }
-    header .author{
-    font-size: 1.6em;
-}
-    header .subtitle {
-	font-size: 1.2em;
-    }
-header .title {
-    font-size: 2.2em;
-}
+  #content ul {
+    column-count: 2;
+    column-gap: 3rem;
+    column-rule: 1px solid #C79C87;
+  }
 
+  #content {
+    justify-items: center;
+  }
+
+  header .author {
+    font-size: 1.6em;
+  }
+
+  header .subtitle {
+    font-size: 1.2em;
+  }
+
+  header .title {
+    font-size: 3.2em;
+  }
 }

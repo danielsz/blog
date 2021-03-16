@@ -1,5 +1,5 @@
 body {
-    font-family: 'charterregular', serif; 
+  font-family: 'charterregular', serif;
 }
 
 h1,
@@ -8,71 +8,80 @@ h3,
 h4,
 h5,
 h6 {
-    font-size: 1.5em;
-    text-transform: uppercase;
-    font-family: 'Merriweather Sans', sans-serif;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-family: 'Merriweather Sans', sans-serif;
 }
+
 blockquote {
- box-shadow: 2px 2px 15px #ccc;
- padding: 1em;
- font-family: 'Roboto Condensed', sans-serif;
- font-style: italic;
+  box-shadow: 2px 2px 15px #ccc;
+  padding: 1em;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-style: italic;
 }
 
+dl.org-dl,
 ul.org-ul > li {
-    font-family: 'Source Serif Pro', serif;
-    font-weight: 400;
-    margin-bottom: 0.5em;
+  font-family: 'Source Serif Pro', serif;
+  font-weight: 400;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
 }
 
+dl.org-dl > dt {
+  text-transform: uppercase;
+}
 ul.org-ul > li > a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
+
 ul.org-ul > li > a:hover {
-    background: #C79C87;
+  background: #C79C87;
 }
+
 #lambda {
-    font-family: 'Source Serif Pro', serif; 
-    font-size: 2em;
-    font-weight: 600;
-    color: #BF0000;
-    text-shadow: 4px 4px 4px #aaa;
+  font-family: 'Source Serif Pro', serif; 
+  font-size: 2em;
+  font-weight: 600;
+  color: #BF0000;
+  text-shadow: 4px 4px 4px #aaa;
 }
 
 pre {
-    font-size: 1em;
-}
-p {
-    font-size: 1.2em;
-    line-height: 1.35em;
-    text-rendering: optimizeLegibility;
+  font-size: 1em;
 }
 
-    li {
-	font-size: 1.2em;
-    }
+p {
+  font-size: 1.2em;
+  line-height: 1.35em;
+  text-rendering: optimizeLegibility;
+}
 
 #content pre.src-org {
-    background-color: #F5E8BC;
+  background-color: #F5E8BC;
 }
 
 @media (min-width: 800px) {
-    p {
-	font-size: 1.5em;
-    }
-    pre {
-	font-size: 1.2em;
-    }
-    li {
-	font-size: 1.5em;
-    }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+  p {
+    font-size: 1.5em;
+  }
+
+  pre {
+    font-size: 1.2em;
+  }
+
+  dl.org-dl,
+  ul.org-ul > li {
+    font-size: 1.5em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-size: 2em;
-}
+  }
 }

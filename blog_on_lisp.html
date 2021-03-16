@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-08-11 Tue 20:18 -->
+<!-- 2021-03-16 Tue 23:07 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>In the mood for Lisp</title>
@@ -38,7 +38,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -50,7 +50,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -199,50 +199,26 @@
 <script src="js/grid.js"></script>
 <script src="js/fathom.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -258,7 +234,7 @@ Just like in the Hong-Kong movie "<a href="http://en.wikipedia.org/wiki/In_the_M
 </p>
 
 
-<figure>
+<figure id="org5f1e575">
 <img src="images/costume-institute01.jpg" alt="costume-institute01.jpg">
 
 </figure>
@@ -329,7 +305,7 @@ Install quicklisp.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(load <span style="color: #8b2252;">"/path/to/quicklisp.lisp"</span>)
+<pre class="src src-lisp">(load <span style="color: #65E6A7;">"/path/to/quicklisp.lisp"</span>)
 (quicklisp-quickstart:install)
 </pre>
 </div>
@@ -339,7 +315,7 @@ Proceed to installing Stumpwm.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(ql:quickload <span style="color: #8b2252;">"stumpwm"</span>)
+<pre class="src src-lisp">(ql:quickload <span style="color: #65E6A7;">"stumpwm"</span>)
 </pre>
 </div>
 
@@ -348,10 +324,10 @@ In your CCL init file, make sure you defined a function to load quicklisp on dem
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">load-quicklisp</span> ()
-  (<span style="color: #a020f0;">let</span> ((quicklisp-init (merge-pathnames <span style="color: #8b2252;">"quicklisp/setup.lisp"</span>
+<pre class="src src-lisp">(<span style="color: #6bd9db;">defun</span> <span style="color: #cea2ca;">load-quicklisp</span> ()
+  (<span style="color: #6bd9db;">let</span> ((quicklisp-init (merge-pathnames <span style="color: #65E6A7;">"quicklisp/setup.lisp"</span>
                                          (user-homedir-pathname))))
-    (<span style="color: #a020f0;">when</span> (probe-file quicklisp-init)
+    (<span style="color: #6bd9db;">when</span> (probe-file quicklisp-init)
       (load quicklisp-init))))
 </pre>
 </div>
@@ -361,7 +337,7 @@ Now we can load Stumpwm in X. Put the following in your .Xinitrc the following:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #a020f0;">exec</span> ccl -e <span style="color: #8b2252;">"(load-quicklisp)"</span> -e <span style="color: #8b2252;">"(ql:quickload \"stumpwm\")"</span> -e <span style="color: #8b2252;">"(stumpwm:stumpwm)"</span>
+<pre class="src src-shell"><span style="color: #6bd9db;">exec</span> ccl -e <span style="color: #65E6A7;">"(load-quicklisp)"</span> -e <span style="color: #65E6A7;">"(ql:quickload \"stumpwm\")"</span> -e <span style="color: #65E6A7;">"(stumpwm:stumpwm)"</span>
 </pre>
 </div>
 
@@ -370,7 +346,7 @@ Now we can load Stumpwm in X. Put the following in your .Xinitrc the following:
 </p>
 
 <p>
-The Raspberry Pi has spawned renewed interest in non-mainstream OSes like RISC OS and Plan 9, but one can experiment delightfully as well while staying on the stock Raspbian. With a little bit of effort and a lot of imagination, you can even pretend you're driving a Lisp machine.
+The Raspberry Pi has spawned renewed interest in non-mainstream OSes like RISC OS and Plan 9, but one can experiment delightfully as well while staying on the stock Raspbian. With a little bit of effort and a lot of imagination, you can even pretend you're in love with a Lisp machine.
 </p>
 </div>
 </body>

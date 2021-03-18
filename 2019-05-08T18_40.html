@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-03-19 Fri 00:44 -->
+<!-- 2021-03-19 Fri 01:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ring's idionsyncrasies</title>
+<title>Ring's idiosyncrasies</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Daniel Szmulewicz">
 <style type="text/css">
@@ -228,7 +228,7 @@
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
 <header>
-<h1 class="title">Ring's idionsyncrasies</h1>
+<h1 class="title">Ring's idiosyncrasies</h1>
 </header><p>
 The promise of Ring is to let us assemble web applications from
 modular parts. In other words, Ring endows us with
@@ -287,7 +287,7 @@ These are the foundations of web application development in Clojure. There is no
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">(</span>handler <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/doc/10"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-clojure"><span style="color: #707183;">(</span>handler <span style="color: #7388d6;">(</span><span style="color: #228b22;">mock</span>/request <span style="color: #008b8b;">:get</span> <span style="color: #8b2252;">"/"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -644,7 +644,7 @@ Can you spot the InputStream in the generated request?
 </pre>
 </div>
 
-<pre class="example" id="orge6818a8">
+<pre class="example" id="orgc3fbf28">
 {:remote-addr "localhost",
  :headers
  {"host" "localhost",
@@ -657,7 +657,7 @@ Can you spot the InputStream in the generated request?
  :server-name "localhost",
  :query-string ,
  :body
- #object[java.io.ByteArrayInputStream 0x225d04f6 "java.io.ByteArrayInputStream@225d04f6"],
+ #object[java.io.ByteArrayInputStream 0x3b45246 "java.io.ByteArrayInputStream@3b45246"],
  :scheme :http,
  :request-method :post}
 

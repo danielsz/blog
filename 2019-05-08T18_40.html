@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-03-19 Fri 00:37 -->
+<!-- 2021-03-19 Fri 00:42 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -269,9 +269,10 @@ Requests are being processed by the handler, which in turn generates an appropri
 You can now typically write something like: 
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>run handler <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:port</span> 4040<span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span> 
+<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>run handler <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:port</span> 4040<span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span>
 </pre>
 </div>
+
 
 <p>
 Where <code>run</code> or <code>serve</code> is the entry point for a particular adapter implementation interfacing with <code>Jetty</code> or any other underlying Java web server. 
@@ -292,7 +293,8 @@ These are the foundations of web application development in Clojure. There is no
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200, :headers {"content-type" "text/plain"}, :body "Some text"}
+
 </pre>
 
 
@@ -320,7 +322,8 @@ Let’s define middleware that does nothing.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200, :headers {"content-type" "text/plain"}, :body "Some text"}
+
 </pre>
 
 
@@ -345,7 +348,8 @@ Let's define some more middleware. You can chain them with impunity.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200, :headers {"content-type" "text/plain"}, :body "Some text"}
+
 </pre>
 
 
@@ -433,7 +437,8 @@ In Compojure, one combines handlers with the <code>routes</code> function. Build
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200, :headers {"content-type" "text/plain"}, :body "Bonsoir"}
+
 </pre>
 
 
@@ -448,7 +453,10 @@ Did you notice something? Our response was in French! Let’s try again, but wit
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"content-type" "text/plain"},
+ :body "Noswaith dda"}
+
 </pre>
 
 
@@ -480,7 +488,10 @@ Note: Under the hood, Compojure relies on a library called <code>clout</code> to
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"Content-Type" "text/html; charset=utf-8"},
+ :body "Bonsoir"}
+
 </pre>
 
 
@@ -490,7 +501,10 @@ class clojure.lang.Compiler$CompilerException
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"Content-Type" "text/html; charset=utf-8"},
+ :body "Noswaith dda"}
+
 </pre>
 
 
@@ -513,7 +527,8 @@ Typically, you would pass a response map.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200, :headers {"content-type" "text/plain"}, :body "Bonsoir"}
+
 </pre>
 
 
@@ -531,7 +546,8 @@ Compojure routes are semantically the same as Ring handlers, with the exception 
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+
+
 </pre>
 
 
@@ -567,7 +583,10 @@ As before, we have a composable system:
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"Content-Type" "text/html; charset=utf-8"},
+ :body "Bonsoir"}
+
 </pre>
 
 
@@ -583,7 +602,10 @@ Look how we can freely compose middleware and handlers in this system.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"Content-Type" "text/html; charset=utf-8"},
+ :body "Bonsoir"}
+
 </pre>
 
 
@@ -600,7 +622,10 @@ Or even:
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"Content-Type" "text/html; charset=utf-8"},
+ :body "Bonsoir"}
+
 </pre>
 
 
@@ -620,10 +645,24 @@ Can you spot the InputStream in the generated request?
 </pre>
 </div>
 
-<pre class="example">
-class clojure.lang.Compiler$CompilerException
-</pre>
+<pre class="example" id="org406fa51">
+{:remote-addr "localhost",
+ :headers
+ {"host" "localhost",
+  "content-type" "application/x-www-form-urlencoded",
+  "content-length" "11"},
+ :server-port 80,
+ :content-length 11,
+ :content-type "application/x-www-form-urlencoded",
+ :uri "/french",
+ :server-name "localhost",
+ :query-string ,
+ :body
+ #object[java.io.ByteArrayInputStream 0x410b38d1 "java.io.ByteArrayInputStream@410b38d1"],
+ :scheme :http,
+ :request-method :post}
 
+</pre>
 
 <p>
 Let’s compose a route with middleware that extracts that InputStream and adds a params key to the request.
@@ -646,7 +685,10 @@ Note: Middleware often add keys to the request map in addition to the standard k
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"Content-Type" "text/html; charset=utf-8"},
+ :body "Bonsoir"}
+
 </pre>
 
 
@@ -687,7 +729,10 @@ You might be tempted to write something like this:
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"Content-Type" "text/html; charset=utf-8"},
+ :body "Noswaith dda"}
+
 </pre>
 
 
@@ -700,7 +745,8 @@ class clojure.lang.Compiler$CompilerException
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+
+
 </pre>
 
 
@@ -723,7 +769,10 @@ We can fix that if we shuffle things around a bit.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerException
+{:status 200,
+ :headers {"Content-Type" "text/html; charset=utf-8"},
+ :body "Bonsoir"}
+
 </pre>
 
 

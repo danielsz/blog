@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-01-14 Thu 10:33 -->
+<!-- 2021-03-19 Fri 01:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Understanding Meyvn, part I</title>
@@ -242,7 +242,7 @@ In the beginning was the installer, and the authoritative place to find its most
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure">clj -Sdeps '<span style="color: #cc0000; font-weight: bold;">{</span><span style="color: #1f5bff;">:deps</span> <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #18b2b2;">org.danielsz</span>/meyvn-installer <span style="color: #00af00; font-weight: bold;">{</span><span style="color: #1f5bff;">:</span><span style="color: #18b2b2;">mvn</span><span style="color: #5f5f5f; background-color: #fdfde7;">/</span><span style="color: #1f5bff;">version</span> <span style="color: #ff1f8b;">"1.3.0"</span><span style="color: #00af00; font-weight: bold;">}</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">}</span>' -m meyvn-installer.core
+<pre class="src src-clojure">clj -Sdeps '<span style="color: #707183;">{</span><span style="color: #008b8b;">:deps</span> <span style="color: #7388d6;">{</span><span style="color: #228b22;">org.danielsz</span>/meyvn-installer <span style="color: #909183;">{</span><span style="color: #008b8b;">:</span><span style="color: #228b22;">mvn</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #008b8b;">version</span> <span style="color: #8b2252;">"1.3.0"</span><span style="color: #909183;">}</span><span style="color: #7388d6;">}</span><span style="color: #707183;">}</span>' -m meyvn-installer.core
 </pre>
 </div>
 
@@ -289,18 +289,18 @@ Meyvn is driven by a configuration file found in the project directory, <code>me
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">{</span><span style="color: #1f5bff;">:uberjar</span> <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #1f5bff;">:enabled</span> <span style="color: #1f5bff;">true</span>
-           <span style="color: #1f5bff;">:resources</span> <span style="color: #00af00; font-weight: bold;">{</span><span style="color: #1f5bff;">:cljs</span> <span style="color: #ff4ea3; font-weight: bold;">{</span><span style="color: #1f5bff;">:enabled</span> <span style="color: #1f5bff;">true</span>
-                              <span style="color: #1f5bff;">:compiler-opts</span> <span style="color: #00d7af; font-weight: bold;">{</span><span style="color: #1f5bff;">:infer-externs</span> <span style="color: #1f5bff;">true</span>
-                                              <span style="color: #1f5bff;">:optimizations</span> <span style="color: #1f5bff;">:advanced</span>
-                                              <span style="color: #1f5bff;">:parallel-build</span> <span style="color: #1f5bff;">true</span>
-                                              <span style="color: #1f5bff;">:verbose</span> <span style="color: #1f5bff;">true</span>
-                                              <span style="color: #1f5bff;">:aot-cache</span> <span style="color: #1f5bff;">true</span>
-                                              <span style="color: #1f5bff;">:output-to</span> <span style="color: #ff1f8b;">"js/my-app.js"</span>
-                                              <span style="color: #1f5bff;">:output-wrapper</span> <span style="color: #1f5bff;">true</span>
-                                              <span style="color: #1f5bff;">:foreign-libs</span> <span style="color: #ff8700; font-weight: bold;">[]</span>
-                                              <span style="color: #1f5bff;">:main</span> <span style="color: #ff1f8b;">"myapp.core"</span><span style="color: #00d7af; font-weight: bold;">}</span>
-                              <span style="color: #1f5bff;">:tools-deps-alias</span> <span style="color: #1f5bff;">:cljs</span><span style="color: #ff4ea3; font-weight: bold;">}</span><span style="color: #00af00; font-weight: bold;">}</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-clojure"><span style="color: #707183;">{</span><span style="color: #008b8b;">:uberjar</span> <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:enabled</span> <span style="color: #008b8b;">true</span>
+           <span style="color: #008b8b;">:resources</span> <span style="color: #909183;">{</span><span style="color: #008b8b;">:cljs</span> <span style="color: #709870;">{</span><span style="color: #008b8b;">:enabled</span> <span style="color: #008b8b;">true</span>
+                              <span style="color: #008b8b;">:compiler-opts</span> <span style="color: #907373;">{</span><span style="color: #008b8b;">:infer-externs</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:optimizations</span> <span style="color: #008b8b;">:advanced</span>
+                                              <span style="color: #008b8b;">:parallel-build</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:verbose</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:aot-cache</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:output-to</span> <span style="color: #8b2252;">"js/my-app.js"</span>
+                                              <span style="color: #008b8b;">:output-wrapper</span> <span style="color: #008b8b;">true</span>
+                                              <span style="color: #008b8b;">:foreign-libs</span> <span style="color: #6276ba;">[]</span>
+                                              <span style="color: #008b8b;">:main</span> <span style="color: #8b2252;">"myapp.core"</span><span style="color: #907373;">}</span>
+                              <span style="color: #008b8b;">:tools-deps-alias</span> <span style="color: #008b8b;">:cljs</span><span style="color: #709870;">}</span><span style="color: #909183;">}</span><span style="color: #7388d6;">}</span><span style="color: #707183;">}</span>
 </pre>
 </div>
 

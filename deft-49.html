@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-08-11 Tue 20:17 -->
+<!-- 2021-03-19 Fri 01:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ghosts in the machine</title>
@@ -38,7 +38,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -50,7 +50,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -199,50 +199,26 @@
 <script src="js/grid.js"></script>
 <script src="js/fathom.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -260,7 +236,7 @@ There is a crack in everything. That's how the light gets in. – Leonard Cohen
 </blockquote>
 
 
-<figure>
+<figure id="org1fe92eb">
 <img src="images/lain-animated2.gif" alt="lain-animated2.gif">
 
 </figure>
@@ -295,7 +271,7 @@ OK, fine. But wait a second, why? What are we guarding ourselves against? What d
 </p>
 
 
-<figure>
+<figure id="orgcdfdd9f">
 <img src="images/delete.gif" alt="delete.gif">
 
 </figure>
@@ -400,7 +376,7 @@ Note: We are restricting the present discussion to static Vars. Dynamic Vars hav
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red"]} 0x23cbe4da]
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red"]} 0x49d7b18a]
 </pre>
 </div>
 
@@ -428,7 +404,7 @@ If we redefine our Var, our agent will pick up the new value.
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue"]} 0x23cbe4da]
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue"]} 0x49d7b18a]
 </pre>
 </div>
 
@@ -490,7 +466,7 @@ Of course. But what if we ask Neo?
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue" "blue"]} 0x23cbe4da]
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue"]} 0x49d7b18a]
 </pre>
 </div>
 
@@ -535,7 +511,7 @@ If this seems like a contrived exercise, please note that this is exactly what h
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue" "blue" "blue"]} 0x23cbe4da]
+<pre class="src src-org">#agent[{:status :ready, :val [#'choice/pill "red" "blue" "blue" "blue"]} 0x49d7b18a]
 </pre>
 </div>
 
@@ -576,7 +552,7 @@ Let’s savour this moment, because this is when the sirens start blasting, all 
 </p>
 
 
-<figure>
+<figure id="orgdbc3c77">
 <img src="images/sirens.gif" alt="sirens.gif">
 
 </figure>
@@ -643,7 +619,7 @@ This is what happens to <code>foo</code> when reloading a namespace with <code>r
 </p>
 
 
-<figure>
+<figure id="org777efbf">
 <img src="images/liveness-foo2.png" alt="liveness-foo2.png">
 
 </figure>
@@ -657,7 +633,7 @@ And this is what happens to a Var named foo when reloading a namespace with <cod
 </p>
 
 
-<figure>
+<figure id="org11f13ba">
 <img src="images/liveness-foo1.png" alt="liveness-foo1.png">
 
 </figure>

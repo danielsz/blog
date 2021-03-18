@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-08-11 Tue 20:18 -->
+<!-- 2021-03-19 Fri 00:34 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ring's idionsyncrasies</title>
@@ -38,7 +38,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -50,7 +50,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -199,50 +199,26 @@
 <script src="js/grid.js"></script>
 <script src="js/fathom.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -254,7 +230,7 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">Ring's idionsyncrasies</h1>
 </header><p>
-The promise of Ring is to let us assemble web applications from
+TThe promise of Ring is to let us assemble web applications from
 modular parts. In other words, Ring endows us with
 composability. Images of Lego blocks neatly piled up into a larger
 structure come to mind, but as usual in the software world, things are
@@ -316,8 +292,7 @@ These are the foundations of web application development in Clojure. There is no
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:37).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -345,8 +320,7 @@ Let’s define middleware that does nothing.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:51).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -371,8 +345,7 @@ Let's define some more middleware. You can chain them with impunity.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:2:2).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -399,8 +372,7 @@ This handler returns the same response regardless of the request. Not very usefu
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:2:2).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -411,8 +383,7 @@ No such namespace: mock
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:2:2).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -460,8 +431,7 @@ In Compojure, one combines handlers with the <code>routes</code> function. Build
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: routes in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -476,8 +446,7 @@ Did you notice something? Our response was in French! Let’s try again, but wit
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: routes in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -509,8 +478,7 @@ Note: Under the hood, Compojure relies on a library called <code>clout</code> to
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:33).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -520,8 +488,7 @@ No such namespace: mock
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:33).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -544,8 +511,7 @@ Typically, you would pass a response map.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: routes in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -563,8 +529,7 @@ Compojure routes are semantically the same as Ring handlers, with the exception 
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:33).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -600,8 +565,7 @@ As before, we have a composable system:
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: routes in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -617,8 +581,7 @@ Look how we can freely compose middleware and handlers in this system.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: routes in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -635,8 +598,7 @@ Or even:
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:41).
-Unable to resolve symbol: routes in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -657,8 +619,7 @@ Can you spot the InputStream in the generated request?
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:28).
-No such namespace: mock
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -683,8 +644,7 @@ Note: Middleware often add keys to the request map in addition to the standard k
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: wrap-params in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -725,8 +685,7 @@ You might be tempted to write something like this:
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: routes in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -739,8 +698,7 @@ Unable to resolve symbol: routes in this context
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: routes in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 
@@ -763,8 +721,7 @@ We can fix that if we shuffle things around a bit.
 </div>
 
 <pre class="example">
-class clojure.lang.Compiler$CompilerExceptionclass clojure.lang.Compiler$CompilerExceptionSyntax error compiling at (*cider-repl ~:localhost:33541(clj)*:1:29).
-Unable to resolve symbol: wrap-params in this context
+class clojure.lang.Compiler$CompilerException
 </pre>
 
 

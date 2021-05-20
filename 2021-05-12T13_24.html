@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-20 Thu 16:14 -->
+<!-- 2021-05-20 Thu 16:22 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">101562696
+<pre class="src src-org">1013371288
 </pre>
 </div>
 
@@ -281,27 +281,16 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">929263935
+<pre class="src src-org">1673667787
 </pre>
 </div>
 
 <p>
-Not only are they not the same instance, but every new instance joins its ancestors in the class loader hierarchy. This can be inspected like so.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #1f5bff; font-weight: bold;">)</span>
-     <span style="color: #1f5bff; font-weight: bold;">(</span>iterate #<span style="color: #00af00; font-weight: bold;">(</span>.getParent <span style="color: #ff8700;">%</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
-     <span style="color: #1f5bff; font-weight: bold;">(</span>take-while #<span style="color: #00af00; font-weight: bold;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #ff8700;">%</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
-
-<p>
-This befuddling observation is what Vladimir and Arne reported earlier. 
+Not only are they not the same instance, but every new instance joins its ancestors in the class loader hierarchy and sticks around.
 </p>
 
 <p>
-Let&rsquo;s examine the class loader hierarchy in its complete form. Here are our <code>DynamicClassLoader</code> friends again, plus the troika of built-in class loaders at the top. 
+Let&rsquo;s examine the class loader hierarchy.
 </p>
 
 <div class="org-src-container">
@@ -312,11 +301,20 @@ Let&rsquo;s examine the class loader hierarchy in its complete form. Here are ou
 </div>
 
 <p>
+You&rsquo;ll notice our <code>DynamicClassLoader</code> friend, plus the troika of built-in class loaders at the top. 
+</p>
+
+<p>
 If you see only two out of the three triumvirs, don&rsquo;t fret. The Primordial class loader is responsible for bootstrapping Java&rsquo;s core classes. It is written in native code, out of reach, represented by nil. 
 </p>
 
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>nil? <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader java.lang.Class<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">true
 </pre>
 </div>
 
@@ -875,6 +873,7 @@ Back then, each evaluation was producing a new class loader instance that would 
 
 <p>
 keeps an internal cache of its own classes, it will delegate the loading to its parent
+This befuddling observation is what Vladimir and Arne reported earlier. 
 </p>
 </div>
 </body>

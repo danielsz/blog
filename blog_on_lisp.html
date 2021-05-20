@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-03-19 Fri 01:08 -->
+<!-- 2021-05-20 Thu 14:44 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>In the mood for Lisp</title>
@@ -191,15 +191,8 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="css/grid.css">
-<link rel="stylesheet" type="text/css" href="css/post.css">
-<link rel="stylesheet" type="text/css" href="assets/fonts/charter/webfonts/stylesheet.css">
-<link rel="stylesheet" type="text/css" href="css/typography.css">
-<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Roboto+Condensed|Source+Serif+Pro|Inconsolata" rel="stylesheet">
-<script src="js/grid.js"></script>
-<script src="js/fathom.js"></script>
 <script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
 <!--/*--><![CDATA[/*><!--*/
      function CodeHighlightOn(elem, id)
      {
@@ -222,11 +215,7 @@
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href="index.html"> UP </a>
- |
- <a accesskey="H" href="index.html"> HOME </a>
-</div><div id="content">
+<div id="content">
 <header>
 <h1 class="title">In the mood for Lisp</h1>
 </header><p>
@@ -234,7 +223,7 @@ Just like in the Hong-Kong movie "<a href="http://en.wikipedia.org/wiki/In_the_M
 </p>
 
 
-<figure id="org853b50d">
+<figure id="org948222a">
 <img src="images/costume-institute01.jpg" alt="costume-institute01.jpg">
 
 </figure>
@@ -305,7 +294,7 @@ Install quicklisp.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(load <span style="color: #8b2252;">"/path/to/quicklisp.lisp"</span>)
+<pre class="src src-lisp">(load <span style="color: #ff1f8b;">"/path/to/quicklisp.lisp"</span>)
 (quicklisp-quickstart:install)
 </pre>
 </div>
@@ -315,7 +304,7 @@ Proceed to installing Stumpwm.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(ql:quickload <span style="color: #8b2252;">"stumpwm"</span>)
+<pre class="src src-lisp">(ql:quickload <span style="color: #ff1f8b;">"stumpwm"</span>)
 </pre>
 </div>
 
@@ -324,10 +313,10 @@ In your CCL init file, make sure you defined a function to load quicklisp on dem
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">load-quicklisp</span> ()
-  (<span style="color: #a020f0;">let</span> ((quicklisp-init (merge-pathnames <span style="color: #8b2252;">"quicklisp/setup.lisp"</span>
+<pre class="src src-lisp">(<span style="color: #00af00;">defun</span> <span style="color: #ef2929;">load-quicklisp</span> ()
+  (<span style="color: #00af00;">let</span> ((quicklisp-init (merge-pathnames <span style="color: #ff1f8b;">"quicklisp/setup.lisp"</span>
                                          (user-homedir-pathname))))
-    (<span style="color: #a020f0;">when</span> (probe-file quicklisp-init)
+    (<span style="color: #00af00;">when</span> (probe-file quicklisp-init)
       (load quicklisp-init))))
 </pre>
 </div>
@@ -337,7 +326,7 @@ Now we can load Stumpwm in X. Put the following in your .Xinitrc the following:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #a020f0;">exec</span> ccl -e <span style="color: #8b2252;">"(load-quicklisp)"</span> -e <span style="color: #8b2252;">"(ql:quickload \"stumpwm\")"</span> -e <span style="color: #8b2252;">"(stumpwm:stumpwm)"</span>
+<pre class="src src-shell"><span style="color: #00af00;">exec</span> ccl -e <span style="color: #ff1f8b;">"(load-quicklisp)"</span> -e <span style="color: #ff1f8b;">"(ql:quickload \"stumpwm\")"</span> -e <span style="color: #ff1f8b;">"(stumpwm:stumpwm)"</span>
 </pre>
 </div>
 
@@ -348,6 +337,11 @@ Now we can load Stumpwm in X. Put the following in your .Xinitrc the following:
 <p>
 The Raspberry Pi has spawned renewed interest in non-mainstream OSes like RISC OS and Plan 9, but one can experiment delightfully as well while staying on the stock Raspbian. With a little bit of effort and a lot of imagination, there you are having a romance with a Lisp machine.
 </p>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Daniel Szmulewicz</p>
+<p class="date">Created: 2021-05-20 Thu 14:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

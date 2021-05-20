@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-20 Thu 16:31 -->
+<!-- 2021-05-20 Thu 16:35 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">2089863519
+<pre class="src src-org">1846147127
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">495187271
+<pre class="src src-org">2064696445
 </pre>
 </div>
 
@@ -406,11 +406,11 @@ Let&rsquo;s have a look at its class hierarchy.
 </div>
 
 <p>
-Contrary to the previous examples, <code>foo</code> was not present when the JVM started, it&rsquo;s a brand new class loaded at runtime. This is important. Indeed, the Java class model is designed in such a way that it need not know ahead of time the classes it is going load and run. Java was born as <code>Greentalk</code>, a nod to Smalltalk because that was the state of the art in terms of virtual machine and <code>JIT</code> compilation. For a time the system was projected to be running on <a href="https://www.javatpoint.com/history-of-java">set-top boxes</a>. The need for runtime class loading was anticipated as classes were going to travel across the wire.
+Contrary to the previous examples, <code>foo</code> was not present when the JVM started. It&rsquo;s a brand new class loaded at runtime. This is important. Indeed, the Java class model is designed in such a way that it need not know ahead of time the classes it is going load and run. Java was born as <code>Greentalk</code>, a nod to Smalltalk because that was the state of the art in terms of virtual machine and <code>JIT</code> compilation. For a time the system was projected to be running on <a href="https://www.javatpoint.com/history-of-java">set-top boxes</a>. The need for runtime class loading was anticipated as classes were going to travel across the wire.
 </p>
 
 <p>
-So who is responsible to load on-the-fly Clojure code?
+So who is responsible for loading Clojure code on-the-fly?
 </p>
 
 <div class="org-src-container">
@@ -419,7 +419,7 @@ So who is responsible to load on-the-fly Clojure code?
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">"clojure.lang.DynamicClassLoader@7b7a0e19"
+<pre class="src src-org">"clojure.lang.DynamicClassLoader@5f8b50b4"
 </pre>
 </div>
 
@@ -520,7 +520,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">78
+<pre class="src src-org">98
 </pre>
 </div>
 

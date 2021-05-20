@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-20 Thu 16:24 -->
+<!-- 2021-05-20 Thu 16:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1776968574
+<pre class="src src-org">1072705496
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1931191452
+<pre class="src src-org">363150198
 </pre>
 </div>
 
@@ -355,6 +355,11 @@ The classes that you care most about, those that you declare as dependencies, ar
 </pre>
 </div>
 
+<div class="org-src-container">
+<pre class="src src-org">"clojure.lang.PersistentArrayMap was loaded by app"
+</pre>
+</div>
+
 <p>
 Finally, at the REPL we are creating new classes all the time. We may not notice it, but we do. 
 </p>
@@ -364,12 +369,22 @@ Finally, at the REPL we are creating new classes all the time. We may not notice
 </pre>
 </div>
 
+<div class="org-src-container">
+<pre class="src src-org">#'user/foo
+</pre>
+</div>
+
 <p>
 To us, <code>foo</code> is a function, but to the JVM it is a class.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>.getName <span style="color: #1f5bff; font-weight: bold;">(</span>class foo<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">"user$foo"
 </pre>
 </div>
 
@@ -385,6 +400,11 @@ Let&rsquo;s have a look at its class hierarchy.
 </pre>
 </div>
 
+<div class="org-src-container">
+<pre class="src src-org">"class user$fooclass clojure.lang.AFunctionclass clojure.lang.AFnclass java.lang.Object"
+</pre>
+</div>
+
 <p>
 Contrary to the previous examples, <code>foo</code> was not present when the JVM started, it&rsquo;s a brand new class loaded at runtime. This is important. Indeed, the Java class model is designed in such a way that it need not know ahead of time the classes it is going load and run. Java was born as <code>Greentalk</code>, a nod to Smalltalk because that was the state of the art in terms of virtual machine and <code>JIT</code> compilation. For a time the system was projected to be running on <a href="https://www.javatpoint.com/history-of-java">set-top boxes</a>. The need for runtime class loading was anticipated as classes were going to travel across the wire.
 </p>
@@ -395,6 +415,11 @@ So who is responsible to load on-the-fly Clojure code?
 
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>str <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader <span style="color: #00af00; font-weight: bold;">(</span>class foo<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">"clojure.lang.DynamicClassLoader@14fe8213"
 </pre>
 </div>
 
@@ -438,6 +463,13 @@ A new class loader instance is referenced with every top-level form.
 </pre>
 </div>
 
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #767676; background-color: #ffff87;">| #'user/foo |</span>
+<span style="color: #767676; background-color: #ffff87;">| #'user/bar |</span>
+<span style="color: #767676; background-color: #ffff87;">| false      |</span>
+</pre>
+</div>
+
 <p>
 Compare and contrast.
 </p>
@@ -446,6 +478,11 @@ Compare and contrast.
 <pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">let</span> <span style="color: #1f5bff; font-weight: bold;">[</span>foo <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">fn</span>  <span style="color: #ff4ea3; font-weight: bold;">[</span>x<span style="color: #ff4ea3; font-weight: bold;">]</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>identity x<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
       bar <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">fn</span> <span style="color: #ff4ea3; font-weight: bold;">[</span>y<span style="color: #ff4ea3; font-weight: bold;">]</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>identity y<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">]</span>
   <span style="color: #1f5bff; font-weight: bold;">(</span>= <span style="color: #00af00; font-weight: bold;">(</span>.getClassLoader <span style="color: #ff4ea3; font-weight: bold;">(</span>class foo<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span>.getClassLoader <span style="color: #ff4ea3; font-weight: bold;">(</span>class bar<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">true
 </pre>
 </div>
 
@@ -472,13 +509,18 @@ The expected behavior is that it is set once, unlike the per-evaluation <code>cl
 </p>
 
 <p>
-It is worth reproducing the experiment in both a default Clojure REPL and a nREPL client.
+It is worth reproducing the experiment in a plain Clojure REPL and a nREPL client side by side.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>count <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #00af00; font-weight: bold;">)</span>
    <span style="color: #00af00; font-weight: bold;">(</span>iterate #<span style="color: #ff4ea3; font-weight: bold;">(</span>.getParent <span style="color: #ff8700;">%</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
    <span style="color: #00af00; font-weight: bold;">(</span>take-while #<span style="color: #ff4ea3; font-weight: bold;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #ff8700;">%</span> <span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">63
 </pre>
 </div>
 

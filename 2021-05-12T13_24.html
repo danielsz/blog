@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-20 Thu 16:35 -->
+<!-- 2021-05-20 Thu 16:43 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1846147127
+<pre class="src src-org">616023362
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">2064696445
+<pre class="src src-org">1050839409
 </pre>
 </div>
 
@@ -414,21 +414,21 @@ So who is responsible for loading Clojure code on-the-fly?
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>str <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader <span style="color: #00af00; font-weight: bold;">(</span>class foo<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>class <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader <span style="color: #00af00; font-weight: bold;">(</span>class foo<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">"clojure.lang.DynamicClassLoader@5f8b50b4"
+<pre class="src src-org">clojure.lang.DynamicClassLoader
 </pre>
 </div>
 
 <p>
-When you create <code>foo</code>  at the REPL, Clojure&rsquo;s compiler emits bytecode for consumption by the loader&rsquo;s <code>defineClass</code> method. The newly created class is then linked.
+When you create <code>foo</code>  at the REPL, Clojure&rsquo;s compiler emits bytecode for consumption by <code>DynamicClassLoader</code>. It will create a new class with the  <code>defineClass</code> method before linking it.
 </p>
 
 <p>
-Note: Linking is the process of taking a class or interface and combining it into the run-time state of the Java Virtual Machine so that it can be executed.
+<i>Note:</i> Linking is the process of taking a class or interface and combining it into the run-time state of the Java Virtual Machine so that it can be executed.
 </p>
 
 <p>
@@ -520,7 +520,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">98
+<pre class="src src-org">119
 </pre>
 </div>
 
@@ -893,7 +893,7 @@ Behind both of those expressions of befuddlement is a peculiar observation. Some
 </p>
 <blockquote>
 <p>
-Note: the observer effect is the disturbance of an observed system by the act of observation
+<i>Note:</i> the observer effect is the disturbance of an observed system by the act of observation
 </p>
 </blockquote>
 

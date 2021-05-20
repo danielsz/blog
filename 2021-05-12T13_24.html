@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-20 Thu 16:28 -->
+<!-- 2021-05-20 Thu 16:31 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1072705496
+<pre class="src src-org">2089863519
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">363150198
+<pre class="src src-org">495187271
 </pre>
 </div>
 
@@ -419,7 +419,7 @@ So who is responsible to load on-the-fly Clojure code?
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">"clojure.lang.DynamicClassLoader@14fe8213"
+<pre class="src src-org">"clojure.lang.DynamicClassLoader@7b7a0e19"
 </pre>
 </div>
 
@@ -520,7 +520,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">63
+<pre class="src src-org">78
 </pre>
 </div>
 
@@ -534,13 +534,21 @@ Clojure&rsquo;s entry point to the REPL is <code>clojure.main/repl</code>. Howev
 
 <blockquote>
 <p>
-Yes, this should be fixed upstream; a new DynamicClassLoader should only be set as the thread-context classloader if one is not already in place&#x2026; Some years on, and it&rsquo;s clear that this is fundamentally a minor problem (insofar as hardly anyone has complained AFAIK)&#x2026; Chas Emerick, <a href="https://github.com/nrepl/nrepl/issues/8#issuecomment-342284589">issue 8</a>, nREPL repository.
+Yes, this should be fixed upstream; a new DynamicClassLoader should only be set as the thread-context classloader if one is not already in place&#x2026; Some years on, and it&rsquo;s clear that this is fundamentally a minor problem (insofar as hardly anyone has complained AFAIK)&#x2026;
+</p>
+
+<p>
+⸺ Chas Emerick, <a href="https://github.com/nrepl/nrepl/issues/8#issuecomment-342284589">issue 8</a>, nREPL repository.
 </p>
 </blockquote>
 
 <blockquote>
 <p>
-I think nREPL will end up having to stop using <code>clojure.main/repl</code>, and maintain a modified version of it itself (something I wanted to avoid exactly so as to benefit from the changes to <code>clojure.main/repl</code> from version to version of Clojure). Chas Emerick, <a href="https://clojure.atlassian.net/browse/NREPL-31">NREPL-31</a>, Jira.
+I think nREPL will end up having to stop using <code>clojure.main/repl</code>, and maintain a modified version of it itself (something I wanted to avoid exactly so as to benefit from the changes to <code>clojure.main/repl</code> from version to version of Clojure).
+</p>
+
+<p>
+⸺ Chas Emerick, <a href="https://clojure.atlassian.net/browse/NREPL-31">NREPL-31</a>, Jira.
 </p>
 </blockquote>
 
@@ -557,6 +565,12 @@ Also interesting is why hardly anyone is complaining. That&rsquo;s because there
 </pre>
 </div>
 
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #767676; background-color: #ffff87;">| #'user/json-jar |</span>
+<span style="color: #767676; background-color: #ffff87;">| #'user/addlib   |</span>
+</pre>
+</div>
+
 <p>
 Now you can.
 </p>
@@ -565,6 +579,11 @@ Now you can.
 <pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>addlib json-jar<span style="color: #cc0000; font-weight: bold;">)</span>
 <span style="color: #cc0000; font-weight: bold;">(</span>require '<span style="color: #1f5bff; font-weight: bold;">[</span>clojure.data.json <span style="color: #1f5bff;">:as</span> json<span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
 <span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">json</span>/write-str <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #1f5bff;">:foo</span> <span style="color: #ff1f8b;">"bar"</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">"{\"foo\":\"bar\"}"
 </pre>
 </div>
 

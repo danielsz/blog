@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-20 Thu 16:57 -->
+<!-- 2021-05-20 Thu 17:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">298270290
+<pre class="src src-org">2012001926
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">590714890
+<pre class="src src-org">1762149295
 </pre>
 </div>
 
@@ -395,13 +395,12 @@ Let&rsquo;s have a look at its class hierarchy.
 <div class="org-src-container">
 <pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span>class foo<span style="color: #1f5bff; font-weight: bold;">)</span>
   <span style="color: #1f5bff; font-weight: bold;">(</span>iterate #<span style="color: #00af00; font-weight: bold;">(</span>.getSuperclass <span style="color: #ff8700;">%</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
-  <span style="color: #1f5bff; font-weight: bold;">(</span>take-while identity<span style="color: #1f5bff; font-weight: bold;">)</span>
-  <span style="color: #1f5bff; font-weight: bold;">(</span>apply str<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span>take-while identity<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">"class user$fooclass clojure.lang.AFunctionclass clojure.lang.AFnclass java.lang.Object"
+<pre class="src src-org">(user$foo clojure.lang.AFunction clojure.lang.AFn java.lang.Object)
 </pre>
 </div>
 
@@ -486,7 +485,7 @@ Compare and contrast.
 </div>
 
 <p>
-We&rsquo;ve shown how class loader instances are being repeatedly created at the REPL, and it sounds like an explanation for the mystery we mentioned earlier. It is not. Let&rsquo;s take a closer look at the observation that has befuddled inquisitive developers since 2012. 
+We&rsquo;ve shown how class loader instances are being repeatedly created at the REPL, and it sounds like an explanation for the mystery we mentioned at the start. It is not. Let&rsquo;s take a closer look at the observation that has befuddled inquisitive developers since 2012. 
 </p>
 
 <p>
@@ -504,7 +503,7 @@ This translates to: <i>instead of setting the default Application loader class o
 </p>
 
 <p>
-The expected behavior is that it is set once, unlike the per-evaluation <code>clojure.lang.Compiler/LOADER</code>.
+The expected behavior is that it is set once, unlike the per-evaluation class loader stored in <code>clojure.lang.Compiler/LOADER</code>.
 </p>
 
 <p>
@@ -519,7 +518,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">40
+<pre class="src src-org">61
 </pre>
 </div>
 

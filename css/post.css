@@ -1,25 +1,29 @@
 #content {
-    display: grid;
-    grid-template-columns: [full-start] minmax(1em, 1fr) [main-start] minmax(0, 40em) [main-end] minmax(1em, 1fr) [full-end];
+  display: grid;
+  grid-template-columns: [full-start] minmax(1em, 1fr) [main-start] minmax(0, 40em) [main-end] minmax(1em, 1fr) [full-end];
 }
 
 #content > * {
-    grid-column: main;
+  grid-column: main;
 }
 
 #content > .org-src-container {
-    grid-column: full;
+  grid-column: full;
 }
 
 #content > blockquote {
-    grid-column: full;
+  grid-column: full;
 }
 
 #org-div-home-and-up {
-    grid-column-start: -2;
-    text-align: center;
+  grid-column-start: -2;
+  text-align: center;
 }
 
 #content img {
-    max-width: 100%;
+  max-width: 100%;
+}
+
+#content .hiring {
+  border: solid;
 }

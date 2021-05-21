@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-20 Thu 17:02 -->
+<!-- 2021-05-21 Fri 10:07 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -229,7 +229,13 @@
 </div><div id="content">
 <header>
 <h1 class="title">Once Upon a Class</h1>
-</header><p>
+</header><div class="pepe" id="org9fac84d">
+<p>
+hello
+</p>
+
+</div>
+<p>
 This is a story about classes. A story that harks back to early days, both historically and metaphorically, and it begins with a mystery.
 </p>
 
@@ -267,7 +273,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">2012001926
+<pre class="src src-org">1610504585
 </pre>
 </div>
 
@@ -281,7 +287,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1762149295
+<pre class="src src-org">547971656
 </pre>
 </div>
 
@@ -379,12 +385,12 @@ To us, <code>foo</code> is a function, but to the JVM it is a class.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>.getName <span style="color: #1f5bff; font-weight: bold;">(</span>class foo<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>class foo<span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">"user$foo"
+<pre class="src src-org">user$foo
 </pre>
 </div>
 
@@ -518,7 +524,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">61
+<pre class="src src-org">19
 </pre>
 </div>
 
@@ -551,7 +557,7 @@ I think nREPL will end up having to stop using <code>clojure.main/repl</code>, a
 </blockquote>
 
 <p>
-Also interesting is why hardly anyone is complaining. That&rsquo;s because there are no side-effects apart from the memory leak. The context class loader is not used by the compiler at all. It is sometimes used by tooling. <code>DynamicClassLoader</code> happens to extend Java&rsquo;s URLClassLoader and the latter can be used to load JARs. Suppose you&rsquo;re at the REPL and you realize that you need <code>data.json</code>, but it isn&rsquo;t in your class path. No problemo.
+Also interesting is why hardly anyone is complaining. That&rsquo;s because there are no side-effects apart from the memory leak (ie. allocation of objects evading GC). The context class loader is not used by the compiler at all. It is sometimes used by tooling. <code>DynamicClassLoader</code> happens to extend Java&rsquo;s URLClassLoader and the latter can be used to load JARs. Suppose you&rsquo;re at the REPL and you realize that you need <code>data.json</code>, but it isn&rsquo;t in your class path. No problemo.
 </p>
 
 <div class="org-src-container">
@@ -587,7 +593,7 @@ Now you can.
 
 
 <p>
-In conclusion, Clojure leverages built-in capabilities of the JVM to provide a dynamic runtime environment at the REPL. Redefinition of classes is achieved via the assignment of new instances of <code>DynamicClassLoader</code> for every top-level form. Wholesale addition of classes in Jars is made possible because <code>DynamicClassLoader</code> inherits from <code>URLCLassLoader</code> the <code>addURL</code> method.
+In conclusion, Clojure leverages built-in capabilities of the JVM to provide a dynamic runtime environment at the REPL. Redefinition of classes is achieved via the assignment of new instances of <code>DynamicClassLoader</code> for every top-level form. Wholesale addition of classes in Jars is made possible because <code>DynamicClassLoader</code> inherits the <code>addURL</code> method from <code>URLCLassLoader</code>.
 </p>
 
 

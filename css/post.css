@@ -26,4 +26,6 @@
 
 #content .hiring {
   border: solid;
+  padding: 1em;
+  background-color: rgb(144, 238, 144);
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-21 Fri 22:52 -->
+<!-- 2021-05-22 Sat 09:59 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -262,12 +262,12 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>hash <span style="color: #80bcb6;">(</span>.getContextClassLoader <span style="color: #c79af4;">(</span><span style="color: #ef6787;">Thread</span>/currentThread<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>hash <span style="color: #1f5bff; font-weight: bold;">(</span>.getContextClassLoader <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1986529521
+<pre class="src src-org">1608142171
 </pre>
 </div>
 
@@ -276,12 +276,12 @@ Now rinse and repeat.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>hash <span style="color: #80bcb6;">(</span>.getContextClassLoader <span style="color: #c79af4;">(</span><span style="color: #ef6787;">Thread</span>/currentThread<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>hash <span style="color: #1f5bff; font-weight: bold;">(</span>.getContextClassLoader <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1722614403
+<pre class="src src-org">160504817
 </pre>
 </div>
 
@@ -294,9 +294,9 @@ Let&rsquo;s examine the class loader hierarchy.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">-&gt;&gt;</span> <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #80bcb6;">)</span>
-     <span style="color: #80bcb6;">(</span>iterate #<span style="color: #c79af4;">(</span>.getParent <span style="color: #eed891;">%</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
-     <span style="color: #80bcb6;">(</span>take-while identity<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #1f5bff; font-weight: bold;">)</span>
+     <span style="color: #1f5bff; font-weight: bold;">(</span>iterate #<span style="color: #00af00; font-weight: bold;">(</span>.getParent <span style="color: #ff8700;">%</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+     <span style="color: #1f5bff; font-weight: bold;">(</span>take-while identity<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -309,7 +309,7 @@ If you see only two out of the three triumvirs, don&rsquo;t fret. The Primordial
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>nil? <span style="color: #80bcb6;">(</span>.getClassLoader java.lang.Class<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>nil? <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader java.lang.Class<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -323,7 +323,7 @@ Object, String, Long and List are also core classes.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>every? #<span style="color: #80bcb6;">(</span>nil? <span style="color: #c79af4;">(</span>.getClassLoader <span style="color: #807f96;">(</span>class <span style="color: #eed891;">%</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span> <span style="color: #80bcb6;">[</span>4 <span style="color: #65E6A7;">"hello"</span> <span style="color: #c79af4;">(</span>java.lang.Object.<span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span><span style="color: #ef6787;">java.util.Collections</span>/EMPTY_LIST<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>every? #<span style="color: #1f5bff; font-weight: bold;">(</span>nil? <span style="color: #00af00; font-weight: bold;">(</span>.getClassLoader <span style="color: #ff4ea3; font-weight: bold;">(</span>class <span style="color: #ff8700;">%</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">[</span>4 <span style="color: #ff1f8b;">"hello"</span> <span style="color: #00af00; font-weight: bold;">(</span>java.lang.Object.<span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">java.util.Collections</span>/EMPTY_LIST<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -337,7 +337,7 @@ In turn, classes in the <code>java.util.*</code> package are loaded by the Platf
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>.getName <span style="color: #80bcb6;">(</span>.getClassLoader <span style="color: #c79af4;">(</span>class <span style="color: #807f96;">(</span>java.sql.Time. 1 1 1<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>.getName <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader <span style="color: #00af00; font-weight: bold;">(</span>class <span style="color: #ff4ea3; font-weight: bold;">(</span>java.sql.Time. 1 1 1<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -351,7 +351,7 @@ The classes that you care most about, those that you declare as dependencies, ar
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>str <span style="color: #80bcb6;">(</span>.getName <span style="color: #c79af4;">(</span>class <span style="color: #807f96;">{}</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span> <span style="color: #65E6A7;">" was loaded by "</span> <span style="color: #80bcb6;">(</span>.getName <span style="color: #c79af4;">(</span>.getClassLoader <span style="color: #807f96;">(</span>class <span style="color: #91b9c7;">{}</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>str <span style="color: #1f5bff; font-weight: bold;">(</span>.getName <span style="color: #00af00; font-weight: bold;">(</span>class <span style="color: #ff4ea3; font-weight: bold;">{}</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff1f8b;">" was loaded by "</span> <span style="color: #1f5bff; font-weight: bold;">(</span>.getName <span style="color: #00af00; font-weight: bold;">(</span>.getClassLoader <span style="color: #ff4ea3; font-weight: bold;">(</span>class <span style="color: #00d7af; font-weight: bold;">{}</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -365,7 +365,7 @@ Finally, at the REPL we are creating new classes all the time. We may not notice
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">foo</span> <span style="color: #80bcb6;">[</span>x<span style="color: #80bcb6;">]</span> <span style="color: #80bcb6;">(</span>+ x x<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defn</span> <span style="color: #ef2929;">foo</span> <span style="color: #1f5bff; font-weight: bold;">[</span>x<span style="color: #1f5bff; font-weight: bold;">]</span> <span style="color: #1f5bff; font-weight: bold;">(</span>+ x x<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -379,7 +379,7 @@ To us, <code>foo</code> is a function, but to the JVM it is a class.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>class foo<span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>class foo<span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -393,9 +393,9 @@ Let&rsquo;s have a look at its class hierarchy.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">-&gt;&gt;</span> <span style="color: #80bcb6;">(</span>class foo<span style="color: #80bcb6;">)</span>
-  <span style="color: #80bcb6;">(</span>iterate #<span style="color: #c79af4;">(</span>.getSuperclass <span style="color: #eed891;">%</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span>
-  <span style="color: #80bcb6;">(</span>take-while identity<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span>class foo<span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span>iterate #<span style="color: #00af00; font-weight: bold;">(</span>.getSuperclass <span style="color: #ff8700;">%</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span>take-while identity<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -413,7 +413,7 @@ So who is responsible for loading Clojure code on-the-fly?
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>class <span style="color: #80bcb6;">(</span>.getClassLoader <span style="color: #c79af4;">(</span>class foo<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>class <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader <span style="color: #00af00; font-weight: bold;">(</span>class foo<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -439,10 +439,10 @@ The compiler tracks the current instance of  <code>DynamicClassLoader</code> in 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">inspect-cache</span> <span style="color: #80bcb6;">[]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #c79af4;">[</span>cache <span style="color: #807f96;">(</span>.getDeclaredField clojure.lang.DynamicClassLoader <span style="color: #65E6A7;">"classCache"</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">]</span>
-    <span style="color: #c79af4;">(</span>.setAccessible cache <span style="color: #f5c791;">true</span><span style="color: #c79af4;">)</span>
-    <span style="color: #c79af4;">(</span>.get cache <span style="color: #f5c791;">nil</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defn</span> <span style="color: #ef2929;">inspect-cache</span> <span style="color: #1f5bff; font-weight: bold;">[]</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">let</span> <span style="color: #00af00; font-weight: bold;">[</span>cache <span style="color: #ff4ea3; font-weight: bold;">(</span>.getDeclaredField clojure.lang.DynamicClassLoader <span style="color: #ff1f8b;">"classCache"</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">]</span>
+    <span style="color: #00af00; font-weight: bold;">(</span>.setAccessible cache <span style="color: #1f5bff;">true</span><span style="color: #00af00; font-weight: bold;">)</span>
+    <span style="color: #00af00; font-weight: bold;">(</span>.get cache <span style="color: #1f5bff;">nil</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -455,16 +455,16 @@ A new class loader instance is referenced with every top-level form.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">foo</span> <span style="color: #80bcb6;">[</span>x<span style="color: #80bcb6;">]</span> <span style="color: #80bcb6;">(</span>identity x<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">bar</span> <span style="color: #80bcb6;">[</span>y<span style="color: #80bcb6;">]</span> <span style="color: #80bcb6;">(</span>identity y<span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span>= <span style="color: #80bcb6;">(</span>.getClassLoader <span style="color: #c79af4;">(</span>class foo<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span> <span style="color: #80bcb6;">(</span>.getClassLoader <span style="color: #c79af4;">(</span>class bar<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defn</span> <span style="color: #ef2929;">foo</span> <span style="color: #1f5bff; font-weight: bold;">[</span>x<span style="color: #1f5bff; font-weight: bold;">]</span> <span style="color: #1f5bff; font-weight: bold;">(</span>identity x<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defn</span> <span style="color: #ef2929;">bar</span> <span style="color: #1f5bff; font-weight: bold;">[</span>y<span style="color: #1f5bff; font-weight: bold;">]</span> <span style="color: #1f5bff; font-weight: bold;">(</span>identity y<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span>= <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader <span style="color: #00af00; font-weight: bold;">(</span>class foo<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">(</span>.getClassLoader <span style="color: #00af00; font-weight: bold;">(</span>class bar<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org"><span style="color: #c9c9cd; background-color: #2a2931;">| #'user/foo |</span>
-<span style="color: #c9c9cd; background-color: #2a2931;">| #'user/bar |</span>
-<span style="color: #c9c9cd; background-color: #2a2931;">| false      |</span>
+<pre class="src src-org"><span style="color: #767676; background-color: #ffff87;">| #'user/foo |</span>
+<span style="color: #767676; background-color: #ffff87;">| #'user/bar |</span>
+<span style="color: #767676; background-color: #ffff87;">| false      |</span>
 </pre>
 </div>
 
@@ -473,9 +473,9 @@ Compare and contrast.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #80bcb6;">[</span>foo <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">fn</span>  <span style="color: #807f96;">[</span>x<span style="color: #807f96;">]</span> <span style="color: #807f96;">(</span>identity x<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span>
-      bar <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">fn</span> <span style="color: #807f96;">[</span>y<span style="color: #807f96;">]</span> <span style="color: #807f96;">(</span>identity y<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span>= <span style="color: #c79af4;">(</span>.getClassLoader <span style="color: #807f96;">(</span>class foo<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span>.getClassLoader <span style="color: #807f96;">(</span>class bar<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">let</span> <span style="color: #1f5bff; font-weight: bold;">[</span>foo <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">fn</span>  <span style="color: #ff4ea3; font-weight: bold;">[</span>x<span style="color: #ff4ea3; font-weight: bold;">]</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>identity x<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
+      bar <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">fn</span> <span style="color: #ff4ea3; font-weight: bold;">[</span>y<span style="color: #ff4ea3; font-weight: bold;">]</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>identity y<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">]</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span>= <span style="color: #00af00; font-weight: bold;">(</span>.getClassLoader <span style="color: #ff4ea3; font-weight: bold;">(</span>class foo<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span>.getClassLoader <span style="color: #ff4ea3; font-weight: bold;">(</span>class bar<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -493,8 +493,8 @@ Upon launching a REPL, Clojure <a href="https://github.com/clojure/clojure/blob/
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">let</span> <span style="color: #80bcb6;">[</span>cl <span style="color: #c79af4;">(</span>.getContextClassLoader <span style="color: #807f96;">(</span><span style="color: #ef6787;">Thread</span>/currentThread<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span>.setContextClassLoader <span style="color: #c79af4;">(</span><span style="color: #ef6787;">Thread</span>/currentThread<span style="color: #c79af4;">)</span> <span style="color: #c79af4;">(</span>clojure.lang.DynamicClassLoader. cl<span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">let</span> <span style="color: #1f5bff; font-weight: bold;">[</span>cl <span style="color: #00af00; font-weight: bold;">(</span>.getContextClassLoader <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">]</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span>.setContextClassLoader <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">(</span>clojure.lang.DynamicClassLoader. cl<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -511,9 +511,9 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>count <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">-&gt;&gt;</span> <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #c79af4;">)</span>
-   <span style="color: #c79af4;">(</span>iterate #<span style="color: #807f96;">(</span>.getParent <span style="color: #eed891;">%</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span>
-   <span style="color: #c79af4;">(</span>take-while #<span style="color: #807f96;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #eed891;">%</span> <span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>count <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #00af00; font-weight: bold;">)</span>
+   <span style="color: #00af00; font-weight: bold;">(</span>iterate #<span style="color: #ff4ea3; font-weight: bold;">(</span>.getParent <span style="color: #ff8700;">%</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
+   <span style="color: #00af00; font-weight: bold;">(</span>take-while #<span style="color: #ff4ea3; font-weight: bold;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #ff8700;">%</span> <span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -559,17 +559,17 @@ The context class loader is not used much. It is sometimes used by tooling. <cod
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">def</span> <span style="color: #eed891;">json-jar</span> <span style="color: #65E6A7;">"https://repo1.maven.org/maven2/org/clojure/data.json/2.3.0/data.json-2.3.0.jar"</span><span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">addlib</span> <span style="color: #80bcb6;">[</span>jar<span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">-&gt;</span> <span style="color: #c79af4;">(</span><span style="color: #ef6787;">Thread</span>/currentThread<span style="color: #c79af4;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">def</span> <span style="color: #ff8700;">json-jar</span> <span style="color: #ff1f8b;">"https://repo1.maven.org/maven2/org/clojure/data.json/2.3.0/data.json-2.3.0.jar"</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defn</span> <span style="color: #ef2929;">addlib</span> <span style="color: #1f5bff; font-weight: bold;">[</span>jar<span style="color: #1f5bff; font-weight: bold;">]</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span>
      .getContextClassLoader
-     <span style="color: #c79af4;">(</span>.addURL <span style="color: #807f96;">(</span>java.net.URL. jar<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+     <span style="color: #00af00; font-weight: bold;">(</span>.addURL <span style="color: #ff4ea3; font-weight: bold;">(</span>java.net.URL. jar<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org"><span style="color: #c9c9cd; background-color: #2a2931;">| #'user/json-jar |</span>
-<span style="color: #c9c9cd; background-color: #2a2931;">| #'user/addlib   |</span>
+<pre class="src src-org"><span style="color: #767676; background-color: #ffff87;">| #'user/json-jar |</span>
+<span style="color: #767676; background-color: #ffff87;">| #'user/addlib   |</span>
 </pre>
 </div>
 
@@ -578,9 +578,9 @@ Now you can.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>addlib json-jar<span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>clojure.data.json <span style="color: #f5c791;">:as</span> json<span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span><span style="color: #ef6787;">json</span>/write-str <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:foo</span> <span style="color: #65E6A7;">"bar"</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>addlib json-jar<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span>require '<span style="color: #1f5bff; font-weight: bold;">[</span>clojure.data.json <span style="color: #1f5bff;">:as</span> json<span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">json</span>/write-str <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #1f5bff;">:foo</span> <span style="color: #ff1f8b;">"bar"</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -595,18 +595,17 @@ In conclusion, Clojure leverages built-in capabilities of the JVM to provide a d
 </p>
 
 <p>
-An extended version of this article is available here.
+An extended version of this article is available <a href="https://meyvn.org/publication/classloading">here</a>.
 </p>
 
 
-<div class="hiring" id="orgfbf488b">
+<div class="hiring" id="org236b41a">
 <p>
 <b>Are you hiring?</b>
 </p>
 
 <p>
-Are you doing something interesting? Are you working responsibly?
-I am currently between assignments. All my channels open. Let&rsquo;s talk!
+Good! Let&rsquo;s <a href="mailto:daniel.szmulewicz@gmail.com">talk</a>.
 </p>
 
 </div>
@@ -636,11 +635,11 @@ According to the parent-delegation model of Java&rsquo;s class system.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">def</span> <span style="color: #eed891;">json-jar</span> <span style="color: #65E6A7;">"https://repo1.maven.org/maven2/org/clojure/data.json/2.3.0/data.json-2.3.0.jar"</span><span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span><span style="color: #6bd9db;">defn</span> <span style="color: #cea2ca;">addlib</span> <span style="color: #80bcb6;">[</span>jar<span style="color: #80bcb6;">]</span>
-  <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">-&gt;</span> <span style="color: #c79af4;">(</span><span style="color: #ef6787;">Thread</span>/currentThread<span style="color: #c79af4;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">def</span> <span style="color: #ff8700;">json-jar</span> <span style="color: #ff1f8b;">"https://repo1.maven.org/maven2/org/clojure/data.json/2.3.0/data.json-2.3.0.jar"</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defn</span> <span style="color: #ef2929;">addlib</span> <span style="color: #1f5bff; font-weight: bold;">[</span>jar<span style="color: #1f5bff; font-weight: bold;">]</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span>
      .getContextClassLoader
-     <span style="color: #c79af4;">(</span>.addURL <span style="color: #807f96;">(</span>java.net.URL. jar<span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+     <span style="color: #00af00; font-weight: bold;">(</span>.addURL <span style="color: #ff4ea3; font-weight: bold;">(</span>java.net.URL. jar<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -649,9 +648,9 @@ Now you can.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>addlib json-jar<span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span>require '<span style="color: #80bcb6;">[</span>clojure.data.json <span style="color: #f5c791;">:as</span> json<span style="color: #80bcb6;">]</span><span style="color: #9d81ba;">)</span>
-<span style="color: #9d81ba;">(</span><span style="color: #ef6787;">json</span>/write-str <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:foo</span> <span style="color: #65E6A7;">"bar"</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>addlib json-jar<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span>require '<span style="color: #1f5bff; font-weight: bold;">[</span>clojure.data.json <span style="color: #1f5bff;">:as</span> json<span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">json</span>/write-str <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #1f5bff;">:foo</span> <span style="color: #ff1f8b;">"bar"</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -790,9 +789,9 @@ We can count the instances of class loaders.
 o
 </p>
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>count <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">-&gt;&gt;</span> <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #c79af4;">)</span>
-         <span style="color: #c79af4;">(</span>iterate #<span style="color: #807f96;">(</span>.getParent <span style="color: #eed891;">%</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span>
-         <span style="color: #c79af4;">(</span>take-while #<span style="color: #807f96;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #eed891;">%</span> <span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>count <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #00af00; font-weight: bold;">)</span>
+         <span style="color: #00af00; font-weight: bold;">(</span>iterate #<span style="color: #ff4ea3; font-weight: bold;">(</span>.getParent <span style="color: #ff8700;">%</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
+         <span style="color: #00af00; font-weight: bold;">(</span>take-while #<span style="color: #ff4ea3; font-weight: bold;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #ff8700;">%</span> <span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
@@ -810,14 +809,14 @@ So now we have to ask ourselves. Is it only when poking at the class loader that
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>+ 1 1<span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>+ 1 1<span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #9d81ba;">(</span>count <span style="color: #80bcb6;">(</span><span style="color: #6bd9db;">-&gt;&gt;</span> <span style="color: #c79af4;">(</span><span style="color: #6bd9db;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #c79af4;">)</span>
-         <span style="color: #c79af4;">(</span>iterate #<span style="color: #807f96;">(</span>.getParent <span style="color: #eed891;">%</span><span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span>
-         <span style="color: #c79af4;">(</span>take-while #<span style="color: #807f96;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #eed891;">%</span> <span style="color: #807f96;">)</span><span style="color: #c79af4;">)</span><span style="color: #80bcb6;">)</span><span style="color: #9d81ba;">)</span>
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>count <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #00af00; font-weight: bold;">)</span>
+         <span style="color: #00af00; font-weight: bold;">(</span>iterate #<span style="color: #ff4ea3; font-weight: bold;">(</span>.getParent <span style="color: #ff8700;">%</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
+         <span style="color: #00af00; font-weight: bold;">(</span>take-while #<span style="color: #ff4ea3; font-weight: bold;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #ff8700;">%</span> <span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 

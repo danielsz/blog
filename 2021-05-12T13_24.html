@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-22 Sat 09:59 -->
+<!-- 2021-05-22 Sat 15:13 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1608142171
+<pre class="src src-org">773992193
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">160504817
+<pre class="src src-org">1655974310
 </pre>
 </div>
 
@@ -435,7 +435,7 @@ Once a class loader links a class, it is final. Attempting to link a new definit
 </p>
 
 <p>
-The compiler tracks the current instance of  <code>DynamicClassLoader</code> in  <code>clojure.lang.Compiler/LOADER</code>, while <code>DynamicClassLoader</code> tracks the classes created by its fleeting instances via a cache. The latter is backed by a reference queue, helping the garbage collector do its job. The curious can peek into it with the following code.
+The compiler tracks the current instance of  <code>DynamicClassLoader</code> in  <code>clojure.lang.Compiler/LOADER</code>, while <code>DynamicClassLoader</code> tracks its classes via a cache. The latter is backed by a reference queue, helping the garbage collector do its job. The curious can peek into it with the following code.
 </p>
 
 <div class="org-src-container">
@@ -451,7 +451,7 @@ This will reveal a mapping between the names of the generated classes and soft r
 </p>
 
 <p>
-A new class loader instance is referenced with every top-level form. 
+A new class loader instance is used for every top-level form. 
 </p>
 
 <div class="org-src-container">
@@ -518,7 +518,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">20
+<pre class="src src-org">40
 </pre>
 </div>
 
@@ -599,13 +599,13 @@ An extended version of this article is available <a href="https://meyvn.org/publ
 </p>
 
 
-<div class="hiring" id="org236b41a">
+<div class="hiring" id="org69bc888">
 <p>
 <b>Are you hiring?</b>
 </p>
 
 <p>
-Good! Let&rsquo;s <a href="mailto:daniel.szmulewicz@gmail.com">talk</a>.
+Good! Let&rsquo;s <a href="mailto:daniel.szmulewicz@gmail.com?subject=We%20are%20hiring">talk</a>.
 </p>
 
 </div>

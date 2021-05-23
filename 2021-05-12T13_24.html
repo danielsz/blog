@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-22 Sat 15:13 -->
+<!-- 2021-05-23 Sun 14:21 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">773992193
+<pre class="src src-org">133398252
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1655974310
+<pre class="src src-org">773089034
 </pre>
 </div>
 
@@ -405,7 +405,11 @@ Let&rsquo;s have a look at its class hierarchy.
 </div>
 
 <p>
-Contrary to the previous examples, <code>foo</code> was not present when the JVM started. It&rsquo;s a brand new class loaded at runtime. This is important. Indeed, the Java class model is designed in such a way that it need not know ahead of time the classes it is going load and run. Java was born as <code>Greentalk</code>, a nod to Smalltalk because that was the state of the art in terms of virtual machine and <code>JIT</code> compilation. For a time the system was projected to be running on <a href="https://www.javatpoint.com/history-of-java">set-top boxes</a>. The need for runtime class loading was anticipated as classes were going to travel across the wire.
+Contrary to the previous examples, <code>foo</code> was not present when the JVM started. It&rsquo;s a brand new class loaded at runtime. This is an important observation. Indeed, the Java class model is designed in such a way that it need not know ahead of time the classes it is going load and run.
+</p>
+
+<p>
+<i>Note:</i> Java was born as <code>Greentalk</code>, a nod to Smalltalk because that was the state of the art in terms of virtual machine and <code>JIT</code> compilation. For a time the system was projected to be running on <a href="https://www.javatpoint.com/history-of-java">set-top boxes</a>. The need for runtime class loading was anticipated as classes were going to travel across the wire.
 </p>
 
 <p>
@@ -489,7 +493,7 @@ We&rsquo;ve shown how class loader instances are being repeatedly created at the
 </p>
 
 <p>
-Upon launching a REPL, Clojure <a href="https://github.com/clojure/clojure/blob/653b8465845a78ef7543e0a250078eea2d56b659/src/clj/clojure/main.clj#L412">sets</a> the context class loader with a class loader of its own. The following is the first line of <code>clojure.mail/repl</code>&rsquo;s source code.
+Upon launching a REPL, Clojure <a href="https://github.com/clojure/clojure/blob/653b8465845a78ef7543e0a250078eea2d56b659/src/clj/clojure/main.clj#L412">sets</a> the context class loader with a class loader of its own. The following is the first line of <code>clojure.main/repl</code>&rsquo;s source code.
 </p>
 
 <div class="org-src-container">
@@ -518,7 +522,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">40
+<pre class="src src-org">20
 </pre>
 </div>
 
@@ -527,18 +531,44 @@ In the default REPL, one instance of <code>DynamicClassLoader</code> stays assoc
 </p>
 
 <p>
-Clojure&rsquo;s entry point to the REPL is <code>clojure.main/repl</code>. However, nREPL runs <code>clojure.main/repl</code> for every <a href="https://github.com/nrepl/nrepl/blob/8223894f6c46a2afd71398517d9b8fe91cdf715d/src/clojure/nrepl/middleware/interruptible_eval.clj#L84">evaluation</a>. Since <code>clojure.main/repl</code> starts with setting the context class loader with a new instance of <code>DynamicClassLoader</code>, we end up with an unbounded stack of class loaders. Colin Jones <a href="https://clojure.atlassian.net/browse/NREPL-36">reported</a> the issue in 2012. 
+Clojure&rsquo;s entry point to the REPL is <code>clojure.main/repl</code>. However, due to historical reasons, nREPL runs <code>clojure.main/repl</code> for every <a href="https://github.com/nrepl/nrepl/blob/8223894f6c46a2afd71398517d9b8fe91cdf715d/src/clojure/nrepl/middleware/interruptible_eval.clj#L84">evaluation</a>. It isn&rsquo;t a long running process like Clojure&rsquo;s native REPL.
+</p>
+
+<p>
+Since <code>clojure.main/repl</code> starts with setting the context class loader with a new instance of <code>DynamicClassLoader</code>, we end up with an unbounded stack of class loaders. Colin Jones <a href="https://clojure.atlassian.net/browse/NREPL-36">reported</a> the issue in 2012. 
+</p>
+
+<p>
+Remember that nREPL is a major community effort to elevate Clojure&rsquo;s REPL experience. In a native REPL, it is not possible to interrupt an evaluation. nREPL brings that capability. At the cost of the quirk that we&rsquo;ve described.
 </p>
 
 <blockquote>
 <p>
-Yes, this should be fixed upstream; a new DynamicClassLoader should only be set as the thread-context classloader if one is not already in place&#x2026; Some years on, and it&rsquo;s clear that this is fundamentally a minor problem (insofar as hardly anyone has complained AFAIK)&#x2026;
+the work necessary to stop depending upon it would be considerable&#x2026; interruptible-eval/evaluate is structured to cater to it&#x2026;
+</p>
+
+<p>
+⸺ Chas Emerick, <a href="https://clojure.atlassian.net/browse/NREPL-36">NREPL-36</a>, Jira.
+</p>
+</blockquote>
+
+<p>
+Naturally, solutions were envisaged.
+</p>
+
+<blockquote>
+<p>
+Yes, this should be fixed upstream; a new DynamicClassLoader should only be set as the thread-context classloader if one is not already in place&#x2026; 
 </p>
 
 <p>
 ⸺ Chas Emerick, <a href="https://github.com/nrepl/nrepl/issues/8#issuecomment-342284589">issue 8</a>, nREPL repository.
 </p>
 </blockquote>
+
+<p>
+A downstream solution, maybe.
+</p>
 
 <blockquote>
 <p>
@@ -551,7 +581,25 @@ I think nREPL will end up having to stop using <code>clojure.main/repl</code>, a
 </blockquote>
 
 <p>
-Also interesting is why hardly anyone is complaining. That&rsquo;s because there are no side-effects apart from redundant allocation of objects. In a default Clojure REPL, each evaluation produces one instance of <code>DynamicClassLoader</code>. In a nREPL client, two. The one that is by design, used by Clojure&rsquo;s compiler, and the one that is extraneous, due to the repeated call to <code>clojure.main/repl</code>. At a cost of 112 bytes per instance of <code>DynamicClassLoader</code>, the increased memory usage is not earth-shattering. 
+Ultimately, pragmatism prevailed. 
+</p>
+
+<blockquote>
+<p>
+Some years on, and it&rsquo;s clear that this is fundamentally a minor problem (insofar as hardly anyone has complained AFAIK)&#x2026;
+</p>
+
+<p>
+⸺ Chas Emerick, <a href="https://github.com/nrepl/nrepl/issues/8#issuecomment-342284589">issue 8</a>, nREPL repository.
+</p>
+</blockquote>
+
+<p>
+How come nobody is complaining? That&rsquo;s because there are no side-effects apart from the redundant allocation of objects. At a cost of 112 bytes per instance of <code>DynamicClassLoader</code>, the increased memory usage isn&rsquo;t immediately noticeable.
+</p>
+
+<p>
+In a default Clojure REPL, each evaluation produces one instance of <code>DynamicClassLoader</code> and that is by design, used by Clojure&rsquo;s compiler. In a nREPL client, two instances are created, the second one extraneous due to the repeated call to <code>clojure.main/repl</code>. 
 </p>
 
 <p>
@@ -589,7 +637,6 @@ Now you can.
 </pre>
 </div>
 
-
 <p>
 In conclusion, Clojure leverages built-in capabilities of the JVM to provide a dynamic runtime environment at the REPL. Redefinition of classes is achieved via the assignment of new instances of <code>DynamicClassLoader</code> for every top-level form. Wholesale addition of classes in Jars is made possible because <code>DynamicClassLoader</code> inherits the <code>addURL</code> method from <code>URLCLassLoader</code>. Design decisions. 
 </p>
@@ -599,7 +646,7 @@ An extended version of this article is available <a href="https://meyvn.org/publ
 </p>
 
 
-<div class="hiring" id="org69bc888">
+<div class="hiring" id="org158c413">
 <p>
 <b>Are you hiring?</b>
 </p>
@@ -626,33 +673,13 @@ When the class is absent from its cache, <code>DynamicClassLoader</code> will de
 </p>
 
 <p>
-<code>DynamicClassLoader</code> 
 According to the parent-delegation model of Java&rsquo;s class system.
 </p>
 
-<p>
-<code>DynamicClassLoader</code> happens to extend Java&rsquo;s URLClassLoader and the latter can be used to load JARs. Suppose you&rsquo;re at the REPL and you realize that you need <code>data.json</code>, but it isn&rsquo;t in your class path. No problemo.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">def</span> <span style="color: #ff8700;">json-jar</span> <span style="color: #ff1f8b;">"https://repo1.maven.org/maven2/org/clojure/data.json/2.3.0/data.json-2.3.0.jar"</span><span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defn</span> <span style="color: #ef2929;">addlib</span> <span style="color: #1f5bff; font-weight: bold;">[</span>jar<span style="color: #1f5bff; font-weight: bold;">]</span>
-  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span>
-     .getContextClassLoader
-     <span style="color: #00af00; font-weight: bold;">(</span>.addURL <span style="color: #ff4ea3; font-weight: bold;">(</span>java.net.URL. jar<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
 
 <p>
-Now you can.
+Did you know? Every time you press <code>Enter</code> at the REPL, a new class is created. And with it, a new class loader instance exclusively dedicated to it. In a nREPL client like Cider, two new class loader instances come to life. Strange, but true. Read on to understand why. 
 </p>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>addlib json-jar<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #cc0000; font-weight: bold;">(</span>require '<span style="color: #1f5bff; font-weight: bold;">[</span>clojure.data.json <span style="color: #1f5bff;">:as</span> json<span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">json</span>/write-str <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #1f5bff;">:foo</span> <span style="color: #ff1f8b;">"bar"</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
 
 
 <p>
@@ -963,6 +990,9 @@ Back then, each evaluation was producing a new class loader instance that would 
 <p>
 keeps an internal cache of its own classes, it will delegate the loading to its parent
 This befuddling observation is what Vladimir and Arne reported earlier. 
+is bare-bones It brings features absent from the bare 
+many ways, it is a heroic effort t has 
+All software projects have their quirks. And each quirk has a history. To make evaluations interruptible in nREPL 
 </p>
 </div>
 </body>

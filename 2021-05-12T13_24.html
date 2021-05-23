@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-23 Sun 18:32 -->
+<!-- 2021-05-23 Sun 18:44 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1254688969
+<pre class="src src-org">2122246734
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">677159923
+<pre class="src src-org">1303678596
 </pre>
 </div>
 
@@ -522,7 +522,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">80
+<pre class="src src-org">100
 </pre>
 </div>
 
@@ -599,14 +599,14 @@ How come nobody is complaining? That&rsquo;s because there are no side-effects a
 </p>
 
 <p>
-In the extended version of this article, I dwell a bit longer on the context class loader and what you can do with it. Hint: loading JARs missing from your dependencies without shutting down your REPL session.
+In the <a href="https://meyvn.org/publication/classloading">extended version</a> of this article, I dwell a bit longer on the context class loader and what you can do with it. Hint: loading JARs missing from your dependencies without shutting down your REPL session.
 </p>
 
 <p>
-In conclusion, Clojure leverages the built-in capabilities of the JVM to provide a dynamic runtime environment. Redefinition of classes is made possible because each top-level form gets its own instance of <code>DynamicClassLoader</code>. In a nREPL client, two instances are created and one of them is extraneous, the result of repeatedly calling <code>clojure.main/repl</code>. 
+In conclusion, Clojure leverages the built-in capabilities of the JVM to provide a dynamic runtime environment. Redefinition of classes is made possible because each top-level form gets its own instance of <code>DynamicClassLoader</code>. In a nREPL client, an extraneous instance is created, a quirk that should not obscure the fact that it provides a more capable REPL, backed by a long standing community effort. 
 </p>
 
-<div class="hiring" id="org1cda6e5">
+<div class="hiring" id="org60eac52">
 <p>
 <b>Are you hiring?</b>
 </p>
@@ -616,396 +616,6 @@ Good! Let&rsquo;s <a href="mailto:daniel.szmulewicz@gmail.com?subject=We%20are%2
 </p>
 
 </div>
-
-
-<p>
-In a default Clojure REPL, each evaluation produces one instance of <code>DynamicClassLoader</code> and that is by design.
-</p>
-
-<p>
-Wholesale addition of classes in Jars is made possible because <code>DynamicClassLoader</code> inherits the <code>addURL</code> method from <code>URLCLassLoader</code>. Design decisions.
-</p>
-
-
-<p>
-The context class loader is not used much at all. It is sometimes used by tooling. <code>DynamicClassLoader</code> happens to extend Java&rsquo;s URLClassLoader and the latter can be used to load JARs. Suppose you&rsquo;re at the REPL and you realize that you need <code>data.json</code>, but it isn&rsquo;t in your class path. No problemo.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">def</span> <span style="color: #ff8700;">json-jar</span> <span style="color: #ff1f8b;">"https://repo1.maven.org/maven2/org/clojure/data.json/2.3.0/data.json-2.3.0.jar"</span><span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defn</span> <span style="color: #ef2929;">addlib</span> <span style="color: #1f5bff; font-weight: bold;">[</span>jar<span style="color: #1f5bff; font-weight: bold;">]</span>
-  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span>
-     .getContextClassLoader
-     <span style="color: #00af00; font-weight: bold;">(</span>.addURL <span style="color: #ff4ea3; font-weight: bold;">(</span>java.net.URL. jar<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-org"><span style="color: #767676; background-color: #ffff87;">| #'user/json-jar |</span>
-<span style="color: #767676; background-color: #ffff87;">| #'user/addlib   |</span>
-</pre>
-</div>
-
-<p>
-Now you can.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>addlib json-jar<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #cc0000; font-weight: bold;">(</span>require '<span style="color: #1f5bff; font-weight: bold;">[</span>clojure.data.json <span style="color: #1f5bff;">:as</span> json<span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">json</span>/write-str <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #1f5bff;">:foo</span> <span style="color: #ff1f8b;">"bar"</span><span style="color: #1f5bff; font-weight: bold;">}</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-org">"{\"foo\":\"bar\"}"
-</pre>
-</div>
-
-
-
-<p>
-An extended version of this article is available <a href="https://meyvn.org/publication/classloading">here</a>.
-</p>
-
-
-<p>
-achieve on-the-fly class loading and reloading.
-In Java, class loaders delegate to their parents by default.
-</p>
-
-<blockquote>
-<p>
-The delegation model requires that any request for a class loader to load a given class is first delegated to its parent class loader before the requested class loader tries to load the class itself. The parent class loader, in turn, goes through the same process of asking its parent. This chain of delegation continues through to the bootstrap class loader (also known as the primordial or system class loader). If a class loader&rsquo;s parent can load a given class, it returns that class. Otherwise, the class loader attempts to load the class itself.
-</p>
-</blockquote>
-
-<p>
-When the class is absent from its cache, <code>DynamicClassLoader</code> will delegate to its parent.
-</p>
-
-<p>
-According to the parent-delegation model of Java&rsquo;s class system.
-</p>
-
-
-<p>
-Did you know? Every time you press <code>Enter</code> at the REPL, a new class is created. And with it, a new class loader instance exclusively dedicated to it. In a nREPL client like Cider, two new class loader instances come to life. Strange, but true. Read on to understand why. 
-</p>
-
-
-<p>
-hat is to say: in the default Clojure REPL. Not in a nREPL client. In a nREPL client, you have to find the instance of the class loader that is highest in the hierarchy, and use its <code>addUrl</code> method. It is the only one that Clojure compiler is bound to. All these newer class loaders are below. 
-</p>
-
-<blockquote>
-<p>
-My first impulse upon seeing this was that this was &ldquo;last straw&rdquo; territory w.r.t. using clojure.main/repl (as recorded in the thread linked above), but the work necessary to stop depending upon it would be considerable (not because repl does much, but because interruptible-eval/evaluate is structured to cater to it).  
-</p>
-</blockquote>
-
-
-
-
-<p>
-Clojure itself has deprecated <code>add-classpath</code> because limitations in environments that introduce their own class loader. Third-party tooling provides dependency resolution relies on it, though.
-</p>
-
-<p>
-The fragile compromises when making design decisions.
-</p>
-
-
-
-
-<p>
-hen its object instances are no longer referenced, it will .
-</p>
-
-<p>
-In the case of 
-</p>
-
-<p>
-And indeed, if you run  and do the same experiment, you will see.
-</p>
-
-<p>
-It sounds 
-</p>
-
-
-<p>
-We started our exploration with a mystery.
-</p>
-
-<p>
-by the observation that we mentioned 
-</p>
-
-
-
-
-<p>
-doesn&rsquo;t address . 
-</p>
-
-
-
-<p>
-But there is a fundamental difference.
-</p>
-
-
-
-<p>
-At the REPL, Clojure compiles our code <i>on the fly</i>, so the byte
-</p>
-
-<p>
-resulting in bytecode loaded in-memory with <code>DynamicClassLoader</code>.
-</p>
-
-<p>
-In contrast, with ahead-of-time compilation, the bytecode is saved on disk. You can compile manually at the REPL, too, provided your code is in a source file in your classpath. You can then inspect that output with a disassembler like <code>javap</code>. The <code>*.class</code> files will be found in the directory corresponding to your <code>*compile-path*</code>. One quick way to ascertain that we&rsquo;re dealing with Java bytecode is by checking the magic number, which spells <a href="https://en.wikipedia.org/wiki/Java_class_file#File_layout_and_structure"><code>CAFE BABE</code></a>.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-shell">od -N4 -tx1 ~/Clojure/testing/classloaders/target/classes/classloaders/core.class
-</pre>
-</div>
-
-<p>
-Does Clojure have a special trick to load classes at the REPL? Not at all. 
-</p>
-
-<p>
-Class loaders have a method <code>defineClass</code> which reads bytes and returns a class.
-</p>
-
-
-
-<p>
-The Java class model is thus neatly decoupled from file systems.
-</p>
-
-<p>
-The class model enables Clojure to compile and load classes on the fly, but we as users can also join the party.
-</p>
-
-<p>
-A URL that ends with a <code>/</code> is assumed to refer to a directory, otherwise it is assumed to refer to a JAR file which will be opened as needed. For years, developers have tapped into the fact that the application class loader was an instance of java.net.URLClassLoader. So you could always add jars on a running JVM without having to shut it down amend the classpath. <code>addURL</code> is a handy way to load classes from disk.
-</p>
-
-<p>
-Then Java 9 came along, and reminded everyone that that was an implementation detail. With Project Jigsaw and the new module system &#x2013; a big refactoring towards a more secure platform  &#x2013; it was no longer true. It came as a surprise to many, but Java does not provide a user-accessible API to dynamically augment the classpath at runtime. Tooling and framework implementors are meant to create their own specialized class loaders.
-</p>
-
-<p>
-Clojure itself <a href="https://github.com/clojure/clojure/blob/b1b88dd25373a86e41310a525a21b497799dbbf2/src/jvm/clojure/lang/RT.java#L2164">creates</a> a class loader which it binds to the compiler. Its name, clojure.lang.DynamicClassLoader, hints at its modifiable nature. Extending the above mentioned URLClassloader, it is the key to code hot-loading.
-</p>
-
-
-<p>
-The ability to load classes at runtime  
-</p>
-
-
-<p>
-Here&rsquo;s an interview question: could it be that a class created at runtime is loaded by the Java class loading troika? It&rsquo;s a trick question because the answer is version specific. From time immemorial, the Application class loader was extending <code>URLclassloader</code> which has a readily available method able to load classes at runtime.
-</p>
-
-<p>
-What class foo?
-In Java, every class is loaded by a class loader, except for   Apart from that,  Or, for our purposes, every class is loaded by a class loader.
-</p>
-
-<p>
-We can count the instances of class loaders.
-</p>
-
-<p>
-o
-</p>
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>count <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #00af00; font-weight: bold;">)</span>
-         <span style="color: #00af00; font-weight: bold;">(</span>iterate #<span style="color: #ff4ea3; font-weight: bold;">(</span>.getParent <span style="color: #ff8700;">%</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
-         <span style="color: #00af00; font-weight: bold;">(</span>take-while #<span style="color: #ff4ea3; font-weight: bold;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #ff8700;">%</span> <span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
-
-<p>
-Let&rsquo;s run that again. Yup. The count incremented by one.
-</p>
-
-<pre class="example">
-21
-</pre>
-
-
-<p>
-So now we have to ask ourselves. Is it only when poking at the class loader that the count increments? Let&rsquo;s (in)validate that.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>+ 1 1<span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>count <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">-&gt;&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #00af00;">..</span> java.lang.Thread currentThread getContextClassLoader<span style="color: #00af00; font-weight: bold;">)</span>
-         <span style="color: #00af00; font-weight: bold;">(</span>iterate #<span style="color: #ff4ea3; font-weight: bold;">(</span>.getParent <span style="color: #ff8700;">%</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
-         <span style="color: #00af00; font-weight: bold;">(</span>take-while #<span style="color: #ff4ea3; font-weight: bold;">(</span>instance? clojure.lang.DynamicClassLoader <span style="color: #ff8700;">%</span> <span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
-
-<p>
-Aha! The count incremented by two. If you play longer along those lines, you will soon discover that every singe evaluation at the REPL creates a new class loader. It had nothing to do with the observer effect or our poking at the class loader specifically. Any code, any expression causes the same side-effect. Is this by design? What could be the reason?
-</p>
-
-<p>
-The careful reader may have noticed that I said &ldquo;let&rsquo;s fire a nREPL session and play along&rdquo;. Notice the lower-case n, that is for networked REPL. Repeat the steps above in a regular REPL session in a shell and nothing of that sort occurs. 
-</p>
-
-<p>
-<i>Note:</i> Type <code>clj</code> in your shell to start a regular REPL session.
-</p>
-
-
-
-
-<p>
-Class loading in Java is one of those topics that you can ignore the entirety of your career and not feel ashamed by that. Unless you are writing tooling, framework or platforms, it has no bearing. And it shouldn&rsquo;t. 
-</p>
-
-<p>
-It is subtle.
-</p>
-
-
-
-<p>
-the default behavior of a class loader is to delegate to his parent.
-</p>
-
-
-<p>
-are those 
-That last question is 
-</p>
-
-<p>
-This can&rsquo;t be good.
-</p>
-
-<p>
-of creating a new class loader. 
-</p>
-
-<p>
-. would have resulted in an 
-</p>
-
-<p>
-and they all stack up as long as the REPL session 
-</p>
-
-<p>
-The question remains: is this because we asked for the class loader
-</p>
-
-<p>
-Why another instance? You 
-</p>
-
-
-<p>
-One of the more befuddling aspect behind those observations that motivated both previous quotations is the observation that every at the REPL . 
-</p>
-
-<p>
-that of foundation building
-when the foundations were still being built,  and progresses through t, but with a happy end. Maybe. 
-that has befuddled .Let&rsquo;s start with some build-up. 
-We can go further back in time.
-</p>
-
-
-<blockquote>
-<p>
-I’ve gone down the rabbit hole trying to understand classloaders and the Java 9 changes, and I’m still utterly confused and without a working solution. Arne, <a href="https://clojureverse.org/t/dynamically-adding-to-the-classpath-in-a-post-java-9-world-help/2520">Clojureverse</a>, 2018 
-</p>
-</blockquote>
-
-
-
-<blockquote>
-<p>
-I think, the main problem is nobody has ever tried to write an article &ldquo;Class loading in Clojure&rdquo;. If such article existed, it would make life much easier for many developers. Vladimir, <a href="https://groups.google.com/g/clojure/c/firG9zTVecU">Clojure email list</a>, Dec 10, 2012
-</p>
-</blockquote>
-
-<p>
-Behind both of those expressions of befuddlement is a peculiar observation. Something that isn&rsquo;t apparent if you&rsquo;re aren&rsquo;t looking for it, but trivial to simulate and observe.
-</p>
-<blockquote>
-<p>
-<i>Note:</i> the observer effect is the disturbance of an observed system by the act of observation
-</p>
-</blockquote>
-
-<p>
-For a while, I Oops. Those are not the same instances. What is this quantum mechanics shenanigan whereby just by looking at the class loader it changes.
-</p>
-
-<p>
-In other words, every time we poke for the class loader we get another one.
-</p>
-
-<blockquote>
-<p>
-just found that every interaction with Clojure REPL causes one more DynamicClassLoader put on the Thread context class loader chain. Vladimir, <a href="https://groups.google.com/g/clojure/c/firG9zTVecU">Clojure email list</a>, Dec 10, 2012
-</p>
-</blockquote>
-
-<p>
-The primordial class loader, which you may remember from above, is tasked with loading classes from the local file system in a platform-dependent manner. All class loaders 
-This is how Clojure&rsquo;s compiler treats its <a href="https://github.com/clojure/clojure/blob/b1b88dd25373a86e41310a525a21b497799dbbf2/src/jvm/clojure/lang/Compiler.java#L4990">output</a>. So the JVM being used a hot code reloading 
-</p>
-
-<p>
-running the following code in a nREPL-based client results in a growing hierarchy of  <code>DynamicClassLoader</code> instance.
-provides the <code>addURL</code> method that can be used to add . This is how we add jars at runtime.
-</p>
-
-<p>
-It does not occur in Clojure&rsquo;s plain REPL.
-</p>
-
-<p>
-Remember the observer effect from quantum mechanics where the act of observation affects the system under observation? It <i>looks</i> as if you get a new instance of DynamicClassLoader <i>because</i> you are poking at it.
- (<code>findClass</code>).
-Here we are with the observer effect again. Each time we poke at the class loader we see a new instance.
-</p>
-
-<p>
-Each operation at the REPL 
-</p>
-
-<p>
-to achieve a truly dynamic runtime environment.
-to allow overwriting existing definitions.  ,     to operate at the REPL in a truly dynamic runtime environment.  sauce behind redefining
-of When an evaluation returns, that class loader instance has finished to play its role. If you redefine <code>foo</code> at the REPL, the class loader that created the previous version becomes eligible for garbage collection. This ensures that  
-Back then, each evaluation was producing a new class loader instance that would stick around, never eligible for garbage collection. In contrast, The per-form class loader is by design. The references stored in <code>clojure.lang.Compiler/LOADER</code> are being properly disposed.
-</p>
-
-<p>
-keeps an internal cache of its own classes, it will delegate the loading to its parent
-This befuddling observation is what Vladimir and Arne reported earlier. 
-is bare-bones It brings features absent from the bare 
-many ways, it is a heroic effort t has 
-All software projects have their quirks. And each quirk has a history. To make evaluations interruptible in nREPL 
-</p>
 </div>
 </body>
 </html>

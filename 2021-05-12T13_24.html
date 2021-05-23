@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-23 Sun 18:44 -->
+<!-- 2021-05-23 Sun 21:59 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">2122246734
+<pre class="src src-org">1217517512
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1303678596
+<pre class="src src-org">1242401638
 </pre>
 </div>
 
@@ -439,7 +439,7 @@ Once a class loader links a class, it is final. Attempting to link a new definit
 </p>
 
 <p>
-The compiler tracks the current instance of  <code>DynamicClassLoader</code> in  <code>clojure.lang.Compiler/LOADER</code>, while <code>DynamicClassLoader</code> tracks its classes via a cache. The latter is backed by a reference queue, helping the garbage collector do its job. The curious can peek into it with the following code.
+The compiler tracks the current instance of  <code>DynamicClassLoader</code> in  <code>clojure.lang.Compiler/LOADER</code>, while <code>DynamicClassLoader</code> tracks its classes via a cache. The latter is backed by a reference queue, helping the garbage collector do its job. We can peek into it via the Reflection API.
 </p>
 
 <div class="org-src-container">
@@ -522,7 +522,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">100
+<pre class="src src-org">20
 </pre>
 </div>
 
@@ -606,7 +606,7 @@ In the <a href="https://meyvn.org/publication/classloading">extended version</a>
 In conclusion, Clojure leverages the built-in capabilities of the JVM to provide a dynamic runtime environment. Redefinition of classes is made possible because each top-level form gets its own instance of <code>DynamicClassLoader</code>. In a nREPL client, an extraneous instance is created, a quirk that should not obscure the fact that it provides a more capable REPL, backed by a long standing community effort. 
 </p>
 
-<div class="hiring" id="org60eac52">
+<div class="hiring" id="org47dc7b7">
 <p>
 <b>Are you hiring?</b>
 </p>

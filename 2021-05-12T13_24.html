@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-23 Sun 14:21 -->
+<!-- 2021-05-23 Sun 14:34 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -267,7 +267,7 @@ Our exploration of the topic makes heavy use of a REPL, I invite you to fire one
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">133398252
+<pre class="src src-org">833593852
 </pre>
 </div>
 
@@ -281,7 +281,7 @@ Now rinse and repeat.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">773089034
+<pre class="src src-org">538272936
 </pre>
 </div>
 
@@ -522,7 +522,7 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">20
+<pre class="src src-org">40
 </pre>
 </div>
 
@@ -599,11 +599,16 @@ How come nobody is complaining? That&rsquo;s because there are no side-effects a
 </p>
 
 <p>
-In a default Clojure REPL, each evaluation produces one instance of <code>DynamicClassLoader</code> and that is by design, used by Clojure&rsquo;s compiler. In a nREPL client, two instances are created, the second one extraneous due to the repeated call to <code>clojure.main/repl</code>. 
+In a default Clojure REPL, each evaluation produces one instance of <code>DynamicClassLoader</code> and that is by design. In a nREPL client, two instances are created and one of them is extraneous, the result of repeatedly calling <code>clojure.main/repl</code>. 
 </p>
 
 <p>
-The context class loader is not used much. It is sometimes used by tooling. <code>DynamicClassLoader</code> happens to extend Java&rsquo;s URLClassLoader and the latter can be used to load JARs. Suppose you&rsquo;re at the REPL and you realize that you need <code>data.json</code>, but it isn&rsquo;t in your class path. No problemo.
+In conclusion, Clojure leverages built-in capabilities of the JVM to provide a dynamic runtime environment at the REPL. Redefinition of classes is achieved via the assignment of new instances of <code>DynamicClassLoader</code> for every top-level form. Wholesale addition of classes in Jars is made possible because <code>DynamicClassLoader</code> inherits the <code>addURL</code> method from <code>URLCLassLoader</code>. Design decisions.
+</p>
+
+
+<p>
+The context class loader is not used much at all. It is sometimes used by tooling. <code>DynamicClassLoader</code> happens to extend Java&rsquo;s URLClassLoader and the latter can be used to load JARs. Suppose you&rsquo;re at the REPL and you realize that you need <code>data.json</code>, but it isn&rsquo;t in your class path. No problemo.
 </p>
 
 <div class="org-src-container">
@@ -637,16 +642,14 @@ Now you can.
 </pre>
 </div>
 
-<p>
-In conclusion, Clojure leverages built-in capabilities of the JVM to provide a dynamic runtime environment at the REPL. Redefinition of classes is achieved via the assignment of new instances of <code>DynamicClassLoader</code> for every top-level form. Wholesale addition of classes in Jars is made possible because <code>DynamicClassLoader</code> inherits the <code>addURL</code> method from <code>URLCLassLoader</code>. Design decisions. 
-</p>
+
 
 <p>
 An extended version of this article is available <a href="https://meyvn.org/publication/classloading">here</a>.
 </p>
 
 
-<div class="hiring" id="org158c413">
+<div class="hiring" id="org066dcbd">
 <p>
 <b>Are you hiring?</b>
 </p>

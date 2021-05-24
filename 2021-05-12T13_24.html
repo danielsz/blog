@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-23 Sun 21:59 -->
+<!-- 2021-05-25 Tue 01:57 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -258,39 +258,7 @@ I think, the main problem is nobody has ever tried to write an article «Class l
 </blockquote>
 
 <p>
-Our exploration of the topic makes heavy use of a REPL, I invite you to fire one up and play along.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>hash <span style="color: #1f5bff; font-weight: bold;">(</span>.getContextClassLoader <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-org">1217517512
-</pre>
-</div>
-
-<p>
-Now rinse and repeat.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>hash <span style="color: #1f5bff; font-weight: bold;">(</span>.getContextClassLoader <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-org">1242401638
-</pre>
-</div>
-
-<p>
-Not only are they not the same instance, but every new instance joins its ancestors in the class loader hierarchy and sticks around.
-</p>
-
-<p>
-Let&rsquo;s examine the class loader hierarchy.
+Our exploration of the topic makes heavy use of a REPL, I invite you to fire one up and play along. Let&rsquo;s examine the class loader hierarchy.
 </p>
 
 <div class="org-src-container">
@@ -301,7 +269,7 @@ Let&rsquo;s examine the class loader hierarchy.
 </div>
 
 <p>
-You&rsquo;ll notice our <code>DynamicClassLoader</code> friend, plus the troika of built-in class loaders at the top. 
+You&rsquo;ll notice Clojure&rsquo;s <code>DynamicClassLoader</code>, plus the troika of built-in class loaders at the top. 
 </p>
 
 <p>
@@ -314,7 +282,7 @@ If you see only two out of the three triumvirs, don&rsquo;t fret. The Primordial
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">true
+<pre class="src src-org">Please reevaluate when nREPL is connected
 </pre>
 </div>
 
@@ -489,7 +457,7 @@ Compare and contrast.
 </div>
 
 <p>
-We&rsquo;ve shown how class loader instances are being repeatedly created at the REPL, and it sounds like an explanation for the mystery we mentioned at the start. It is not. Let&rsquo;s take a closer look at the observation that has befuddled inquisitive developers since 2012. 
+We&rsquo;ve shown how class loader instances are being repeatedly created at the REPL, and it sounds like an explanation for the mystery we mentioned at the start. It is not. Let&rsquo;s take a closer look at the observation that has befuddled inquisitive developers since 2012. It is worth reproducing the experiment in a plain Clojure REPL and a nREPL client side by side.
 </p>
 
 <p>
@@ -507,11 +475,21 @@ This translates to: <i>instead of setting the default Application loader class o
 </p>
 
 <p>
-The expected behavior is that it is set once, unlike the per-evaluation class loader stored in <code>clojure.lang.Compiler/LOADER</code>.
+The expected behavior is that it is set once, unlike the per-evaluation class loader stored in <code>clojure.lang.Compiler/LOADER</code>. 
 </p>
 
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #cc0000; font-weight: bold;">(</span>hash <span style="color: #1f5bff; font-weight: bold;">(</span>.getContextClassLoader <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">Thread</span>/currentThread<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">1134629244
+</pre>
+</div>
+
 <p>
-It is worth reproducing the experiment in a plain Clojure REPL and a nREPL client side by side.
+Now rinse and repeat. In the default REPL, one instance of <code>DynamicClassLoader</code> stays associated with the REPL throughout the session. In a nREPL client, instances of <code>DynamicClassLoader</code> keep piling up. 
 </p>
 
 <div class="org-src-container">
@@ -522,38 +500,16 @@ It is worth reproducing the experiment in a plain Clojure REPL and a nREPL clien
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">20
+<pre class="src src-org">17
 </pre>
 </div>
 
 <p>
-In the default REPL, one instance of <code>DynamicClassLoader</code> stays associated with the REPL throughout the session. In a nREPL client, instances of <code>DynamicClassLoader</code> keep piling up. So what is happening?
+Clojure&rsquo;s entry point to the REPL is <code>clojure.main/repl</code>. However, due to historical reasons, nREPL runs <code>clojure.main/repl</code> for every <a href="https://github.com/nrepl/nrepl/blob/8223894f6c46a2afd71398517d9b8fe91cdf715d/src/clojure/nrepl/middleware/interruptible_eval.clj#L84">evaluation</a>. It isn&rsquo;t a long running process like Clojure&rsquo;s native REPL. Since <code>clojure.main/repl</code> starts with setting the context class loader with a new instance of <code>DynamicClassLoader</code>, we end up with an unbounded stack of class loaders. 
 </p>
 
 <p>
-Clojure&rsquo;s entry point to the REPL is <code>clojure.main/repl</code>. However, due to historical reasons, nREPL runs <code>clojure.main/repl</code> for every <a href="https://github.com/nrepl/nrepl/blob/8223894f6c46a2afd71398517d9b8fe91cdf715d/src/clojure/nrepl/middleware/interruptible_eval.clj#L84">evaluation</a>. It isn&rsquo;t a long running process like Clojure&rsquo;s native REPL.
-</p>
-
-<p>
-Since <code>clojure.main/repl</code> starts with setting the context class loader with a new instance of <code>DynamicClassLoader</code>, we end up with an unbounded stack of class loaders. Colin Jones <a href="https://clojure.atlassian.net/browse/NREPL-36">reported</a> the issue in 2012. 
-</p>
-
-<p>
-Remember that nREPL is a major community effort to elevate Clojure&rsquo;s REPL experience. In a native REPL, it is not possible to interrupt an evaluation. nREPL brings that capability. At the cost of the quirk that we&rsquo;ve described.
-</p>
-
-<blockquote>
-<p>
-the work necessary to stop depending upon it would be considerable&#x2026; interruptible-eval/evaluate is structured to cater to it&#x2026;
-</p>
-
-<p>
-⸺ Chas Emerick, <a href="https://clojure.atlassian.net/browse/NREPL-36">NREPL-36</a>, Jira.
-</p>
-</blockquote>
-
-<p>
-Naturally, solutions were envisaged.
+This is unfortunate, but remember that nREPL is a major community effort to elevate Clojure&rsquo;s REPL experience. In a native REPL, it is not possible to interrupt an evaluation. nREPL brings that capability. At the cost of the quirk that we&rsquo;ve described. Colin Jones <a href="https://clojure.atlassian.net/browse/NREPL-36">reported</a> the issue in 2012. Naturally, solutions were envisaged.
 </p>
 
 <blockquote>
@@ -606,7 +562,7 @@ In the <a href="https://meyvn.org/publication/classloading">extended version</a>
 In conclusion, Clojure leverages the built-in capabilities of the JVM to provide a dynamic runtime environment. Redefinition of classes is made possible because each top-level form gets its own instance of <code>DynamicClassLoader</code>. In a nREPL client, an extraneous instance is created, a quirk that should not obscure the fact that it provides a more capable REPL, backed by a long standing community effort. 
 </p>
 
-<div class="hiring" id="org47dc7b7">
+<div class="hiring" id="orga2f8a1d">
 <p>
 <b>Are you hiring?</b>
 </p>

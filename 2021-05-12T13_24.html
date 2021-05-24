@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-25 Tue 02:02 -->
+<!-- 2021-05-25 Tue 02:04 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Once Upon a Class</title>
@@ -258,11 +258,7 @@ I think, the main problem is nobody has ever tried to write an article «Class l
 </blockquote>
 
 <p>
-Our exploration of the topic makes heavy use of a REPL, I invite you to fire one up and play along.
-</p>
-
-<p>
-Let&rsquo;s start with examining the class loader hierarchy.
+Our exploration of the topic makes heavy use of a REPL, I invite you to fire one up and play along. Let&rsquo;s start with examining the class loader hierarchy.
 </p>
 
 <div class="org-src-container">
@@ -273,11 +269,7 @@ Let&rsquo;s start with examining the class loader hierarchy.
 </div>
 
 <p>
-You&rsquo;ll notice Clojure&rsquo;s <code>DynamicClassLoader</code>, plus the troika of built-in class loaders at the top. 
-</p>
-
-<p>
-If you see only two out of the three triumvirs, don&rsquo;t fret. The Primordial class loader is responsible for bootstrapping Java&rsquo;s core classes. It is written in native code, out of reach, represented by nil. 
+You&rsquo;ll notice Clojure&rsquo;s <code>DynamicClassLoader</code>, plus the troika of built-in class loaders at the top. If you see only two out of the three triumvirs, don&rsquo;t fret. The Primordial class loader is responsible for bootstrapping Java&rsquo;s core classes. It is written in native code, out of reach, represented by nil. 
 </p>
 
 <div class="org-src-container">
@@ -488,7 +480,7 @@ The expected behavior is that it is set once, unlike the per-evaluation class lo
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">1083016866
+<pre class="src src-org">1979207367
 </pre>
 </div>
 
@@ -504,7 +496,7 @@ Now rinse and repeat. In the default REPL, one instance of <code>DynamicClassLoa
 </div>
 
 <div class="org-src-container">
-<pre class="src src-org">31
+<pre class="src src-org">45
 </pre>
 </div>
 
@@ -566,7 +558,7 @@ In the <a href="https://meyvn.org/publication/classloading">extended version</a>
 In conclusion, Clojure leverages the built-in capabilities of the JVM to provide a dynamic runtime environment. Redefinition of classes is made possible because each top-level form gets its own instance of <code>DynamicClassLoader</code>. In a nREPL client, an extraneous instance is created, a quirk that should not obscure the fact that it provides a more capable REPL, backed by a long standing community effort. 
 </p>
 
-<div class="hiring" id="orgcf29224">
+<div class="hiring" id="org6890014">
 <p>
 <b>Are you hiring?</b>
 </p>

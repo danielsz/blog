@@ -14,9 +14,9 @@
   <link>https://danielsz.github.io/blog/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Thu, 17 Sep 2020 00:15:59 +0300</pubDate>
-  <lastBuildDate>Thu, 17 Sep 2020 00:15:59 +0300</lastBuildDate>
-  <generator>Emacs 27.1 Org-mode 9.4</generator>
+  <pubDate>Tue, 25 May 2021 11:57:31 +0300</pubDate>
+  <lastBuildDate>Tue, 25 May 2021 11:57:31 +0300</lastBuildDate>
+  <generator>Emacs 27.2 Org-mode 9.4.6</generator>
   <webMaster>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</webMaster>
   <image>
     <url>https://danielsz.github.io/blog/images/lain-animated2.gif</url>
@@ -26,128 +26,146 @@
 
 
   <item>
-    <title>file:2017-12-04T11_17.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#org3824ef1</link>
+    <title>Finding files</title>
+    <link>https://danielsz.github.io/blog/2017-12-04T11_17.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#org3824ef1</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2017-12-04T11_17.html</guid>
+    <pubDate>Mon, 04 Dec 2017 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:2017-12-04T23_53.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#org48e1222</link>
+    <title>Forrest Gump and the Kibbutz</title>
+    <link>https://danielsz.github.io/blog/2017-12-04T23_53.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#org48e1222</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2017-12-04T23_53.html</guid>
+    <pubDate>Tue, 05 Dec 2017 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:2017-12-05T20_22.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#org8af7d54</link>
+    <title>From coworking to coshoring</title>
+    <link>https://danielsz.github.io/blog/2017-12-05T20_22.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#org8af7d54</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2017-12-05T20_22.html</guid>
+    <pubDate>Tue, 05 Dec 2017 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:deft-49.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#org36ebd9f</link>
+    <title>Ghosts in the machine</title>
+    <link>https://danielsz.github.io/blog/deft-49.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#org36ebd9f</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/deft-49.html</guid>
+    <pubDate>Wed, 25 Mar 2020 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:deft-4.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#orgc7798fd</link>
+    <title>How is printing to the console a side effect</title>
+    <link>https://danielsz.github.io/blog/deft-4.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#orgc7798fd</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/deft-4.html</guid>
+    <pubDate>Sun, 03 Dec 2017 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:blog_on_lisp.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#org131e720</link>
+    <title>In the mood for Lisp</title>
+    <link>https://danielsz.github.io/blog/blog_on_lisp.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#org131e720</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/blog_on_lisp.html</guid>
+    <pubDate>Sat, 03 Apr 2021 00:00:00 +0300</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:2019-08-05T21_14.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#orgdfcc20f</link>
+    <title>Is this sentence a question?</title>
+    <link>https://danielsz.github.io/blog/2020-12-04T15_08.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#orgdfcc20f</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2020-12-04T15_08.html</guid>
+    <pubDate>Fri, 04 Dec 2020 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:deft-20.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#orgfc2165b</link>
+    <title>Lisp \ne Lambda Calculus</title>
+    <link>https://danielsz.github.io/blog/2019-08-05T21_14.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#orgfc2165b</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2019-08-05T21_14.html</guid>
+    <pubDate>Fri, 03 Jul 2020 00:00:00 +0300</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:deft-21.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#orgf0f2814</link>
+    <title>Lisp's nested syntax</title>
+    <link>https://danielsz.github.io/blog/deft-20.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#orgf0f2814</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/deft-20.html</guid>
+    <pubDate>Sun, 03 Dec 2017 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:2017-12-04T12_20.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#org757b8ae</link>
+    <title>Live coding, take 5</title>
+    <link>https://danielsz.github.io/blog/deft-21.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#org757b8ae</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/deft-21.html</guid>
+    <pubDate>Sun, 03 Dec 2017 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:deft-37.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#orga013a59</link>
+    <title>Modernism and the Web</title>
+    <link>https://danielsz.github.io/blog/2017-12-04T12_20.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#orga013a59</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2017-12-04T12_20.html</guid>
+    <pubDate>Mon, 04 Dec 2017 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:2019-05-08T18_40.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#org038c1f3</link>
+    <title>Om, no DOM</title>
+    <link>https://danielsz.github.io/blog/deft-37.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#org038c1f3</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/deft-37.html</guid>
+    <pubDate>Sun, 03 Dec 2017 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:2017-07-31T16_31.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#orga3516ae</link>
+    <title>Once Upon a Class</title>
+    <link>https://danielsz.github.io/blog/2021-05-12T13_24.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#orga3516ae</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2021-05-12T13_24.html</guid>
+    <pubDate>Tue, 25 May 2021 00:00:00 +0300</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>file:2020-09-01T1556.org</title>
-    <link>https://danielsz.github.io/blog/rss.html#org268c306</link>
+    <title>Ring's idiosyncrasies</title>
+    <link>https://danielsz.github.io/blog/2019-05-08T18_40.html</link>
     <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
-    <guid isPermaLink="false">https://danielsz.github.io/blog/rss.html#org268c306</guid>
-    <pubDate>Thu, 17 Sep 2020 00:15:00 +0300</pubDate>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2019-05-08T18_40.html</guid>
+    <pubDate>Fri, 19 Mar 2021 00:00:00 +0200</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Timed Idempotency</title>
+    <link>https://danielsz.github.io/blog/2017-07-31T16_31.html</link>
+    <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2017-07-31T16_31.html</guid>
+    <pubDate>Mon, 04 Dec 2017 00:00:00 +0200</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Understanding Meyvn, part I</title>
+    <link>https://danielsz.github.io/blog/2020-09-01T1556.html</link>
+    <author>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</author>
+    <guid isPermaLink="false">https://danielsz.github.io/blog/2020-09-01T1556.html</guid>
+    <pubDate>Thu, 14 Jan 2021 00:00:00 +0200</pubDate>
 
     <description><![CDATA[]]></description>
   </item>

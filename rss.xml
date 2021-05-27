@@ -14,8 +14,8 @@
   <link>https://danielsz.github.io/blog/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Tue, 25 May 2021 11:57:31 +0300</pubDate>
-  <lastBuildDate>Tue, 25 May 2021 11:57:31 +0300</lastBuildDate>
+  <pubDate>Fri, 28 May 2021 00:47:46 +0300</pubDate>
+  <lastBuildDate>Fri, 28 May 2021 00:47:46 +0300</lastBuildDate>
   <generator>Emacs 27.2 Org-mode 9.4.6</generator>
   <webMaster>daniel.szmulewicz@gmail.com (Daniel Szmulewicz)</webMaster>
   <image>
@@ -140,7 +140,10 @@
     <guid isPermaLink="false">https://danielsz.github.io/blog/2021-05-12T13_24.html</guid>
     <pubDate>Tue, 25 May 2021 00:00:00 +0300</pubDate>
 
-    <description><![CDATA[]]></description>
+    <description><![CDATA[<p>
+    Every time you press ENTER at the REPL, a new class is born. In addition, it comes with a new class loader instance exclusively dedicated to loading it. That’s Clojure behind the scenes doing its runtime magic. On the other hand, in a nREPL client like Cider, not one but two class loader instances are produced, and that is a quirk that carries over since its earliest days. I bring you that story as an excuse for dwelling on the subject of class loading. Arcane, maybe, but essential.
+    </p>
+    ]]></description>
   </item>
   <item>
     <title>Ring's idiosyncrasies</title>

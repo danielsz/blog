@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-03-19 Fri 01:08 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-02-25 Fri 22:35 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Understanding Meyvn, part I</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Daniel Szmulewicz">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="author" content="Daniel Szmulewicz" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -29,8 +29,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -39,21 +40,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -189,7 +190,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/grid.css">
 <link rel="stylesheet" type="text/css" href="css/post.css">
@@ -198,9 +198,8 @@
 <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Roboto+Condensed|Source+Serif+Pro|Inconsolata" rel="stylesheet">
 <script src="js/grid.js"></script>
 <script src="js/fathom.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
      function CodeHighlightOn(elem, id)
      {
        var target = document.getElementById(id);
@@ -217,7 +216,6 @@
          target.classList.remove("code-highlighted");
        }
      }
-    /*]]>*///-->
 // @license-end
 </script>
 </head>
@@ -226,7 +224,7 @@
  <a accesskey="h" href="index.html"> UP </a>
  |
  <a accesskey="H" href="index.html"> HOME </a>
-</div><div id="content">
+</div><div id="content" class="content">
 <header>
 <h1 class="title">Understanding Meyvn, part I</h1>
 </header><p>
@@ -240,11 +238,6 @@ In this chapter we are going to focus on Meyvn the build tool, and later we&rsqu
 <p>
 In the beginning was the installer, and the authoritative place to find its most recent coordinates is at Meyvn&rsquo;s documentation <a href="https://danielsz.github.io/meyvn">site</a>. The Meyvn installer is invoked on the command line and will install the binary in a local user path, typically <code>$HOME/bin</code> or <code>$HOME/.local/bin</code>.
 </p>
-
-<div class="org-src-container">
-<pre class="src src-clojure">clj -Sdeps '<span style="color: #707183;">{</span><span style="color: #008b8b;">:deps</span> <span style="color: #7388d6;">{</span><span style="color: #228b22;">org.danielsz</span>/meyvn-installer <span style="color: #909183;">{</span><span style="color: #008b8b;">:</span><span style="color: #228b22;">mvn</span><span style="color: #000000; background-color: #ffffff;">/</span><span style="color: #008b8b;">version</span> <span style="color: #8b2252;">"1.3.0"</span><span style="color: #909183;">}</span><span style="color: #7388d6;">}</span><span style="color: #707183;">}</span>' -m meyvn-installer.core
-</pre>
-</div>
 
 <p>
 When you type <code>myvn</code> in the command line, you can feed it with any familiar Maven command (<code>clean</code>, <code>install</code>, <code>test</code>, <code>deploy</code>) as well as chain them together, reflecting Maven&rsquo;s grammar. Meyvn is indeed a strict super-set of Maven. 
@@ -289,18 +282,18 @@ Meyvn is driven by a configuration file found in the project directory, <code>me
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #707183;">{</span><span style="color: #008b8b;">:uberjar</span> <span style="color: #7388d6;">{</span><span style="color: #008b8b;">:enabled</span> <span style="color: #008b8b;">true</span>
-           <span style="color: #008b8b;">:resources</span> <span style="color: #909183;">{</span><span style="color: #008b8b;">:cljs</span> <span style="color: #709870;">{</span><span style="color: #008b8b;">:enabled</span> <span style="color: #008b8b;">true</span>
-                              <span style="color: #008b8b;">:compiler-opts</span> <span style="color: #907373;">{</span><span style="color: #008b8b;">:infer-externs</span> <span style="color: #008b8b;">true</span>
-                                              <span style="color: #008b8b;">:optimizations</span> <span style="color: #008b8b;">:advanced</span>
-                                              <span style="color: #008b8b;">:parallel-build</span> <span style="color: #008b8b;">true</span>
-                                              <span style="color: #008b8b;">:verbose</span> <span style="color: #008b8b;">true</span>
-                                              <span style="color: #008b8b;">:aot-cache</span> <span style="color: #008b8b;">true</span>
-                                              <span style="color: #008b8b;">:output-to</span> <span style="color: #8b2252;">"js/my-app.js"</span>
-                                              <span style="color: #008b8b;">:output-wrapper</span> <span style="color: #008b8b;">true</span>
-                                              <span style="color: #008b8b;">:foreign-libs</span> <span style="color: #6276ba;">[]</span>
-                                              <span style="color: #008b8b;">:main</span> <span style="color: #8b2252;">"myapp.core"</span><span style="color: #907373;">}</span>
-                              <span style="color: #008b8b;">:tools-deps-alias</span> <span style="color: #008b8b;">:cljs</span><span style="color: #709870;">}</span><span style="color: #909183;">}</span><span style="color: #7388d6;">}</span><span style="color: #707183;">}</span>
+<pre class="src src-clojure"><span style="color: #9d81ba;">{</span><span style="color: #f5c791;">:uberjar</span> <span style="color: #80bcb6;">{</span><span style="color: #f5c791;">:enabled</span> <span style="color: #f5c791;">true</span>
+           <span style="color: #f5c791;">:resources</span> <span style="color: #c79af4;">{</span><span style="color: #f5c791;">:cljs</span> <span style="color: #807f96;">{</span><span style="color: #f5c791;">:enabled</span> <span style="color: #f5c791;">true</span>
+                              <span style="color: #f5c791;">:compiler-opts</span> <span style="color: #91b9c7;">{</span><span style="color: #f5c791;">:infer-externs</span> <span style="color: #f5c791;">true</span>
+                                              <span style="color: #f5c791;">:optimizations</span> <span style="color: #f5c791;">:advanced</span>
+                                              <span style="color: #f5c791;">:parallel-build</span> <span style="color: #f5c791;">true</span>
+                                              <span style="color: #f5c791;">:verbose</span> <span style="color: #f5c791;">true</span>
+                                              <span style="color: #f5c791;">:aot-cache</span> <span style="color: #f5c791;">true</span>
+                                              <span style="color: #f5c791;">:output-to</span> <span style="color: #65E6A7;">"js/my-app.js"</span>
+                                              <span style="color: #f5c791;">:output-wrapper</span> <span style="color: #f5c791;">true</span>
+                                              <span style="color: #f5c791;">:foreign-libs</span> <span style="color: #687184;">[]</span>
+                                              <span style="color: #f5c791;">:main</span> <span style="color: #65E6A7;">"myapp.core"</span><span style="color: #91b9c7;">}</span>
+                              <span style="color: #f5c791;">:tools-deps-alias</span> <span style="color: #f5c791;">:cljs</span><span style="color: #807f96;">}</span><span style="color: #c79af4;">}</span><span style="color: #80bcb6;">}</span><span style="color: #9d81ba;">}</span>
 </pre>
 </div>
 
@@ -314,10 +307,6 @@ If the user is not sure what kind of build will result from a particular configu
 
 <p>
 In the next part of the series, we are going to investigate the facilities offered by Meyvn&rsquo;s interactive environment. See you then!
-</p>
-
-<p>
-PS: If your company is conducting an onboarding process for junior hires, please <a href="https://t.me/joinchat/BoAuYBn5KJ4zJjfbhcw3OQ">get in touch</a>, we are running a pilot (with Meyvn, of course). 
 </p>
 </div>
 </body>
